@@ -11,6 +11,7 @@ ToutionSoftware es un panel de usuario que te muestra la matrícula a los cursos
 	- Mysql
 	- Prisma (ORM)
 	- Passport.js (Authentication)
+	- JWT (Authentication)
 	- ...
 
 - Frontend
@@ -37,9 +38,9 @@ ToutionSoftware es un panel de usuario que te muestra la matrícula a los cursos
 ```bash
 	git clone https://github.com/grupo-desarollo-web-fullstack/toution-software.git
 	cd toution-software
-	// if you use backend
+	# if you use backend
 	cd backend
-	// if use frontend
+	# if use frontend
 	cd frontend
 	npm install
 	npm run dev
