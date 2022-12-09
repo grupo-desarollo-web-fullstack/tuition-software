@@ -19,9 +19,10 @@ horario.get("/", async function (req, res) {
 
 //Obtiene datos por ID
 horario.get("/:id", async function (req, res) {
+  const { id } = req.params;
   const data = await getDataUniqueFromModel("horario", {
     where: {
-      horario_id: +req.params.id,
+      horario_id: +id,
     },
   });
   res.json({
@@ -32,15 +33,18 @@ horario.get("/:id", async function (req, res) {
 
 //Actualiza datos por ID -----------
 horario.put("/:id", async function (req, res) {
+  const { id } = req.params;
+  const { horario_fecha, disponibilidad, aforo, docente_id } = req.body;
+
   const data = await updateDataUniqueFromModel("horario", {
     where: {
-      horario_id: +req.params.id,
+      horario_id: +id,
     },
     data: {
-      horario_fecha: new Date(req.body.horario_fecha),
-      horario_disponibilidad: !!req.body.disponibilidad,
-      horario_aforo: +req.body.aforo,
-      tbl_docente_docente_id: +req.body.docente_id,
+      horario_fecha: new Date(horario_fecha),
+      horario_disponibilidad: !!disponibilidad,
+      horario_aforo: +aforo,
+      tbl_docente_docente_id: +docente_id,
     },
   });
   res.status(201).json({
@@ -51,12 +55,13 @@ horario.put("/:id", async function (req, res) {
 
 //Envia nuevos datos
 horario.post("/", async function (req, res) {
+  const { horario_fecha, disponibilidad, aforo, docente_id } = req.body;
   const data = await postDataListFromModel("horario", {
     data: {
-      horario_fecha: new Date(req.body.horario_fecha),
-      horario_disponibilidad: !!req.body.disponibilidad,
-      horario_aforo: +req.body.aforo,
-      tbl_docente_docente_id: +req.body.docente_id,
+      horario_fecha: new Date(horario_fecha),
+      horario_disponibilidad: !!disponibilidad,
+      horario_aforo: +aforo,
+      tbl_docente_docente_id: +docente_id,
     },
   });
   res.status(201).json({

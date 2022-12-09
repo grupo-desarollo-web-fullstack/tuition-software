@@ -19,9 +19,10 @@ clase.get("/", async function (req, res) {
 
 //Obtiene datos por ID
 clase.get("/:id", async function (req, res) {
+  const { id } = req.params;
   const data = await getDataUniqueFromModel("clase", {
     where: {
-      clase_id: +req.params.id,
+      clase_id: +id,
     },
   });
   res.json({
@@ -32,13 +33,15 @@ clase.get("/:id", async function (req, res) {
 
 //Actualiza datos por ID
 clase.put("/:id", async function (req, res) {
+  const { id } = req.params;
+  const { nsalon, horario_id } = req.body;
   const data = await updateDataUniqueFromModel("clase", {
     where: {
-      clase_id: +req.params.id,
+      clase_id: +id,
     },
     data: {
-      clase_nsalon: req.body.nsalon,
-      tbl_horario_horario_id: +req.body.horario_id,
+      clase_nsalon: nsalon,
+      tbl_horario_horario_id: +horario_id,
     },
   });
   res.status(201).json({
@@ -49,10 +52,11 @@ clase.put("/:id", async function (req, res) {
 
 //Envia nuevos datos
 clase.post("/", async function (req, res) {
+  const { nsalon, horario_id } = req.body;
   const data = await postDataListFromModel("clase", {
     data: {
-      clase_nsalon: req.body.nsalon,
-      tbl_horario_horario_id: +req.body.horario_id,
+      clase_nsalon: nsalon,
+      tbl_horario_horario_id: +horario_id,
     },
   });
   res.status(201).json({

@@ -19,9 +19,10 @@ docente.get("/", async function (req, res) {
 
 //Obtiene datos por ID
 docente.get("/:id", async function (req, res) {
+  const { id } = req.params;
   const data = await getDataUniqueFromModel("docente", {
     where: {
-      docente_id: +req.params.id,
+      docente_id: +id,
     },
   });
   res.json({
@@ -32,13 +33,15 @@ docente.get("/:id", async function (req, res) {
 
 //Actualiza datos por ID
 docente.put("/:id", async function (req, res) {
+  const { id } = req.params;
+  const { nombre, edad } = req.body;
   const data = await updateDataUniqueFromModel("docente", {
     where: {
-      docente_id: +req.params.id,
+      docente_id: +id,
     },
     data: {
-      docente_nombre: req.body.nombre,
-      docente_edad: +req.body.edad,
+      docente_nombre: nombre,
+      docente_edad: +edad,
     },
   });
   res.status(201).json({
@@ -49,10 +52,11 @@ docente.put("/:id", async function (req, res) {
 
 //Envia nuevos datos
 docente.post("/", async function (req, res) {
+  const { nombre, edad } = req.body;
   const data = await postDataListFromModel("docente", {
     data: {
-      docente_nombre: req.body.nombre,
-      docente_edad: +req.body.edad,
+      docente_nombre: nombre,
+      docente_edad: +edad,
     },
   });
   res.status(201).json({

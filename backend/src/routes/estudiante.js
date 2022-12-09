@@ -75,9 +75,10 @@ estudiante.get("/", async function (req, res) {
 });
 
 estudiante.get("/:id", async function (req, res) {
+  const { id } = req.params;
   const data = await getDataUniqueFromModel("estudiante", {
     where: {
-      estudiante_id: +req.params.id,
+      estudiante_id: +id,
     },
   });
   res.json({
@@ -87,14 +88,16 @@ estudiante.get("/:id", async function (req, res) {
 });
 
 estudiante.put("/:id", async function (req, res) {
+  const { id } = req.params;
+  const { nombre, carrera, ciclo } = req.body;
   const data = await updateDataUniqueFromModel("estudiante", {
     where: {
-      estudiante_id: +req.params.id,
+      estudiante_id: +id,
     },
     data: {
-      estudiante_nombre: req.body.nombre,
-      estudiante_carrera: req.body.carrera,
-      estudiante_ciclo: +req.body.ciclo,
+      estudiante_nombre: nombre,
+      estudiante_carrera: carrera,
+      estudiante_ciclo: +ciclo,
     },
   });
   res.status(201).json({
@@ -104,12 +107,13 @@ estudiante.put("/:id", async function (req, res) {
 });
 
 estudiante.post("/", async function (req, res) {
-  const passwordHash = await bcrypt.hash(req.body.password, 10);
+  const { nombre, carrera, ciclo, password } = req.body;
+  const passwordHash = await bcrypt.hash(password, 10);
   const data = await postDataListFromModel("estudiante", {
     data: {
-      estudiante_nombre: req.body.nombre,
-      estudiante_carrera: req.body.carrera,
-      estudiante_ciclo: +req.body.ciclo,
+      estudiante_nombre: nombre,
+      estudiante_carrera: carrera,
+      estudiante_ciclo: +ciclo,
       estudiante_password: passwordHash,
     },
   });

@@ -19,9 +19,10 @@ curso.get("/", async function (req, res) {
 
 //Obtiene datos por ID
 curso.get("/:id", async function (req, res) {
+  const { id } = req.params;
   const data = await getDataUniqueFromModel("curso", {
     where: {
-      curso_id: +req.params.id,
+      curso_id: +id,
     },
   });
   res.json({
@@ -32,14 +33,16 @@ curso.get("/:id", async function (req, res) {
 
 //Actualiza datos por ID
 curso.put("/:id", async function (req, res) {
+  const { id } = req.params;
+  const { nombre, creditos, tipo } = req.body;
   const data = await updateDataUniqueFromModel("curso", {
     where: {
-      curso_id: +req.params.id,
+      curso_id: +id,
     },
     data: {
-      curso_nombre: req.body.nombre,
-      curso_creditos: req.body.creditos,
-      curso_tipo: +req.body.tipo,
+      curso_nombre: nombre,
+      curso_creditos: creditos,
+      curso_tipo: +tipo,
     },
   });
   res.status(201).json({
@@ -50,11 +53,12 @@ curso.put("/:id", async function (req, res) {
 
 //Envia nuevos datos
 curso.post("/", async function (req, res) {
+  const { nombre, creditos, tipo } = req.body;
   const data = await postDataListFromModel("curso", {
     data: {
-      curso_nombre: req.body.nombre,
-      curso_creditos: req.body.creditos,
-      curso_tipo: req.body.tipo,
+      curso_nombre: nombre,
+      curso_creditos: creditos,
+      curso_tipo: tipo,
     },
   });
   res.status(201).json({
