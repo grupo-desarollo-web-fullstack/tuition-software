@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Estudiante {
+  estudiante_id      Int         @id @default(autoincrement())
+  estudiante_nombre  String      @db.VarChar(200)
+  estudiante_password String     @db.VarChar(200)
+  estudiante_carrera String      @db.VarChar(200)
+  estudiante_ciclo   Int
+  estudiante_foto    String?
+  Matricula          Matricula[]
+
+  @@map("tbl_estudiante")
+}
+
+model Curso {
+  curso_id       Int         @id @default(autoincrement())
+  curso_nombre   String      @db.VarChar(100)
+  curso_creditos Int
+  curso_tipo     String      @default("obligatorio") @db.VarChar(45)
+  Matricula      Matricula[]
+
+  @@map("tbl_curso")
+}
+
+model Matricula {
+  matricula_id                 Int        @id @default(autoincrement())
+  tbl_estudiante_estudiante    Estudiante @relation(fields: [tbl_estudiante_estudiante_id], references: [estudiante_id])
+  tbl_estudiante_estudiante_id Int
+  tbl_curso_curso              Curso      @relation(fields: [tbl_curso_curso_id], references: [curso_id])
+  tbl_curso_curso_id           Int
+  tbl_clase_clase    Clase @relation(fields: [tbl_clase_clase_id], references: [clase_id])
+  tbl_clase_clase_id Int
+
+  @@map("tbl_matricula")
+}
+
+model Docente {
+  docente_id     Int       @id @default(autoincrement())
+  docente_nombre String    @db.VarChar(200)
+  docente_edad   Int
+  Horario        Horario[]
+
+  @@map("tbl_docente")
+}
+
+model Horario {
+  horario_id             Int      @id @default(autoincrement())
+  horario_fecha          DateTime
+  horario_disponibilidad Boolean
+  tbl_aforo              Int
+  tbl_docente_docente    Docente  @relation(fields: [tbl_docente_docente_id], references: [docente_id])
+  tbl_docente_docente_id Int
+  Clase                  Clase[]
+
+  @@map("tbl_horario")
+}
+
+model Clase {
+  clase_id               Int     @id @default(autoincrement())
+  clase_nsalon           String  @db.VarChar(10)
+  tbl_horario_horario    Horario @relation(fields: [tbl_horario_horario_id], references: [horario_id])
+  tbl_horario_horario_id Int
+  Matricula Matricula[]
+
+  @@map("tbl_clase")
+}
