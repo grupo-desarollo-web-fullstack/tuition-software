@@ -56,8 +56,8 @@ model Docente {
 model Horario {
   horario_id             Int      @id @default(autoincrement())
   horario_fecha          DateTime
-  horario_disponibilidad Boolean
-  tbl_aforo              Int
+  horario_disponibilidad Boolean  @default(false)
+  horario_aforo          Int
   tbl_docente_docente    Docente  @relation(fields: [tbl_docente_docente_id], references: [docente_id])
   tbl_docente_docente_id Int
   Clase                  Clase[]

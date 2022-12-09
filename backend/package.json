@@ -6,7 +6,8 @@
   "description": "ToutionSoftware es un panel de usuario que te muestra la matrícula a los cursos de tu preferencia, como también los ya matriculados 🎲",
   "main": "./src/index.js",
   "scripts": {
-    "dev": "nodemon -L ./src/index.js"
+    "dev": "nodemon -L ./src/index.js",
+    "prisma:studio":"prisma studio"
   },
   "repository": {
     "type": "git",
