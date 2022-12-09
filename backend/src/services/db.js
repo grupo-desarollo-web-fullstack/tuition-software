@@ -1,32 +1,30 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
-export async function getDataListFromModel(modelName,options={}){
-    const model = prisma[modelName];
-    const data = await model.findMany(options);
+export async function getDataListFromModel(modelName, options = {}) {
+  const model = prisma[modelName];
+  const data = await model.findMany(options);
 
-    return data
+  return data;
 }
 
-export async function getDataUniqueFromModel(modelName,options){
-    const model = prisma[modelName];
-    const data = await model.findUnique(options);
+export async function getDataUniqueFromModel(modelName, options) {
+  const model = prisma[modelName];
+  const data = await model.findUnique(options);
 
-    return data
+  return data;
 }
 
-export async function updateDataUniqueFromModel(modelName,options){
-    const model = prisma[modelName];
-    const data = await model.update(options);
+export async function updateDataUniqueFromModel(modelName, options) {
+  const model = prisma[modelName];
+  const data = await model.update(options);
 
-    return data
+  return data;
 }
 
-export async function postDataListFromModel(modelName,options){
-    const model = prisma[modelName];
-    const data = await model.create(options);
+export async function postDataListFromModel(modelName, options) {
+  const model = prisma[modelName];
+  const data = await model.create(options);
 
-    return data
+  return data;
 }
-
-
