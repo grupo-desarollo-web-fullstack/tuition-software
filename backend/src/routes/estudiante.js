@@ -1,31 +1,43 @@
-    import express from "express"
-    import { getDataListFromModel, getDataUniqueFromModel, postDataListFromModel, updateDataUniqueFromModel } from "../services/db.js";
+import express from "express"
+import { getDataListFromModel, getDataUniqueFromModel, postDataListFromModel, updateDataUniqueFromModel } from "../services/db.js";
 import passport  from "passport";
-import {Strategy,ExtractJwt} from "passport-jwt"
 import jwt from "jsonwebtoken"
 import bcrypt from 'bcrypt';
+import cookieParser from 'cookie-parser'
+import LocalStrategy from 'passport-local';
+
 
 const estudiante = express.Router();
 const options = {
-    jwtFromRequest:ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey:"secret"
 }
 
-passport.use(new Strategy(options,async function(jwtPayload,done){
-    const data = await getDataListFromModel("estudiante",{
+estudiante.use(cookieParser(options.secretOrKey))
+
+passport.use(new LocalStrategy({usernameField:'user'},async function(name,password,done){
+    const data = await getDataUniqueFromModel("estudiante",{
         where:{
-            estudiante_id: jwtPayload.id
+            estudiante_nombre:name
         }
     });
-    delete data.estudiante_password
-    console.log(data)
-    return done(null,data)
+    const vericatedPassword= await bcrypt.compare(password,data.estudiante_password)
+    if(vericatedPassword){
+        return done(null,data)
+    }
 }))
 
-estudiante.post('/login',passport.authenticate("jwt",{session:false}), async function(req,res){
-    const data = Object.assign(req.user)
+estudiante.post('/login',passport.authenticate("local",{session:false}), async function(req,res){
+    const {user:data} = req
     delete data.estudiante_password
-    console.log(data)
+    const token = jwt.sign({
+        id:data.estudiante_id,
+        nombre:data.estudiante_nombre
+    },options.secretOrKey)
+    res.cookie("sessionToution",token,{httpOnly:true,
+                                        maxAge:1000*60*60*3,
+                                        secure:true,
+                                        sameSite:true,
+                                        signed:true})
     res.status(201).json({
         data,
         status:201

@@ -12,7 +12,7 @@ datasource db {
 
 model Estudiante {
   estudiante_id      Int         @id @default(autoincrement())
-  estudiante_nombre  String      @db.VarChar(200)
+  estudiante_nombre  String      @db.VarChar(200) @unique
   estudiante_password String     @db.VarChar(200)
   estudiante_carrera String      @db.VarChar(200)
   estudiante_ciclo   Int
@@ -20,6 +20,7 @@ model Estudiante {
   Matricula          Matricula[]
 
   @@map("tbl_estudiante")
+  @@index([estudiante_nombre])
 }
 
 model Curso {
