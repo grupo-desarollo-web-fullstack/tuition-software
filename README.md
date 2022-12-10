@@ -6,6 +6,8 @@ ToutionSoftware es un panel de usuario que te muestra la matrícula a los cursos
 
 ## 👨‍💻 Tecnologías 👨‍💻
 
+Stack utilizado: MERN(Mysql, Express, React, Node)
+
 - Backend
 	- Express.js (Node.js)
 	- Mysql
