@@ -1,32 +1,48 @@
 {
-	"private": true,
-	"type": "module",
-	"name": "toution-software",
-	"version": "0.0.1",
-	"description": "ToutionSoftware es un panel de usuario que te muestra la matrícula a los cursos de tu preferencia, como también los ya matriculados 🎲",
-	"main": "./src/index.js",
-	"scripts": {
-		"dev": "nodemon -L ./src/index.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/grupo-desarollo-web-fullstack/toution-software.git"
-	},
-	"keywords": [
-		"express"
-	],
-	"contributors": [
-		"alejo <adoa2705@gmail.com>",
-		"mario <77269474@continental.edu.pe>",
-		"yhancarlos <yhagon14@gmail.com>",
-		"york"
-	],
-	"license": "IMT",
-	"bugs": {
-		"url": "https://github.com/grupo-desarollo-web-fullstack/toution-software/issues"
-	},
-	"homepage": "https://github.com/grupo-desarollo-web-fullstack/toution-software#readme",
-	"devDependencies": {
-		"nodemon": "^2.0.20"
-	}
+  "private": true,
+  "type": "module",
+  "name": "toution-software",
+  "version": "0.0.1",
+  "description": "ToutionSoftware es un panel de usuario que te muestra la matrícula a los cursos de tu preferencia, como también los ya matriculados 🎲",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "nodemon -L ./src/index.js",
+    "prisma:studio": "prisma studio",
+    "prisma:format": "prisma format"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grupo-desarollo-web-fullstack/toution-software.git"
+  },
+  "keywords": [
+    "express"
+  ],
+  "contributors": [
+    "alejo <adoa2705@gmail.com>",
+    "mario <77269474@continental.edu.pe>",
+    "yhancarlos <yhagon14@gmail.com>",
+    "york"
+  ],
+  "license": "IMT",
+  "bugs": {
+    "url": "https://github.com/grupo-desarollo-web-fullstack/toution-software/issues"
+  },
+  "homepage": "https://github.com/grupo-desarollo-web-fullstack/toution-software#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "prisma": "^4.7.1"
+  },
+  "author": "",
+  "dependencies": {
+    "@prisma/client": "^4.7.1",
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
+  }
 }
