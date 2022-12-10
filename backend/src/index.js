@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import handlerError from "./middlewares/handlerError.js";
 import clase from "./routes/clase.js";
 import curso from "./routes/curso.js";
@@ -9,6 +10,7 @@ import matricula from "./routes/matricula.js";
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 //rutas
