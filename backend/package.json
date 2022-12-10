@@ -7,7 +7,8 @@
   "main": "./src/index.js",
   "scripts": {
     "dev": "nodemon -L ./src/index.js",
-    "prisma:studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "prisma:format": "prisma format"
   },
   "repository": {
     "type": "git",
