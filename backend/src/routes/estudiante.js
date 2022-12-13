@@ -8,40 +8,19 @@ import {
 import passport from "passport";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import cookieParser from "cookie-parser";
-import LocalStrategy from "passport-local";
+import localStrategy from "../libs/estrategies/authLocal.js";
 
 const estudiante = express.Router();
 const options = {
   secretOrKey: "secret",
 };
 
-estudiante.use(cookieParser(options.secretOrKey));
-
-passport.use(
-  new LocalStrategy({ usernameField: "user" }, async function (
-    name,
-    password,
-    done
-  ) {
-    const data = await getDataUniqueFromModel("estudiante", {
-      where: {
-        estudiante_nombre: name,
-      },
-    });
-    const vericatedPassword = await bcrypt.compare(
-      password,
-      data.estudiante_password
-    );
-    if (vericatedPassword) {
-      return done(null, data);
-    }
-  })
-);
+//Passport Estrategias
+passport.use(localStrategy)
 
 estudiante.post(
   "/login",
-  passport.authenticate("local", { session: false }),
+  passport.authenticate("local"),
   async function (req, res) {
     const { user: data } = req;
     delete data.estudiante_password;
@@ -52,13 +31,8 @@ estudiante.post(
       },
       options.secretOrKey
     );
-    res.cookie("sessionToution", token, {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 3,
-      secure: true,
-      sameSite: true,
-      signed: true,
-    });
+    data.token = token;
+    delete data.estudiante_password;
     res.status(201).json({
       data,
       status: 201,
