@@ -8,57 +8,29 @@ import {
 import passport from "passport";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import cookieParser from "cookie-parser";
-import LocalStrategy from "passport-local";
+import localStrategy from "../libs/estrategies/authLocal.js";
 
 const estudiante = express.Router();
 const options = {
   secretOrKey: "secret",
 };
 
-estudiante.use(cookieParser(options.secretOrKey));
-
-passport.use(
-  new LocalStrategy({ usernameField: "user" }, async function (
-    name,
-    password,
-    done
-  ) {
-    const data = await getDataUniqueFromModel("estudiante", {
-      where: {
-        estudiante_nombre: name,
-      },
-    });
-    const vericatedPassword = await bcrypt.compare(
-      password,
-      data.estudiante_password
-    );
-    if (vericatedPassword) {
-      return done(null, data);
-    }
-  })
-);
+//Passport Estrategias
+passport.use(localStrategy)
 
 estudiante.post(
   "/login",
-  passport.authenticate("local", { session: false }),
+  passport.authenticate("local"),
   async function (req, res) {
     const { user: data } = req;
-    delete data.estudiante_password;
     const token = jwt.sign(
       {
         id: data.estudiante_id,
-        nombre: data.estudiante_nombre,
       },
       options.secretOrKey
     );
-    res.cookie("sessionToution", token, {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 3,
-      secure: true,
-      sameSite: true,
-      signed: true,
-    });
+    data.token = token;
+    delete data.estudiante_password;
     res.status(201).json({
       data,
       status: 201,
@@ -107,7 +79,7 @@ estudiante.put("/:id", async function (req, res) {
 });
 
 estudiante.post("/", async function (req, res) {
-  const { nombre, carrera, ciclo, password } = req.body;
+  const { nombre, carrera, ciclo, password,email } = req.body;
   const passwordHash = await bcrypt.hash(password, 10);
   const data = await postDataListFromModel("estudiante", {
     data: {
@@ -115,13 +87,13 @@ estudiante.post("/", async function (req, res) {
       estudiante_carrera: carrera,
       estudiante_ciclo: +ciclo,
       estudiante_password: passwordHash,
+      estudiante_email: email,
     },
   });
 
   const token = jwt.sign(
     {
       id: data.estudiante_id,
-      nombre: data.estudiante_nombre,
     },
     options.secretOrKey
   );

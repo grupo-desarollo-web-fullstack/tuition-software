@@ -1,4 +1,5 @@
 import express from "express";
+import passport from "passport";
 import {
   getDataListFromModel,
   getDataUniqueFromModel,
@@ -7,6 +8,7 @@ import {
 } from "../services/db.js";
 
 const matricula = express.Router();
+matricula.use(passport.authorize("jwt",{session:false}))
 
 //Obtiene datos
 matricula.get("/", async function (req, res) {
