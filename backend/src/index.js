@@ -7,11 +7,17 @@ import docente from "./routes/docente.js";
 import estudiante from "./routes/estudiante.js";
 import horario from "./routes/horario.js";
 import matricula from "./routes/matricula.js";
+import jwtStrategy from "./libs/estrategies/protectJWT.js";
+import passport from "passport";
 
 const app = express();
 
+//Proteccion estrategia
+passport.use(jwtStrategy())
+
 app.use(cors());
 app.use(express.json());
+
 
 //rutas
 app.use("/estudiante", estudiante);

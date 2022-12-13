@@ -23,11 +23,9 @@ estudiante.post(
   passport.authenticate("local"),
   async function (req, res) {
     const { user: data } = req;
-    delete data.estudiante_password;
     const token = jwt.sign(
       {
         id: data.estudiante_id,
-        nombre: data.estudiante_nombre,
       },
       options.secretOrKey
     );
@@ -81,7 +79,7 @@ estudiante.put("/:id", async function (req, res) {
 });
 
 estudiante.post("/", async function (req, res) {
-  const { nombre, carrera, ciclo, password } = req.body;
+  const { nombre, carrera, ciclo, password,email } = req.body;
   const passwordHash = await bcrypt.hash(password, 10);
   const data = await postDataListFromModel("estudiante", {
     data: {
@@ -89,13 +87,13 @@ estudiante.post("/", async function (req, res) {
       estudiante_carrera: carrera,
       estudiante_ciclo: +ciclo,
       estudiante_password: passwordHash,
+      estudiante_email: email,
     },
   });
 
   const token = jwt.sign(
     {
       id: data.estudiante_id,
-      nombre: data.estudiante_nombre,
     },
     options.secretOrKey
   );
