@@ -66,5 +66,4 @@ clase.post("/",validatorHandler(schemaClase),async function (req, res) {
     status: 201,
   });
 });
-
 export default clase;
