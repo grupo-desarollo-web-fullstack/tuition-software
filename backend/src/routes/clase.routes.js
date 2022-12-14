@@ -1,4 +1,6 @@
 import express from "express";
+import validatorHandler from "../middlewares/validator.handler.js";
+import schemaClase from "../schemas/clase.schema.js";
 import {
   getDataListFromModel,
   getDataUniqueFromModel,
@@ -51,7 +53,7 @@ clase.put("/:id", async function (req, res) {
 });
 
 //Envia nuevos datos
-clase.post("/", async function (req, res) {
+clase.post("/",validatorHandler(schemaClase),async function (req, res) {
   const { nsalon, horario_id } = req.body;
   const data = await postDataListFromModel("clase", {
     data: {
@@ -64,5 +66,4 @@ clase.post("/", async function (req, res) {
     status: 201,
   });
 });
-
 export default clase;

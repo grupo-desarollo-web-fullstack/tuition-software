@@ -1,4 +1,6 @@
 import express from "express";
+import validatorHandler from "../middlewares/validator.handler.js";
+import schemaHorario from "../schemas/horario.schema.js";
 import {
   getDataListFromModel,
   getDataUniqueFromModel,
@@ -54,7 +56,7 @@ horario.put("/:id", async function (req, res) {
 });
 
 //Envia nuevos datos
-horario.post("/", async function (req, res) {
+horario.post("/",validatorHandler(schemaHorario),async function (req, res) {
   const { horario_fecha, disponibilidad, aforo, docente_id } = req.body;
   const data = await postDataListFromModel("horario", {
     data: {
