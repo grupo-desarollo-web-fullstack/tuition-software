@@ -1,4 +1,6 @@
 import express from "express";
+import validate from "../middlewares/validate.js";
+import schemaDocente from "../schemas/docente.schema.js";
 import {
   getDataListFromModel,
   getDataUniqueFromModel,
@@ -51,7 +53,7 @@ docente.put("/:id", async function (req, res) {
 });
 
 //Envia nuevos datos
-docente.post("/", async function (req, res) {
+docente.post("/",validate(schemaDocente), async function (req, res) {
   const { nombre, edad } = req.body;
   const data = await postDataListFromModel("docente", {
     data: {

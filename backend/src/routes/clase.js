@@ -1,4 +1,6 @@
 import express from "express";
+import validate from "../middlewares/validate.js";
+import schemaClase from "../schemas/clase.schema.js";
 import {
   getDataListFromModel,
   getDataUniqueFromModel,
@@ -51,7 +53,7 @@ clase.put("/:id", async function (req, res) {
 });
 
 //Envia nuevos datos
-clase.post("/", async function (req, res) {
+clase.post("/",validate(schemaClase),async function (req, res) {
   const { nsalon, horario_id } = req.body;
   const data = await postDataListFromModel("clase", {
     data: {

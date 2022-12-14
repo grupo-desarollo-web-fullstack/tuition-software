@@ -9,6 +9,8 @@ import passport from "passport";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import localStrategy from "../libs/estrategies/authLocal.js";
+import schemaEstudiante from "../schemas/estudiante.schema.js";
+import validate from "../middlewares/validate.js";
 
 const estudiante = express.Router();
 const options = {
@@ -78,7 +80,7 @@ estudiante.put("/:id", async function (req, res) {
   });
 });
 
-estudiante.post("/", async function (req, res) {
+estudiante.post("/", validate(schemaEstudiante),async function (req, res) {
   const { nombre, carrera, ciclo, password,email } = req.body;
   const passwordHash = await bcrypt.hash(password, 10);
   const data = await postDataListFromModel("estudiante", {
