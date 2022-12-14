@@ -1,5 +1,5 @@
 import express from "express";
-import validate from "../middlewares/validate.js";
+import validatorHandler from "../middlewares/validator.handler.js";
 import schemaClase from "../schemas/clase.schema.js";
 import {
   getDataListFromModel,
@@ -53,7 +53,7 @@ clase.put("/:id", async function (req, res) {
 });
 
 //Envia nuevos datos
-clase.post("/",validate(schemaClase),async function (req, res) {
+clase.post("/",validatorHandler(schemaClase),async function (req, res) {
   const { nsalon, horario_id } = req.body;
   const data = await postDataListFromModel("clase", {
     data: {

@@ -1,6 +1,6 @@
 import express from "express";
 import passport from "passport";
-import validate from "../middlewares/validate.js";
+import validatorHandler from "../middlewares/validator.handler.js";
 import schemaMatricula from "../schemas/matricula.schema.js";
 import {
   getDataListFromModel,
@@ -56,7 +56,7 @@ matricula.put("/:id", async function (req, res) {
 });
 
 //Envia nuevos datos
-matricula.post("/",validate(schemaMatricula), async function (req, res) {
+matricula.post("/",validatorHandler(schemaMatricula), async function (req, res) {
   const { curso_id, clase_id, estudiante_id } = req.body;
   const data = await postDataListFromModel("matricula", {
     data: {
