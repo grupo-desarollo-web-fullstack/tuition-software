@@ -1,9 +1,9 @@
 import Joi from "joi"
 
 const schemaMatricula = Joi.object({    
-    estudiante_id:Joi.number().integer().positive().min(1).required(),
-    curso_id:Joi.number().integer().positive().min(1).required(),
-    clase_id:Joi.number().integer().positive().min(1).required()
+    estudiante_id:Joi.number().integer().positive().required(),
+    curso_id:Joi.number().integer().positive().required(),
+    clase_id:Joi.number().integer().positive().required()
 })
 
 export default schemaMatricula;

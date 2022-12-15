@@ -1,5 +1,5 @@
 import LocalStrategy from "passport-local";
-import { getDataUniqueFromModel } from "../../services/db.js";
+import { getDataUniqueFromModel } from "../db.js";
 
 const localStrategy = new LocalStrategy({ usernameField: "email" }, async function (
     email,

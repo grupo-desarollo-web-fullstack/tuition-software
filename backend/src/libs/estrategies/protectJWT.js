@@ -1,4 +1,6 @@
+import { unauthorized } from '@hapi/boom';
 import { Strategy as JwtStrategy , ExtractJwt } from 'passport-jwt';
+import { getDataUniqueFromModel } from '../db.js';
 
 const jwtStrategy = (options) => new JwtStrategy({
     ...options,
@@ -11,9 +13,10 @@ const jwtStrategy = (options) => new JwtStrategy({
               estudiante_id: payload.id,
             },
           });
-          return done(null, data);
+        return done(null, data);
     } catch (error) {
-        done(error,null)
+        const errorBoom = unauthorized(error.message)
+        done(errorBoom, null)
     }
 })
 

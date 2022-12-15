@@ -1,16 +1,9 @@
 import express from "express";
-import {
-  getDataListFromModel,
-  getDataUniqueFromModel,
-  postDataListFromModel,
-  updateDataUniqueFromModel,
-} from "../services/db.js";
 import passport from "passport";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
 import localStrategy from "../libs/estrategies/authLocal.js";
 import schemaEstudiante from "../schemas/estudiante.schema.js";
 import validatorHandler from "../middlewares/validator.handler.js";
+import estudianteServices from "../services/estudiante.services.js";
 
 const estudiante = express.Router();
 const options = {
@@ -24,15 +17,8 @@ estudiante.post(
   "/login",
   passport.authenticate("local"),
   async function (req, res) {
-    const { user: data } = req;
-    const token = jwt.sign(
-      {
-        id: data.estudiante_id,
-      },
-      options.secretOrKey
-    );
-    data.token = token;
-    delete data.estudiante_password;
+    const { user } = req;
+    const data = estudianteServices.login(user, options);
     res.status(201).json({
       data,
       status: 201,
@@ -40,40 +26,30 @@ estudiante.post(
   }
 );
 
+//-------hecho
 estudiante.get("/", async function (req, res) {
-  const data = await getDataListFromModel("estudiante");
+  const data = await estudianteServices.getAll();
   res.json({
     data,
     status: 200,
   });
 });
 
+//-------hecho
 estudiante.get("/:id", async function (req, res) {
   const { id } = req.params;
-  const data = await getDataUniqueFromModel("estudiante", {
-    where: {
-      estudiante_id: +id,
-    },
-  });
+  const data = await estudianteServices.getUnique(id);
   res.json({
     data,
     status: 200,
   });
 });
 
+//-------hecho
 estudiante.put("/:id", async function (req, res) {
   const { id } = req.params;
   const { nombre, carrera, ciclo } = req.body;
-  const data = await updateDataUniqueFromModel("estudiante", {
-    where: {
-      estudiante_id: +id,
-    },
-    data: {
-      estudiante_nombre: nombre,
-      estudiante_carrera: carrera,
-      estudiante_ciclo: +ciclo,
-    },
-  });
+  const data = await estudianteServices.updateUnique(id, nombre, carrera, ciclo);
   res.status(201).json({
     data,
     status: 201,
@@ -81,26 +57,7 @@ estudiante.put("/:id", async function (req, res) {
 });
 
 estudiante.post("/", validatorHandler(schemaEstudiante),async function (req, res) {
-  const { nombre, carrera, ciclo, password,email } = req.body;
-  const passwordHash = await bcrypt.hash(password, 10);
-  const data = await postDataListFromModel("estudiante", {
-    data: {
-      estudiante_nombre: nombre,
-      estudiante_carrera: carrera,
-      estudiante_ciclo: +ciclo,
-      estudiante_password: passwordHash,
-      estudiante_email: email,
-    },
-  });
-
-  const token = jwt.sign(
-    {
-      id: data.estudiante_id,
-    },
-    options.secretOrKey
-  );
-  data.token = token;
-  delete data.estudiante_password;
+  const data = await estudianteServices.create(req.body,options)
   res.status(201).json({
     data,
     status: 201,
