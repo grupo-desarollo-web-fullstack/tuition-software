@@ -1,18 +1,13 @@
 import express from "express";
 import validatorHandler from "../middlewares/validator.handler.js";
 import schemaCurso from "../schemas/curso.schema.js";
-import {
-  getDataListFromModel,
-  getDataUniqueFromModel,
-  postDataListFromModel,
-  updateDataUniqueFromModel,
-} from "../services/db.js";
+import cursoServices from "../services/curso.services.js";
 
 const curso = express.Router();
 
 //Obtiene datos
 curso.get("/", async function (req, res) {
-  const data = await getDataListFromModel("curso");
+  const data = await cursoServices.getAll();
   res.json({
     data,
     status: 200,
@@ -22,11 +17,7 @@ curso.get("/", async function (req, res) {
 //Obtiene datos por ID
 curso.get("/:id", async function (req, res) {
   const { id } = req.params;
-  const data = await getDataUniqueFromModel("curso", {
-    where: {
-      curso_id: +id,
-    },
-  });
+  const data = await cursoServices.getUnique(id);
   res.json({
     data,
     status: 200,
@@ -37,16 +28,7 @@ curso.get("/:id", async function (req, res) {
 curso.put("/:id", async function (req, res) {
   const { id } = req.params;
   const { nombre, creditos, tipo } = req.body;
-  const data = await updateDataUniqueFromModel("curso", {
-    where: {
-      curso_id: +id,
-    },
-    data: {
-      curso_nombre: nombre,
-      curso_creditos: creditos,
-      curso_tipo: +tipo,
-    },
-  });
+  const data = await cursoServices.updateUnique(id, nombre, creditos, tipo);
   res.status(201).json({
     data,
     status: 201,
@@ -56,13 +38,7 @@ curso.put("/:id", async function (req, res) {
 //Envia nuevos datos
 curso.post("/", validatorHandler(schemaCurso),async function (req, res) {
   const { nombre, creditos, tipo } = req.body;
-  const data = await postDataListFromModel("curso", {
-    data: {
-      curso_nombre: nombre,
-      curso_creditos: creditos,
-      curso_tipo: tipo,
-    },
-  });
+  const data = await cursoServices.create(nombre,creditos,tipo);
   res.status(201).json({
     data,
     status: 201,
