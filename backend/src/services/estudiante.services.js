@@ -3,7 +3,8 @@ import { getDataListFromModel, getDataUniqueFromModel, postDataListFromModel, up
 import bcrypt from "bcrypt";
 
 const estudianteServices = {
-   login(data, options) {
+  login(data, options) {
+    console.log(data)
     const token = jwt.sign(
       {
         id: data.estudiante_id,

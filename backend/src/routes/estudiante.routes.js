@@ -15,14 +15,19 @@ passport.use(localStrategy)
 
 estudiante.post(
   "/login",
-  passport.authenticate("local"),
-  async function (req, res) {
-    const { user } = req;
-    const data = estudianteServices.login(user, options);
-    res.status(201).json({
-      data,
-      status: 201,
-    });
+  passport.authenticate("local", {session:false}),
+  function (req, res,next) {
+    try {
+      const { user } = req;
+      console.log(user)
+      const data = estudianteServices.login(user, options);
+      res.status(201).json({
+        data,
+        status: 201,
+      });
+    } catch (error) {
+      next(error)
+    }
   }
 );
 
