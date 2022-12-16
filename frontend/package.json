@@ -8,7 +8,8 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"styles:dev": "sass --watch --poll src/styles/scss:src/styles/css"
 	},
 	"repository": {
 		"type": "git",
@@ -31,12 +32,14 @@
 	"homepage": "https://github.com/grupo-desarollo-web-fullstack/toution-software#readme",
 	"devDependencies": {
 		"@vitejs/plugin-react": "^2.2.0",
+		"sass": "^1.56.2",
 		"vite": "^3.2.5"
 	},
 	"dependencies": {
 		"luxon": "^3.1.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-icons": "^4.7.1",
 		"react-router-dom": "^6.4.5"
 	}
 }
