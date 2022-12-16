@@ -6,7 +6,7 @@ const jwtStrategy = (options) => new JwtStrategy({
     ...options,
     jwtFromRequest:ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey:"secret"
-}, async (payload,done) => {
+}, async (payload, done) => {
     try {
         const data = await getDataUniqueFromModel("estudiante", {
             where: {
