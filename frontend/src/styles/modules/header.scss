@@ -1,0 +1,33 @@
+@import "./mixins.scss";
+
+.nav {
+  background: #f5f2e7;
+  height: 4rem;
+  padding: 0 1rem;
+  &-container {
+    height: 100%;
+    width: min(100%, 1024px);
+    margin: 0 auto;
+    @include flex-fd-jc-ai-g(row, space-between, center);
+  }
+  &__logo {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    text-decoration: none;
+    justify-content: start;
+    font-size: clamp(0.5rem, 3vw, 0.8rem);
+    gap: 0 0.5rem;
+    &__title {
+      color: #000000;
+      margin: 0;
+    }
+    &__img {
+      width: min(2.5rem, 15%);
+      height: min(2.5rem, 15%);
+    }
+    @include laptop {
+      width: initial;
+    }
+  }
+}

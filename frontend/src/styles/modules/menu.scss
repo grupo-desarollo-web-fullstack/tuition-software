@@ -1,0 +1,67 @@
+@import "mixins.scss";
+
+.menu {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  top: 4rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2c3333;
+  list-style: none;
+  --translate-x: translateX(100%);
+  transition: transform 0.25s;
+  transform: var(--translate-x);
+  @include flex-fd-jc-ai-g(column, center, center, 1rem);
+  &__icon {
+    @include flex-fd-jc-ai-g(column, $justify-content: center, $gap: 0.4rem);
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.25s;
+    &__bar {
+      background-color: #2c3333;
+      height: calc(0.0625rem * 3);
+      width: 100%;
+      border-radius: calc(0.0625rem * 5);
+      transition: all 0.5s;
+      transform-origin: left;
+    }
+    &--close {
+      .menu__icon__bar {
+        &:nth-child(1) {
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+    @include laptop {
+      display: none;
+    }
+  }
+  &--open {
+    --translate-x: translateX(0);
+  }
+  &__link {
+    text-decoration: none;
+    color: #f5f2e7;
+    font-weight: 800;
+    @include laptop {
+      color: #2c3333;
+    }
+  }
+  @include laptop {
+    position: static;
+    --translate-x: translateX(0);
+    flex-direction: row;
+    background-color: transparent;
+  }
+}

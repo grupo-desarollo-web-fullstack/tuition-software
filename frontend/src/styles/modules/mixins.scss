@@ -1,0 +1,66 @@
+@use "sass:meta";
+@use "sass:map";
+
+@mixin flex-fd-jc-ai-g(
+  $flex-direction: row,
+  $justify-content: flex-start,
+  $aling-items: stretch,
+  $gap: 0
+) {
+  display: flex;
+  justify-content: $justify-content;
+  flex-direction: $flex-direction;
+  align-items: $aling-items;
+  @if (meta.type-of($gap) == "number") {
+    gap: $gap;
+  } @else {
+    gap: map.get($gap, "y") map.get($gap, "x");
+  }
+}
+
+@mixin paddingMain() {
+  padding: calc(4rem + 2rem) 0 2rem 0;
+}
+
+@mixin button-cl-pd-cd($color: #0056ef, $padding: 1rem, $colorDisabled: false) {
+  padding: $padding;
+  border-radius: 0.5rem;
+  border: 0.065rem solid $color;
+  font-weight: 600;
+  color: $color;
+  transition: background-color 0.25s, color 0.25s, transform 0.25s;
+  &:hover {
+    background-color: $color;
+    color: white;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+  @if ($colorDisabled) {
+    &:disabled {
+      border: 0.065rem solid $colorDisabled;
+      background-color: $colorDisabled;
+      color: white;
+      pointer-events: none;
+    }
+  }
+  @content;
+}
+
+@mixin sm {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
