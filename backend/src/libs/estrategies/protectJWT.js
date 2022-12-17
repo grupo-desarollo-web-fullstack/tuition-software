@@ -1,23 +1,27 @@
-import { unauthorized } from '@hapi/boom';
-import { Strategy as JwtStrategy , ExtractJwt } from 'passport-jwt';
-import { getDataUniqueFromModel } from '../db.js';
+import { unauthorized } from "@hapi/boom";
+import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
+import { getDataUniqueFromModel } from "../db.js";
 
-const jwtStrategy = (options) => new JwtStrategy({
-    ...options,
-    jwtFromRequest:ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey:"secret"
-}, async (payload, done) => {
-    try {
+const jwtStrategy = (options) =>
+  new JwtStrategy(
+    {
+      ...options,
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: "secret",
+    },
+    async (payload, done) => {
+      try {
         const data = await getDataUniqueFromModel("estudiante", {
-            where: {
-              estudiante_id: payload.id,
-            },
-          });
+          where: {
+            estudiante_id: payload.id,
+          },
+        });
         return done(null, data);
-    } catch (error) {
-        const errorBoom = unauthorized(error.message)
-        done(errorBoom, null)
+      } catch (error) {
+        const errorBoom = unauthorized(error.message);
+        done(errorBoom, null);
+      }
     }
-})
+  );
 
-export default jwtStrategy
+export default jwtStrategy;

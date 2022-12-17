@@ -29,7 +29,13 @@ horario.put("/:id", async function (req, res) {
   const { id } = req.params;
   const { horario_fecha, disponibilidad, aforo, docente_id } = req.body;
 
-  const data = await horarioServices.updateUnique(id, horario_fecha, disponibilidad,aforo, docente_id);
+  const data = await horarioServices.updateUnique(
+    id,
+    horario_fecha,
+    disponibilidad,
+    aforo,
+    docente_id
+  );
   res.status(201).json({
     data,
     status: 201,
@@ -37,9 +43,14 @@ horario.put("/:id", async function (req, res) {
 });
 
 //Envia nuevos datos
-horario.post("/",validatorHandler(schemaHorario),async function (req, res) {
+horario.post("/", validatorHandler(schemaHorario), async function (req, res) {
   const { horario_fecha, disponibilidad, aforo, docente_id } = req.body;
-  const data = await horarioServices.create(horario_fecha, disponibilidad, aforo, docente_id);
+  const data = await horarioServices.create(
+    horario_fecha,
+    disponibilidad,
+    aforo,
+    docente_id
+  );
   res.status(201).json({
     data,
     status: 201,

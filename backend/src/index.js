@@ -14,11 +14,10 @@ import notFoundHandler from "./middlewares/notFound.handler.js";
 const app = express();
 
 //Proteccion estrategia
-passport.use(jwtStrategy())
+passport.use(jwtStrategy());
 
 app.use(cors());
 app.use(express.json());
-
 
 //rutas
 app.use("/estudiante", estudiante);

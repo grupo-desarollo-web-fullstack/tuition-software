@@ -36,7 +36,7 @@ docente.put("/:id", async function (req, res) {
 });
 
 //Envia nuevos datos
-docente.post("/",validatorHandler(schemaDocente), async function (req, res) {
+docente.post("/", validatorHandler(schemaDocente), async function (req, res) {
   const { nombre, edad } = req.body;
   const data = await docenteServices.create(nombre, edad);
   res.status(201).json({

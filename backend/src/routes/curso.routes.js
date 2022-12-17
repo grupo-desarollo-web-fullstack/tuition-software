@@ -36,9 +36,9 @@ curso.put("/:id", async function (req, res) {
 });
 
 //Envia nuevos datos
-curso.post("/", validatorHandler(schemaCurso),async function (req, res) {
+curso.post("/", validatorHandler(schemaCurso), async function (req, res) {
   const { nombre, creditos, tipo } = req.body;
-  const data = await cursoServices.create(nombre,creditos,tipo);
+  const data = await cursoServices.create(nombre, creditos, tipo);
   res.status(201).json({
     data,
     status: 201,

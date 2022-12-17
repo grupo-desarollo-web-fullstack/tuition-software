@@ -1,4 +1,9 @@
-import { getDataListFromModel, getDataUniqueFromModel, postDataListFromModel, updateDataUniqueFromModel } from "../libs/db.js";
+import {
+  getDataListFromModel,
+  getDataUniqueFromModel,
+  postDataListFromModel,
+  updateDataUniqueFromModel,
+} from "../libs/db.js";
 const claseServices = {
   async getAll() {
     const data = await getDataListFromModel("clase");
@@ -27,7 +32,7 @@ const claseServices = {
     return data;
   },
 
-  async create(nsalon,horario_id) {
+  async create(nsalon, horario_id) {
     const data = await postDataListFromModel("clase", {
       data: {
         clase_nsalon: nsalon,
@@ -36,7 +41,6 @@ const claseServices = {
     });
     return data;
   },
-  
 };
 
 export default claseServices;

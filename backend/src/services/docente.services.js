@@ -1,4 +1,10 @@
-import { getDataListFromModel, getDataUniqueFromModel, postDataListFromModel, updateDataUniqueFromModel } from "../libs/db.js";
+import {
+  getDataListFromModel,
+  getDataUniqueFromModel,
+  postDataListFromModel,
+  updateDataUniqueFromModel,
+} from "../libs/db.js";
+
 const docenteServices = {
   async getAll() {
     const data = await getDataListFromModel("docente");
@@ -27,14 +33,14 @@ const docenteServices = {
     return data;
   },
 
-  async create(nombre,edad) {
+  async create(nombre, edad) {
     const data = await postDataListFromModel("docente", {
       data: {
         docente_nombre: nombre,
         docente_edad: +edad,
       },
     });
-      return data;
+    return data;
   },
 };
 

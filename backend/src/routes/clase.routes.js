@@ -2,6 +2,7 @@ import express from "express";
 import validatorHandler from "../middlewares/validator.handler.js";
 import schemaClase from "../schemas/clase.schema.js";
 import claseServices from "../services/clase.services.js";
+
 const clase = express.Router();
 
 //Obtiene datos
@@ -27,7 +28,7 @@ clase.get("/:id", async function (req, res) {
 clase.put("/:id", async function (req, res) {
   const { id } = req.params;
   const { nsalon, horario_id } = req.body;
-  const data = await claseServices.updateUnique(id,nsalon,horario_id);
+  const data = await claseServices.updateUnique(id, nsalon, horario_id);
   res.status(201).json({
     data,
     status: 201,
@@ -35,9 +36,9 @@ clase.put("/:id", async function (req, res) {
 });
 
 //Envia nuevos datos
-clase.post("/",validatorHandler(schemaClase),async function (req, res) {
+clase.post("/", validatorHandler(schemaClase), async function (req, res) {
   const { nsalon, horario_id } = req.body;
-  const data = await claseServices.create(nsalon,horario_id);
+  const data = await claseServices.create(nsalon, horario_id);
   res.status(201).json({
     data,
     status: 201,

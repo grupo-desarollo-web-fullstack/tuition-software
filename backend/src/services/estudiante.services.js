@@ -1,10 +1,14 @@
 import jwt from "jsonwebtoken";
-import { getDataListFromModel, getDataUniqueFromModel, postDataListFromModel, updateDataUniqueFromModel } from "../libs/db.js";
+import {
+  getDataListFromModel,
+  getDataUniqueFromModel,
+  postDataListFromModel,
+  updateDataUniqueFromModel,
+} from "../libs/db.js";
 import bcrypt from "bcrypt";
 
 const estudianteServices = {
   login(data, options) {
-    console.log(data)
     const token = jwt.sign(
       {
         id: data.estudiante_id,
@@ -15,7 +19,7 @@ const estudianteServices = {
     delete data.estudiante_password;
     return data;
   },
-  async create({ nombre,carrera,ciclo,password,email },options) {
+  async create({ nombre, carrera, ciclo, password, email }, options) {
     const passwordHash = await bcrypt.hash(password, 10);
     const data = await postDataListFromModel("estudiante", {
       data: {
@@ -37,21 +41,20 @@ const estudianteServices = {
     delete data.estudiante_password;
     return data;
   },
-  async getAll() { 
+  async getAll() {
     const data = await getDataListFromModel("estudiante");
     return data;
   },
 
-  async getUnique(id) { 
+  async getUnique(id) {
     const data = await getDataUniqueFromModel("estudiante", {
       where: {
         estudiante_id: +id,
       },
-      
     });
     return data;
   },
-  async updateUnique(id,nombre,carrera,ciclo) { 
+  async updateUnique(id, nombre, carrera, ciclo) {
     const data = await updateDataUniqueFromModel("estudiante", {
       where: {
         estudiante_id: +id,
@@ -63,7 +66,7 @@ const estudianteServices = {
       },
     });
     return data;
-  }
+  },
 };
 
 export default estudianteServices;

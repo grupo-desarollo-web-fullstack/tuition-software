@@ -1,4 +1,10 @@
-import { getDataListFromModel, getDataUniqueFromModel, postDataListFromModel, updateDataUniqueFromModel } from "../libs/db.js";
+import {
+  getDataListFromModel,
+  getDataUniqueFromModel,
+  postDataListFromModel,
+  updateDataUniqueFromModel,
+} from "../libs/db.js";
+
 const horarioServices = {
   async getAll() {
     const data = await getDataListFromModel("horario");
@@ -29,7 +35,7 @@ const horarioServices = {
     return data;
   },
 
-  async create(horario_fecha,disponibilidad,aforo,docente_id) {
+  async create(horario_fecha, disponibilidad, aforo, docente_id) {
     const data = await postDataListFromModel("horario", {
       data: {
         horario_fecha: new Date(horario_fecha),
@@ -38,7 +44,7 @@ const horarioServices = {
         tbl_docente_docente_id: +docente_id,
       },
     });
-      return data;
+    return data;
   },
 };
 

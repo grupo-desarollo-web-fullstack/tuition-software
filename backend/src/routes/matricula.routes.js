@@ -5,7 +5,7 @@ import schemaMatricula from "../schemas/matricula.schema.js";
 import matriculaServices from "../services/matricula.services.js";
 
 const matricula = express.Router();
-matricula.use(passport.authorize("jwt",{session:false}))
+matricula.use(passport.authorize("jwt", { session: false }));
 
 //Obtiene datos
 matricula.get("/", async function (req, res) {
@@ -30,7 +30,12 @@ matricula.get("/:id", async function (req, res) {
 matricula.put("/:id", async function (req, res) {
   const { id } = req.params;
   const { curso_id, clase_id, estudiante_id } = req.body;
-  const data = await matriculaServices.updateUnique(id, estudiante_id, curso_id, clase_id);
+  const data = await matriculaServices.updateUnique(
+    id,
+    estudiante_id,
+    curso_id,
+    clase_id
+  );
   res.status(201).json({
     data,
     status: 201,
@@ -38,13 +43,21 @@ matricula.put("/:id", async function (req, res) {
 });
 
 //Envia nuevos datos
-matricula.post("/",validatorHandler(schemaMatricula), async function (req, res) {
-  const { curso_id, clase_id, estudiante_id } = req.body;
-  const data = await matriculaServices.create(estudiante_id, curso_id, clase_id);
-  res.status(201).json({
-    data,
-    status: 201,
-  });
-});
+matricula.post(
+  "/",
+  validatorHandler(schemaMatricula),
+  async function (req, res) {
+    const { curso_id, clase_id, estudiante_id } = req.body;
+    const data = await matriculaServices.create(
+      estudiante_id,
+      curso_id,
+      clase_id
+    );
+    res.status(201).json({
+      data,
+      status: 201,
+    });
+  }
+);
 
 export default matricula;

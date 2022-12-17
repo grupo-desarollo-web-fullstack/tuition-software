@@ -11,22 +11,21 @@ const options = {
 };
 
 //Passport Estrategias
-passport.use(localStrategy)
+passport.use(localStrategy);
 
 estudiante.post(
   "/login",
-  passport.authenticate("local", {session:false}),
-  function (req, res,next) {
+  passport.authenticate("local", { session: false }),
+  function (req, res, next) {
     try {
       const { user } = req;
-      console.log(user)
       const data = estudianteServices.login(user, options);
       res.status(201).json({
         data,
         status: 201,
       });
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 );
@@ -54,19 +53,28 @@ estudiante.get("/:id", async function (req, res) {
 estudiante.put("/:id", async function (req, res) {
   const { id } = req.params;
   const { nombre, carrera, ciclo } = req.body;
-  const data = await estudianteServices.updateUnique(id, nombre, carrera, ciclo);
+  const data = await estudianteServices.updateUnique(
+    id,
+    nombre,
+    carrera,
+    ciclo
+  );
   res.status(201).json({
     data,
     status: 201,
   });
 });
 
-estudiante.post("/", validatorHandler(schemaEstudiante),async function (req, res) {
-  const data = await estudianteServices.create(req.body,options)
-  res.status(201).json({
-    data,
-    status: 201,
-  });
-});
+estudiante.post(
+  "/",
+  validatorHandler(schemaEstudiante),
+  async function (req, res) {
+    const data = await estudianteServices.create(req.body, options);
+    res.status(201).json({
+      data,
+      status: 201,
+    });
+  }
+);
 
 export default estudiante;

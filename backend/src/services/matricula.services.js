@@ -1,4 +1,9 @@
-import { getDataListFromModel, getDataUniqueFromModel, postDataListFromModel, updateDataUniqueFromModel } from "../libs/db.js";
+import {
+  getDataListFromModel,
+  getDataUniqueFromModel,
+  postDataListFromModel,
+  updateDataUniqueFromModel,
+} from "../libs/db.js";
 
 const matriculaServices = {
   async getAll() {
@@ -37,7 +42,6 @@ const matriculaServices = {
         tbl_clase_clase_id: +clase_id,
       },
     });
-    console.log(data)
     return data;
   },
 };
