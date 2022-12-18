@@ -10,6 +10,7 @@ import matricula from "./routes/matricula.routes.js";
 import jwtStrategy from "./libs/estrategies/protectJWT.js";
 import passport from "passport";
 import notFoundHandler from "./middlewares/notFound.handler.js";
+import config from "./config/index.js";
 
 const app = express();
 
@@ -31,6 +32,6 @@ app.use("/clase", clase);
 app.use(handlerError);
 app.use(notFoundHandler);
 
-app.listen(5000, function () {
-  console.log("servidor activo en http://localhost:5000");
+app.listen(config.port, function () {
+  console.log(`servidor activo en http://localhost:${config.port}`);
 });

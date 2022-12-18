@@ -4,10 +4,11 @@ import localStrategy from "../libs/estrategies/authLocal.js";
 import schemaEstudiante from "../schemas/estudiante.schema.js";
 import validatorHandler from "../middlewares/validator.handler.js";
 import estudianteServices from "../services/estudiante.services.js";
+import config from "../config/index.js";
 
 const estudiante = express.Router();
 const options = {
-  secretOrKey: "secret",
+  secretOrKey: config.secretOrKey,
 };
 
 //Passport Estrategias
