@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import {
   getDataListFromModel,
   getDataUniqueFromModel,
@@ -6,15 +5,11 @@ import {
   updateDataUniqueFromModel,
 } from "../libs/db.js";
 import bcrypt from "bcrypt";
+import getTokenJwt from "../utils/getTokenJwt.js";
 
 const estudianteServices = {
   login(data, options) {
-    const token = jwt.sign(
-      {
-        id: data.estudiante_id,
-      },
-      options.secretOrKey
-    );
+    const token = getTokenJwt(data, options);
     data.token = token;
     delete data.estudiante_password;
     return data;
@@ -31,12 +26,7 @@ const estudianteServices = {
       },
     });
 
-    const token = jwt.sign(
-      {
-        id: data.estudiante_id,
-      },
-      options.secretOrKey
-    );
+    const token = getTokenJwt(data, options);
     data.token = token;
     delete data.estudiante_password;
     return data;
