@@ -16,7 +16,7 @@ passport.use(localStrategy);
 
 estudiante.post(
   "/login",
-  passport.authenticate("local", { session: false }),
+  passport.authenticate("local", { session: false, failWithError: true }),
   function (req, res, next) {
     try {
       const { user } = req;

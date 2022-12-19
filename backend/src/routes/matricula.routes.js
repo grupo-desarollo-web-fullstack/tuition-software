@@ -5,7 +5,12 @@ import schemaMatricula from "../schemas/matricula.schema.js";
 import matriculaServices from "../services/matricula.services.js";
 
 const matricula = express.Router();
-matricula.use(passport.authorize("jwt", { session: false }));
+matricula.use(
+  passport.authorize("jwt", {
+    session: false,
+    failWithError: true,
+  })
+);
 
 //Obtiene datos
 matricula.get("/", async function (req, res) {
