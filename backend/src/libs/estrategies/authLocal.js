@@ -1,5 +1,6 @@
 import LocalStrategy from "passport-local";
 import { getDataUniqueFromModel } from "../db.js";
+import { unauthorized } from "@hapi/boom";
 import bcrypt from "bcrypt";
 
 const localStrategy = new LocalStrategy(

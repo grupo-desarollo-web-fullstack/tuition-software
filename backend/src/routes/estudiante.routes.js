@@ -41,14 +41,21 @@ estudiante.get("/", async function (req, res) {
 });
 
 //-------hecho
-estudiante.get("/:id", async function (req, res) {
-  const { id } = req.params;
-  const data = await estudianteServices.getUnique(id);
-  res.json({
-    data,
-    status: 200,
-  });
-});
+estudiante.get(
+  "/:id",
+  passport.authorize("jwt", {
+    session: false,
+    failWithError: true,
+  }),
+  async function (req, res) {
+    const { id } = req.params;
+    const data = await estudianteServices.getUnique(id);
+    res.json({
+      data,
+      status: 200,
+    });
+  }
+);
 
 //-------hecho
 estudiante.put("/:id", async function (req, res) {
