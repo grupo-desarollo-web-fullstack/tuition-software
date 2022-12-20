@@ -5,6 +5,7 @@ import schemaEstudiante from "../schemas/estudiante.schema.js";
 import validatorHandler from "../middlewares/validator.handler.js";
 import estudianteServices from "../services/estudiante.services.js";
 import config from "../config/index.js";
+import { notFound } from "@hapi/boom";
 
 const estudiante = express.Router();
 const options = {
@@ -40,22 +41,43 @@ estudiante.get("/", async function (req, res) {
   });
 });
 
-//-------hecho
+//------info
 estudiante.get(
-  "/:id",
-  passport.authorize("jwt", {
-    session: false,
-    failWithError: true,
-  }),
+  "/info",
+  (req, res, next) => {
+    const middlewareAuthenticate = passport.authenticate(
+      "jwt",
+      { session: false },
+      (error, user) => {
+        if (error) return next(error);
+        if (user) return (req.user = user);
+        res.json({
+          data: null,
+          status: 200,
+        });
+      }
+    );
+    middlewareAuthenticate(req, res, next);
+  },
   async function (req, res) {
-    const { id } = req.params;
-    const data = await estudianteServices.getUnique(id);
+    const { user: data } = req;
+    delete data.estudiante_password;
     res.json({
       data,
       status: 200,
     });
   }
 );
+
+//-------hecho
+estudiante.get("/:id", async function (req, res) {
+  const { id } = req.params;
+  const data = await estudianteServices.getUnique(id);
+  res.json({
+    data,
+    status: 200,
+  });
+});
 
 //-------hecho
 estudiante.put("/:id", async function (req, res) {
