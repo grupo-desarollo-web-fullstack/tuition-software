@@ -1,4 +1,4 @@
-@import "mixins.scss";
+@import "mixins";
 
 .menu {
   position: fixed;
@@ -27,7 +27,7 @@
       height: calc(0.0625rem * 3);
       width: 100%;
       border-radius: calc(0.0625rem * 5);
-      transition: all 0.5s;
+      transition: transform 0.5s, opacity 0.5s;
       transform-origin: left;
     }
     &--close {
@@ -47,15 +47,110 @@
       display: none;
     }
   }
-  &--open {
-    --translate-x: translateX(0);
-  }
   &__link {
     text-decoration: none;
     color: #f5f2e7;
     font-weight: 800;
+    &__icon {
+      transition: transform 0.25s;
+      &--instagram {
+        width: 1.875rem;
+        height: 1.875rem;
+        background: radial-gradient(
+          circle at 33% 100%,
+          #fed373 4%,
+          #f15245 30%,
+          #d92e7f 62%,
+          #9b36b7 85%,
+          #515ecf
+        );
+        border-radius: 30%;
+        position: relative;
+        &::before {
+          content: "";
+          border: 0.1rem solid #fff;
+          border-radius: 30%;
+          width: 1.1rem;
+          height: 1.1rem;
+          inset: 0;
+          position: absolute;
+          margin: auto;
+        }
+        &::after {
+          content: "";
+          border: 0.1rem solid #fff;
+          width: 0.4rem;
+          height: 0.4rem;
+          border-radius: 100%;
+          inset: 0;
+          position: absolute;
+          margin: auto;
+        }
+      }
+      &-circle {
+        content: "";
+        border: 0.1rem solid #fff;
+        width: 0;
+        height: 0;
+        border-radius: 100%;
+        top: 0.52rem;
+        right: 0.52rem;
+        position: absolute;
+        margin: auto;
+      }
+      &:hover {
+        transform: scale(1.1);
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+      &--footer {
+        @include flex-fd-jc-ai-g(row, center, center);
+      }
+    }
     @include laptop {
       color: #2c3333;
+    }
+
+    &::before {
+      content: "";
+      right: 100%;
+    }
+
+    &--active {
+      position: relative;
+      &::before {
+        position: absolute;
+        background-color: #2666cf;
+        top: 1.2rem;
+        left: 0;
+        right: 0;
+        height: calc(0.0625rem * 2);
+        transition: right 0.25s;
+      }
+    }
+  }
+  &--open {
+    --translate-x: translateX(0);
+  }
+  &--footer {
+    position: relative;
+    top: 0;
+    flex-direction: row;
+    --translate-x: translateX(0);
+    background: transparent;
+    &::after {
+      content: "";
+      position: absolute;
+      background-color: #2666cf;
+      height: 0.125rem;
+      top: 2.2rem;
+      left: 0;
+      right: 0;
+      transition: right 0.25s ease-in-out;
+      @include sm {
+        right: 100%;
+      }
     }
   }
   @include laptop {

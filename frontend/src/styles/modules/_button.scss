@@ -1,0 +1,29 @@
+.button {
+  border: none;
+  line-height: 2rem;
+  font-weight: 800;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-radius: 0.5rem;
+  transition: transform 0.25s, opacity 0.25s;
+  cursor: pointer;
+  &--dark {
+    background-color: #2c3333;
+    color: #f5f2e7;
+  }
+  &--light {
+    background-color: #f5f2e7;
+    color: #2c3333;
+  }
+  &--form {
+    margin: 0 auto;
+  }
+  &--disabled {
+    user-select: none;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}

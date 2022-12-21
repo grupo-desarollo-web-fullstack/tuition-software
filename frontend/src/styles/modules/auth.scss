@@ -1,5 +1,57 @@
+@import "./mixins";
+
 .auth {
+  &-container {
+    @include flex-fd-jc-ai-g(row, center, center, 1rem);
+    flex-wrap: wrap;
+  }
+  &__content {
+    @include flex-fd-jc-ai-g(column, center, center, 1rem);
+    min-height: 100vh;
+    flex: 1;
+    @include laptop {
+      margin-top: 4rem;
+      min-height: calc(100vh - 4rem);
+    }
+  }
+  &__aside {
+    display: none;
+    @include laptop {
+      background-color: #2666cf;
+      @include flex-fd-jc-ai-g(column, center, center, 1rem);
+      margin-top: 4rem;
+      min-height: calc(100vh - 4rem);
+      flex: 1;
+      &__img {
+        width: 50%;
+        &--register {
+          width: 30%;
+        }
+      }
+      &__paragraph {
+        color: #f5f2e7;
+        font-size: 1.2rem;
+        width: min(50ch, 95%);
+        margin: 0;
+        text-align: center;
+      }
+    }
+  }
   &__title {
     text-align: center;
+    margin: 0;
+    color: #2c3333;
+    font-size: clamp(1.5rem, 2vw, 2rem);
+  }
+  &__link {
+    text-decoration: none;
+    color: #2c3333;
+    text-align: center;
+    &:hover {
+      text-decoration: wavy underline #2666cf;
+    }
+  }
+  &__aside {
+    width: 5rem;
   }
 }

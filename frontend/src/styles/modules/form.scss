@@ -1,12 +1,47 @@
+@import "mixins";
+
 .form {
   min-height: 5rem;
+  width: min(80%, 640px);
   &-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    @include flex-fd-jc-ai-g(column, $align-items: center, $gap: 1rem);
+    &--register {
+      padding: 0 1rem;
+      @include tablet {
+        flex-wrap: wrap;
+        flex-direction: row;
+      }
+    }
   }
   &__input {
-    width: 50%;
+    border: none;
+    border-radius: 0.2rem;
+    box-shadow: 0 0 0.1rem 0rem #2c3333;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    width: 80%;
+    &--register {
+      width: 100%;
+      @include tablet {
+        &:nth-child(1) {
+          flex: 100%;
+        }
+        &:nth-child(2) {
+          flex: calc(50% - 1rem);
+        }
+        &:nth-child(3) {
+          flex: calc(50% - 1rem);
+        }
+        &:nth-child(4) {
+          flex: calc(50% - 1rem);
+        }
+        &:nth-child(5) {
+          flex: calc(50% - 1rem);
+        }
+      }
+    }
+    @include laptop {
+      width: 60%;
+    }
   }
 }
