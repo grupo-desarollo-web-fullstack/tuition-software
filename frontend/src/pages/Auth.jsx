@@ -1,15 +1,45 @@
-import { Outlet, useMatch } from "react-router-dom";
-import "../styles/modules/auth.scss";
+import { useEffect } from "react";
+import { Outlet, redirect, useMatch, useNavigate } from "react-router-dom";
+import LoginSvg from "@components/LoginSvg";
+import RegisterSvg from "@components/RegisterSvg";
+import useToken from "@hooks/auth/useToken";
+import stateUser from "@libs/states/user";
+import "@styles/modules/auth.scss";
+
+export const loaderAuth = () => {
+  if (stateUser.user) return redirect("/dashboard");
+  return null;
+};
 
 const Auth = () => {
   const isLogin = useMatch("/auth/login");
+  const [token, setToken] = useToken();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (token) navigate("/dashboard");
+  }, [token]);
   return (
     <main className="main">
       <section className="auth">
-        <h2 className="auth__title">
-          {isLogin ? "Iniciar Sesión" : "Registrarse"}
-        </h2>
-        <Outlet />
+        <div className="auth-container">
+          <aside className="auth__aside">
+            {isLogin ? (
+              <LoginSvg className="auth__aside__img pulse" />
+            ) : (
+              <RegisterSvg className="auth__aside__img auth__aside__img--register pulse" />
+            )}
+            <p className="auth__aside__paragraph">
+              {isLogin
+                ? "Inicia sesión, ve las novedades en tus cursos!"
+                : "Registrate, obtén control de tus cursos, explora, matrículate, ahorra tiempo"}
+            </p>
+          </aside>
+          <Outlet
+            context={{
+              setToken,
+            }}
+          />
+        </div>
       </section>
     </main>
   );
