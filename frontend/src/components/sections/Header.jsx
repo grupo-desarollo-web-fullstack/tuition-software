@@ -1,8 +1,7 @@
-import { Link, NavLink } from "react-router-dom";
-import "../styles/modules/header.scss";
-import "../styles/modules/menu.scss";
+import { Link } from "react-router-dom";
 import { useRef } from "react";
-import Logo from "./Logo";
+import Logo from "../Logo";
+import Menu from "@components/Menu";
 
 const Header = () => {
   const menuRef = useRef();
@@ -32,26 +31,7 @@ const Header = () => {
             <div className="menu__icon__bar"></div>
             <div className="menu__icon__bar"></div>
           </button>
-          <ul ref={menuRef} className="menu">
-            <li>
-              <NavLink
-                onClick={handleClickClose}
-                className="menu__link"
-                to="/auth/login"
-              >
-                Iniciar sesión
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                onClick={handleClickClose}
-                className="menu__link"
-                to="/about"
-              >
-                Nosotros
-              </NavLink>
-            </li>
-          </ul>
+          <Menu ref={menuRef} handleClickClose={handleClickClose} />
         </div>
       </nav>
     </header>
