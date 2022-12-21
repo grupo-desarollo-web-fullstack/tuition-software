@@ -12,8 +12,7 @@ export const actionLogin = async ({ request }) => {
 };
 
 const Login = () => {
-  const [, setUser] = useUser();
-  const { setToken } = useOutletContext();
+  const { setToken, setUser } = useOutletContext();
   const fetcher = useFetcher();
   useEffect(() => {
     const { data: user } = fetcher;

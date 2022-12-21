@@ -10,7 +10,7 @@ export const actionRegister = async ({ request }) => {
 };
 
 const Register = () => {
-  const { setToken } = useOutletContext();
+  const { setToken, setUser } = useOutletContext();
   const fetcher = useFetcher();
   useEffect(() => {
     const { data: user } = fetcher;

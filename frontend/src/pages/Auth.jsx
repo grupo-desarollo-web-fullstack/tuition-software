@@ -5,6 +5,7 @@ import RegisterSvg from "@components/RegisterSvg";
 import useToken from "@hooks/auth/useToken";
 import stateUser from "@libs/states/user";
 import "@styles/modules/auth.scss";
+import useUser from "@hooks/auth/useUser";
 
 export const loaderAuth = () => {
   if (stateUser.user) return redirect("/dashboard");
@@ -14,6 +15,7 @@ export const loaderAuth = () => {
 const Auth = () => {
   const isLogin = useMatch("/auth/login");
   const [token, setToken] = useToken();
+  const [, setUser] = useUser();
   const navigate = useNavigate();
   useEffect(() => {
     if (token) navigate("/dashboard");
@@ -37,6 +39,7 @@ const Auth = () => {
           <Outlet
             context={{
               setToken,
+              setUser,
             }}
           />
         </div>
