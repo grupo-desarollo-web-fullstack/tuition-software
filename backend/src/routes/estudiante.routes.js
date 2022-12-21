@@ -5,6 +5,7 @@ import schemaEstudiante from "../schemas/estudiante.schema.js";
 import validatorHandler from "../middlewares/validator.handler.js";
 import estudianteServices from "../services/estudiante.services.js";
 import config from "../config/index.js";
+import { notFound } from "@hapi/boom";
 
 const estudiante = express.Router();
 const options = {
