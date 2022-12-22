@@ -1,7 +1,9 @@
 import express from "express";
 import passport from "passport";
 import localStrategy from "../libs/estrategies/authLocal.js";
-import schemaEstudiante from "../schemas/estudiante.schema.js";
+import schemaEstudiante, {
+  schemaLoginEstudiante,
+} from "../schemas/estudiante.schema.js";
 import validatorHandler from "../middlewares/validator.handler.js";
 import estudianteServices from "../services/estudiante.services.js";
 import config from "../config/index.js";
@@ -17,6 +19,7 @@ passport.use(localStrategy);
 
 estudiante.post(
   "/login",
+  validatorHandler(schemaLoginEstudiante),
   passport.authenticate("local", { session: false, failWithError: true }),
   function (req, res, next) {
     try {
@@ -98,12 +101,17 @@ estudiante.put("/:id", async function (req, res) {
 estudiante.post(
   "/",
   validatorHandler(schemaEstudiante),
-  async function (req, res) {
-    const data = await estudianteServices.create(req.body, options);
-    res.status(201).json({
-      data,
-      status: 201,
-    });
+  async function (req, res, next) {
+    try {
+      const data = await estudianteServices.create(req.body, options);
+      res.status(201).json({
+        data,
+        status: 201,
+      });
+    } catch (err) {
+      res.locals.fieldError = "email";
+      next(err);
+    }
   }
 );
 
