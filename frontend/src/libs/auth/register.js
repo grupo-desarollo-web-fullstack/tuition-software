@@ -10,8 +10,17 @@ const actionRegister = async (payload) => {
     body: JSON.stringify(payload),
     headers,
   });
-  const { data: user } = await response.json();
-  return user;
+  const { data: user, message, error } = await response.json();
+  const dataGetted = {
+    user,
+    status: response.status,
+  };
+  if (error)
+    dataGetted.error = {
+      error,
+      message,
+    };
+  return dataGetted;
 };
 
 export default async function register(formData) {
@@ -20,12 +29,16 @@ export default async function register(formData) {
   const career = formData.get("career");
   const cycle = formData.get("cycle");
   const email = formData.get("email");
-  const user = await actionRegister({
+  const { user, status, error } = await actionRegister({
     nombre: name,
     carrera: career,
     ciclo: cycle,
     password,
     email,
   });
-  return serializeUser(user);
+  return {
+    user: serializeUser(user),
+    status,
+    error,
+  };
 }

@@ -10,16 +10,29 @@ const actionLogin = async (payload) => {
     body: JSON.stringify(payload),
     headers,
   });
-  const { data: user } = await response.json();
-  return user;
+  const { data: user, message, error } = await response.json();
+  const dataGetted = {
+    user,
+    status: response.status,
+  };
+  if (error)
+    dataGetted.error = {
+      error,
+      message,
+    };
+  return dataGetted;
 };
 
 export default async function login(formData) {
   const email = formData.get("email");
   const password = formData.get("password");
-  const user = await actionLogin({
+  const { user, status, error } = await actionLogin({
     email,
     password,
   });
-  return serializeUser(user);
+  return {
+    user: serializeUser(user),
+    status,
+    error,
+  };
 }
