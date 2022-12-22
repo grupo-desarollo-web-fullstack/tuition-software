@@ -1,18 +1,24 @@
 @import "mixins";
 
 .fadeInLeft {
-  @include animation-nm-ts-dr(fadeInLeft);
+  @include animation-nm-ts-dr-tf(fadeInLeft);
   will-change: opacity, transform;
 }
 
 .fadeInDown {
-  @include animation-nm-ts-dr(fadeInDown);
+  @include animation-nm-ts-dr-tf(fadeInDown);
   will-change: opacity, transform;
 }
 
 .pulse {
-  @include animation-nm-ts-dr(pulse);
+  @include animation-nm-ts-dr-tf(pulse);
   will-change: transform;
+}
+
+.openInTop {
+  @include animation-nm-ts-dr-tf(openInTop, 1, 0.5s, ease);
+  animation-fill-mode: forwards;
+  will-change: height;
 }
 
 @keyframes fadeInLeft {
@@ -46,5 +52,14 @@
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes openInTop {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 2.859rem;
   }
 }
