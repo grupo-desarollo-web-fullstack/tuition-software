@@ -1,3 +1,4 @@
+import Menu from "@components/Menu";
 import { FaFacebook, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
@@ -6,7 +7,7 @@ const Footer = () => {
       <nav className="nav nav--footer">
         <div className="nav-container nav-container--footer">
           <h3 className="nav__copyright">Copyright © Tuition Software 2022</h3>
-          <ul className="menu menu--footer">
+          <Menu className="menu--footer" suscribe={false}>
             <li className="menu__item">
               <a className="menu__link menu__link--footer" href="#">
                 <div className="menu__link__icon menu__link__icon--instagram">
@@ -34,7 +35,7 @@ const Footer = () => {
                 />
               </a>
             </li>
-          </ul>
+          </Menu>
         </div>
       </nav>
     </footer>

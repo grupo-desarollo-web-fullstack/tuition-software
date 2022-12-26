@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 import Logo from "../Logo";
-import Menu from "@components/Menu";
+import Menu, { MenuLink } from "@components/Menu";
+import Button from "@components/Button";
 
 const Header = () => {
   const menuRef = useRef();
@@ -22,7 +23,8 @@ const Header = () => {
             <h1 className="nav__logo__title">Tuition Software</h1>
             <Logo width={100} height={100} className="nav__logo__img" />
           </Link>
-          <button
+          <Button
+            isSound={false}
             ref={buttonMenuRef}
             onClick={handleClickToogleMenu}
             className="menu__icon"
@@ -30,8 +32,31 @@ const Header = () => {
             <div className="menu__icon__bar"></div>
             <div className="menu__icon__bar"></div>
             <div className="menu__icon__bar"></div>
-          </button>
-          <Menu ref={menuRef} handleClickClose={handleClickClose} />
+          </Button>
+          <Menu ref={menuRef}>
+            {(user) => (
+              <>
+                <li>
+                  <MenuLink
+                    modifier="header"
+                    onClick={handleClickClose}
+                    to={user ? "/dashboard" : "/auth/login"}
+                  >
+                    {user ? "Dashboard" : "Iniciar sesión"}
+                  </MenuLink>
+                </li>
+                <li>
+                  <MenuLink
+                    modifier="header"
+                    onClick={handleClickClose}
+                    to="/about"
+                  >
+                    Nosotros
+                  </MenuLink>
+                </li>
+              </>
+            )}
+          </Menu>
         </div>
       </nav>
     </header>
