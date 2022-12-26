@@ -27,6 +27,7 @@ const Header = () => {
             isSound={false}
             ref={buttonMenuRef}
             onClick={handleClickToogleMenu}
+            modifiers="menu-icon"
             className="menu__icon"
           >
             <div className="menu__icon__bar"></div>

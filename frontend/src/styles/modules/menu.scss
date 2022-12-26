@@ -48,7 +48,8 @@
     background: transparent;
     cursor: pointer;
     transition: all 0.25s;
-    padding: revert;
+    padding-left: revert;
+    padding-right: revert;
     &__bar {
       background-color: #2c3333;
       height: calc(0.0625rem * 3);
