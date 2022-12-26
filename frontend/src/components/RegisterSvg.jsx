@@ -1,5 +1,7 @@
+import { motion } from "framer-motion";
+
 const RegisterSvg = (props) => (
-  <svg
+  <motion.svg
     viewBox="724.467 117.861 201.577 235.387"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
@@ -91,7 +93,7 @@ const RegisterSvg = (props) => (
       d="M820.585 168.881a1.8 1.8 0 0 1-1.441-.72l-4.417-5.89c-.832-1.109-.151-2.703 1.226-2.869a1.801 1.801 0 0 1 1.656.708l2.89 3.853 7.422-11.134c.769-1.153 2.499-1.042 3.113.201a1.803 1.803 0 0 1-.115 1.798l-8.835 13.251a1.799 1.799 0 0 1-1.449.802h-.05Z"
       fill="#fff"
     />
-  </svg>
+  </motion.svg>
 );
 
 export default RegisterSvg;

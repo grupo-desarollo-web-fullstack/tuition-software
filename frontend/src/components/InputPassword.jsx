@@ -1,12 +1,13 @@
 import { useRef } from "react";
 import { MdVpnKey } from "react-icons/md";
 import { BsEyeFill } from "react-icons/bs";
+import Button from "./Button";
 
 const InputPassword = ({ className }) => {
   const inputPassword = useRef();
   const eyeIcon = useRef();
   const handleClickShow = () => {
-    eyeIcon.current.classList.toggle("form__input__icon-eye--close");
+    eyeIcon.current.classList.toggle("button--icon-eye--close");
     if (inputPassword.current.type === "text")
       return (inputPassword.current.type = "password");
     inputPassword.current.type = "text";
@@ -23,14 +24,15 @@ const InputPassword = ({ className }) => {
         name="password"
         type="password"
       />
-      <button
+      <Button
         type="button"
         onClick={handleClickShow}
         ref={eyeIcon}
-        className="form__input__icon-eye"
+        isSound={false}
+        modifiers="icon-eye"
       >
         <BsEyeFill />
-      </button>
+      </Button>
     </label>
   );
 };

@@ -1,5 +1,7 @@
+import { motion } from "framer-motion";
+
 const LoginImage = (props) => (
-  <svg
+  <motion.svg
     viewBox="147.554 125.916 202.591 120.643"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
@@ -78,7 +80,7 @@ const LoginImage = (props) => (
       fill="#395B64"
       d="M235.671 151.055h.459v69.885h-.459zM247.165 151.055h.459v69.885h-.459z"
     />
-  </svg>
+  </motion.svg>
 );
 
 export default LoginImage;
