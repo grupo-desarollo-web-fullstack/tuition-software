@@ -1,4 +1,5 @@
 import config from "@config";
+import parseToken from "@utils/parseToken";
 import serializeUser from "@utils/serializeUser";
 
 const cache = {
@@ -8,15 +9,18 @@ const cache = {
 
 export default async function getUser(token) {
   if (cache.token === token) return cache.user;
+  const tokenParsed = parseToken(token);
   const { baseUrlBackend } = config;
+  if (tokenParsed.exp < new Date() / 1000) return null;
   const headers = new Headers();
   headers.set("Content-Type", "application/json; charset=utf-8");
-  headers.set("Authorization", `Bearer ${token}`);
-
-  const response = await fetch(`${baseUrlBackend}/estudiante/info`, {
-    method: "GET",
-    headers,
-  });
+  const response = await fetch(
+    `${baseUrlBackend}/estudiante/${tokenParsed.id}`,
+    {
+      method: "GET",
+      headers,
+    }
+  );
   const { data: user } = await response.json();
   const userSerialized = serializeUser(user);
   cache.token = token;

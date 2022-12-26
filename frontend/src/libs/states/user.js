@@ -12,7 +12,8 @@ const stateUser = {
     }
     this.emitChange();
   },
-  suscribe(listener) {
+  suscribe(isSuscribe, listener) {
+    if (isSuscribe === false) return () => {};
     this.listeners = [...this.listeners, listener];
     return () => {
       this.listeners = this.listeners.filter((l) => l !== listener);
