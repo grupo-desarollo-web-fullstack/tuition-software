@@ -13,6 +13,7 @@ import Auth, { loaderAuth } from "@pages/Auth";
 import Layout, { loaderLayout } from "@layouts/Layout";
 import Home from "@pages/Home";
 import About from "@pages/About";
+import { loaderLogout } from "@pages/Logout";
 
 const App = () => {
   const routerBrowser = createBrowserRouter(
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="tuition" element={<Tuition />} />
         </Route>
         <Route path="about" element={<About />} />
+        <Route path="/logout" loader={loaderLogout} />
       </Route>
     )
   );
