@@ -27,7 +27,7 @@ const Dashboard = () => {
   const [user] = useUser();
   if (!user) return <Navigate to="/" />;
   return (
-    <main className="main">
+    <main className="main main--dashboard">
       <Sidebar user={user} />
       <Outlet />
     </main>
