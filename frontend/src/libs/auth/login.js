@@ -1,21 +1,38 @@
-import config from "../../config";
+import config from "@config";
+import serializeUser from "@utils/serializeUser";
 
 const actionLogin = async (payload) => {
   const { baseUrlBackend } = config;
   const headers = new Headers();
-  // headers.set("Content-Type", "application/json; charset=utf-8");
-  const response = await fetch(`${baseUrlBackend}/estudiante`, {
+  headers.set("Content-Type", "application/json; charset=utf-8");
+  const response = await fetch(`${baseUrlBackend}/estudiante/login`, {
     method: "POST",
-    body: payload,
+    body: JSON.stringify(payload),
     headers,
   });
-  const user = await response.json();
-  return {
+  const { data: user, message, error } = await response.json();
+  const dataGetted = {
     user,
+    status: response.status,
   };
+  if (error)
+    dataGetted.error = {
+      error,
+      message,
+    };
+  return dataGetted;
 };
 
 export default async function login(formData) {
-  const user = await actionLogin(formData);
-  return user;
+  const email = formData.get("email");
+  const password = formData.get("password");
+  const { user, status, error } = await actionLogin({
+    email,
+    password,
+  });
+  return {
+    user: serializeUser(user),
+    status,
+    error,
+  };
 }

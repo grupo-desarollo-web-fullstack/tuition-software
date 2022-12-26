@@ -1,0 +1,72 @@
+@import "mixins";
+
+.button {
+  border: none;
+  line-height: 2rem;
+  font-weight: 800;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-radius: 0.5rem;
+  transition: transform 0.25s, opacity 0.25s;
+  cursor: pointer;
+  &--dark {
+    background-color: #2c3333;
+    color: #f5f2e7;
+  }
+  &--light {
+    background-color: #f5f2e7;
+    color: #2c3333;
+  }
+  &--sidebar {
+    background-color: transparent;
+    justify-content: flex-start;
+    padding: 0;
+    color: #f5f2e7;
+    @include flex-fd-jc-ai-g(
+      row,
+      center,
+      center,
+      (
+        x: 0.5rem,
+        y: 0rem,
+      )
+    );
+  }
+  &--form {
+    margin: 0 auto;
+  }
+  &--disabled {
+    user-select: none;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  &--icon-eye {
+    @include flex-fd-jc-ai-g(row, center, center);
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      transform: rotate(329deg);
+      height: 0rem;
+      background: #2c3333;
+      transition: height 0.25s;
+      width: calc(0.0625rem * 1.5);
+      border-radius: 0.5rem;
+    }
+    &--close {
+      &::before {
+        height: 1rem;
+      }
+    }
+  }
+  &--menu-icon {
+    padding: revert;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}

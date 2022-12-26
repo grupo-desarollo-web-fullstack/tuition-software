@@ -1,8 +1,8 @@
-import { Link, NavLink } from "react-router-dom";
-import "../styles/modules/header.scss";
-import "../styles/modules/menu.scss";
+import { Link } from "react-router-dom";
 import { useRef } from "react";
-import Logo from "./Logo";
+import Logo from "../Logo";
+import Menu, { MenuLink } from "@components/Menu";
+import Button from "@components/Button";
 
 const Header = () => {
   const menuRef = useRef();
@@ -23,35 +23,41 @@ const Header = () => {
             <h1 className="nav__logo__title">Tuition Software</h1>
             <Logo width={100} height={100} className="nav__logo__img" />
           </Link>
-          <button
+          <Button
+            isSound={false}
             ref={buttonMenuRef}
             onClick={handleClickToogleMenu}
+            modifiers="menu-icon"
             className="menu__icon"
           >
             <div className="menu__icon__bar"></div>
             <div className="menu__icon__bar"></div>
             <div className="menu__icon__bar"></div>
-          </button>
-          <ul ref={menuRef} className="menu">
-            <li>
-              <NavLink
-                onClick={handleClickClose}
-                className="menu__link"
-                to="/auth/login"
-              >
-                Iniciar sesión
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                onClick={handleClickClose}
-                className="menu__link"
-                to="/about"
-              >
-                Nosotros
-              </NavLink>
-            </li>
-          </ul>
+          </Button>
+          <Menu ref={menuRef}>
+            {(user) => (
+              <>
+                <li>
+                  <MenuLink
+                    modifier="header"
+                    onClick={handleClickClose}
+                    to={user ? "/dashboard" : "/auth/login"}
+                  >
+                    {user ? "Dashboard" : "Iniciar sesión"}
+                  </MenuLink>
+                </li>
+                <li>
+                  <MenuLink
+                    modifier="header"
+                    onClick={handleClickClose}
+                    to="/about"
+                  >
+                    Nosotros
+                  </MenuLink>
+                </li>
+              </>
+            )}
+          </Menu>
         </div>
       </nav>
     </header>

@@ -1,4 +1,5 @@
-import config from "../../config";
+import config from "@config";
+import serializeUser from "@utils/serializeUser";
 
 const actionRegister = async (payload) => {
   const { baseUrlBackend } = config;
@@ -9,10 +10,17 @@ const actionRegister = async (payload) => {
     body: JSON.stringify(payload),
     headers,
   });
-  const user = await response.json();
-  return {
+  const { data: user, message, error } = await response.json();
+  const dataGetted = {
     user,
+    status: response.status,
   };
+  if (error)
+    dataGetted.error = {
+      error,
+      message,
+    };
+  return dataGetted;
 };
 
 export default async function register(formData) {
@@ -20,11 +28,17 @@ export default async function register(formData) {
   const password = formData.get("password");
   const career = formData.get("career");
   const cycle = formData.get("cycle");
-  const user = await actionRegister({
+  const email = formData.get("email");
+  const { user, status, error } = await actionRegister({
     nombre: name,
     carrera: career,
     ciclo: cycle,
     password,
+    email,
   });
-  return user;
+  return {
+    user: serializeUser(user),
+    status,
+    error,
+  };
 }
