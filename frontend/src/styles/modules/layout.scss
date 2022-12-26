@@ -11,4 +11,8 @@
 
 .main {
   flex: 1;
+  &--dashboard {
+    margin-top: 4rem;
+    position: relative;
+  }
 }

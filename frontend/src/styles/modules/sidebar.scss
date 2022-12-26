@@ -2,15 +2,11 @@
 
 .sidebar {
   position: absolute;
-  z-index: 2;
   left: 0;
-  top: 4rem;
-  bottom: 6rem;
+  top: 0;
+  bottom: 0;
   transition: bottom 0.25s;
   background-color: #2666cf;
-  @include sm {
-    bottom: 4rem;
-  }
   &-container {
     height: 100%;
     padding: 0 1rem;
