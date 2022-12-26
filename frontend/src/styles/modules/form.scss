@@ -50,27 +50,5 @@
     outline: none;
     height: 100%;
     width: 100%;
-    &__icon-eye {
-      @include flex-fd-jc-ai-g(row, center, center);
-      padding: 0;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      position: relative;
-      &::before {
-        content: "";
-        position: absolute;
-        transform: rotate(329deg);
-        height: 0rem;
-        background: #2c3333;
-        transition: height 0.25s;
-        width: calc(0.0625rem * 1.5);
-      }
-      &--close {
-        &::before {
-          height: 1rem;
-        }
-      }
-    }
   }
 }

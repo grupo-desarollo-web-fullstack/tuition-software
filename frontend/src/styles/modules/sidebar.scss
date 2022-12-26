@@ -1,0 +1,39 @@
+@import "mixins";
+
+.sidebar {
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 4rem;
+  bottom: 6rem;
+  transition: bottom 0.25s;
+  background-color: #2666cf;
+  @include sm {
+    bottom: 4rem;
+  }
+  &-container {
+    height: 100%;
+    padding: 0 1rem;
+    @include flex-fd-jc-ai-g(column, $gap: 1rem);
+  }
+  &__title {
+    margin: 0;
+    color: #f5f2e7;
+  }
+  &__user {
+    position: relative;
+    &-container {
+      @include flex-fd-jc-ai-g(column, center, center, 0.5rem);
+      padding: 1rem 0;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #f5f2e7;
+        height: calc(0.0625rem * 2);
+      }
+    }
+  }
+}
