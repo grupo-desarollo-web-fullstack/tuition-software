@@ -15,6 +15,7 @@
     margin: 0;
     font-size: clamp(0.8rem, 2vw, 1rem);
     color: #f5f2e7;
+    text-align: center;
     &::first-letter {
       text-transform: uppercase;
     }
