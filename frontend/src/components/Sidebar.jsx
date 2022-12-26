@@ -42,7 +42,7 @@ const Sidebar = ({ user }) => {
           </li>
           <li className="menu__item menu__item--sidebar menu__item--sidebar-logout">
             <Link
-              to="/logout"
+              to="/services/logout"
               className="menu__link menu__link--sidebar menu__link--sidebar-logout"
             >
               <BiLogOut />

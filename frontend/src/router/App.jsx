@@ -37,7 +37,9 @@ const App = () => {
           <Route path="tuition" element={<Tuition />} />
         </Route>
         <Route path="about" element={<About />} />
-        <Route path="/logout" loader={loaderLogout} />
+        <Route path="services">
+          <Route path="logout" loader={loaderLogout} />
+        </Route>
       </Route>
     )
   );
