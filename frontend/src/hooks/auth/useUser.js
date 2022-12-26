@@ -2,7 +2,7 @@ import config from "@config";
 import useLocalStorage from "@hooks/useLocalStorage";
 import getUser from "@libs/auth/getUser";
 import stateUser from "@libs/states/user";
-import { useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 
 /**
  * @typedef User
@@ -18,12 +18,16 @@ import { useSyncExternalStore } from "react";
  *
  * @returns {[User, (user: User?) => void]}
  */
-export default function useUser() {
+export default function useUser(isSuscribe = true) {
   const user = useSyncExternalStore(
-    stateUser.suscribe.bind(stateUser),
+    stateUser.suscribe.bind(stateUser, isSuscribe),
     stateUser.getSnapshot.bind(stateUser)
   );
-  const [token] = useLocalStorage(config.tokenTuitionSoftware, undefined);
+  const [token, , { initial }] = useLocalStorage(
+    config.tokenTuitionSoftware,
+    undefined,
+    isSuscribe
+  );
   const updateUser = async (userPreGetted) => {
     if (typeof userPreGetted !== "undefined") {
       stateUser.user = userPreGetted;
@@ -32,5 +36,8 @@ export default function useUser() {
     const userGetted = await getUser(token);
     stateUser.user = userGetted;
   };
+  useEffect(() => {
+    if (!token && !initial) updateUser(null);
+  }, [token]);
   return [user, updateUser];
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useLocalStorage(key, initialValue) {
+export default function useLocalStorage(key, initialValue, isSuscribe = true) {
   const [initial, setInitial] = useState(true);
   const [storedValue, setStoredValue] = useState(() => {
     const item = localStorage.getItem(key);
@@ -27,13 +27,15 @@ export default function useLocalStorage(key, initialValue) {
     localStorage.removeItem(key);
   };
   useEffect(() => {
-    const handleStorage = (e) => {
-      const { newValue } = e;
-      setInitial(false);
-      if (!newValue) setStoredValue(undefined);
-    };
-    addEventListener("storage", handleStorage);
-    return () => removeEventListener("storage", handleStorage);
+    if (isSuscribe) {
+      const handleStorage = (e) => {
+        const { newValue } = e;
+        setInitial(false);
+        if (!newValue) setStoredValue(undefined);
+      };
+      addEventListener("storage", handleStorage);
+      return () => removeEventListener("storage", handleStorage);
+    }
   }, []);
   return [
     storedValue,
