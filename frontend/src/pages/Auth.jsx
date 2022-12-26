@@ -6,6 +6,7 @@ import useToken from "@hooks/auth/useToken";
 import stateUser from "@libs/states/user";
 import "@styles/modules/auth.scss";
 import useUser from "@hooks/auth/useUser";
+import { AnimatePresence } from "framer-motion";
 
 export const loaderAuth = () => {
   if (stateUser.user) return redirect("/dashboard");
@@ -25,11 +26,23 @@ const Auth = () => {
       <section className="auth">
         <div className="auth-container">
           <aside className="auth__aside">
-            {isLogin ? (
-              <LoginSvg className="auth__aside__img pulse" />
-            ) : (
-              <RegisterSvg className="auth__aside__img auth__aside__img--register pulse" />
-            )}
+            <AnimatePresence>
+              {isLogin ? (
+                <LoginSvg
+                  initial={{ transform: "scale(0.95)" }}
+                  animate={{ transform: "scale(1)" }}
+                  exit={{ transform: "scale(0.95)" }}
+                  className="auth__aside__img "
+                />
+              ) : (
+                <RegisterSvg
+                  initial={{ transform: "scale(0.95)" }}
+                  animate={{ transform: "scale(1)" }}
+                  exit={{ transform: "scale(0.95)" }}
+                  className="auth__aside__img auth__aside__img--register "
+                />
+              )}
+            </AnimatePresence>
             <p className="auth__aside__paragraph">
               {isLogin
                 ? "Inicia sesión, ve las novedades en tus cursos!"

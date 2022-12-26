@@ -3,7 +3,7 @@ import { json, Link, useFetcher, useOutletContext } from "react-router-dom";
 import Button from "@components/Button";
 import register from "@libs/auth/register";
 import ErrorForm from "@components/errors/ErrorForm";
-import { MdEmail, MdLibraryBooks, MdPerson, MdVpnKey } from "react-icons/md";
+import { MdEmail, MdLibraryBooks, MdPerson } from "react-icons/md";
 import { FaUniversity } from "react-icons/fa";
 import InputPassword from "@components/InputPassword";
 
@@ -39,7 +39,7 @@ const Register = () => {
     }
   }, [fetcher.data]);
   return (
-    <div className="auth__content">
+    <section className="auth__content">
       <h2 className="auth__title fadeInDown">Registrarse</h2>
       <fetcher.Form className="form" method="post" action="/auth/register">
         <div className="form-container form-container--register">
@@ -106,7 +106,7 @@ const Register = () => {
           ) : (
             <></>
           )}
-          <Button fetcher={fetcher} type={["dark", "form"]}>
+          <Button fetcher={fetcher} modifiers={["dark", "form"]}>
             ¡Registrarme!
           </Button>
         </div>
@@ -114,7 +114,7 @@ const Register = () => {
       <Link className="auth__link" to="../login">
         Tengo cuenta, quiero iniciar sesión.
       </Link>
-    </div>
+    </section>
   );
 };
 

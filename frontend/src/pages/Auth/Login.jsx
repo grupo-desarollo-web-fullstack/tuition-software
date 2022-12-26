@@ -4,7 +4,7 @@ import Button from "@components/Button";
 import login from "@libs/auth/login";
 import "@styles/modules/form.scss";
 import ErrorForm from "@components/errors/ErrorForm";
-import { MdVpnKey, MdEmail } from "react-icons/md";
+import { MdEmail } from "react-icons/md";
 import InputPassword from "@components/InputPassword";
 
 export const actionLogin = async ({ request }) => {
@@ -39,7 +39,7 @@ const Login = () => {
     }
   }, [fetcher.data]);
   return (
-    <div className="auth__content">
+    <section className="auth__content">
       <h2 className="auth__title fadeInDown">Iniciar sesión</h2>
       <fetcher.Form className="form" method="post" action="/auth/login">
         <div className="form-container">
@@ -56,7 +56,7 @@ const Login = () => {
           </label>
           <InputPassword />
           {error ? <ErrorForm error={error} /> : <></>}
-          <Button fetcher={fetcher} type="dark">
+          <Button fetcher={fetcher} modifiers="dark">
             ¡Entrar!
           </Button>
         </div>
@@ -64,7 +64,7 @@ const Login = () => {
       <Link className="auth__link" to="../register">
         No tengo cuenta, quiero registrarme.
       </Link>
-    </div>
+    </section>
   );
 };
 

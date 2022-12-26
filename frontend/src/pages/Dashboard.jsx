@@ -1,10 +1,11 @@
-import { Outlet, redirect } from "react-router-dom";
-import useLogout from "@hooks/auth/useLogout";
+import { matchPath, Navigate, Outlet, redirect } from "react-router-dom";
 import stateUser from "@libs/states/user";
 import config from "@config/index";
 import getUser from "@libs/auth/getUser";
+import Sidebar from "@components/Sidebar";
+import useUser from "@hooks/auth/useUser";
 
-export const loaderDashboard = async () => {
+export const loaderDashboard = async ({ request }) => {
   const tokenTuitionSoftware = localStorage.getItem(
     config.tokenTuitionSoftware
   );
@@ -15,22 +16,19 @@ export const loaderDashboard = async () => {
       return redirect("/");
     }
     stateUser.user = user;
+    const matchedPath = matchPath("/dashboard", new URL(request.url).pathname);
+    if (matchedPath) return redirect("/dashboard/courses");
+    return null;
   }
-  return null;
+  return redirect("/");
 };
 
 const Dashboard = () => {
-  const logout = useLogout("/");
+  const [user] = useUser();
+  if (!user) return <Navigate to="/" />;
   return (
     <main className="main">
-      <button
-        style={{
-          marginTop: "5rem",
-        }}
-        onClick={logout}
-      >
-        Salir
-      </button>
+      <Sidebar user={user} />
       <Outlet />
     </main>
   );
