@@ -13,6 +13,7 @@
   flex: 1;
   &--dashboard {
     margin-top: 4rem;
+    @include flex-fd-jc-ai-g;
     position: relative;
   }
 }
