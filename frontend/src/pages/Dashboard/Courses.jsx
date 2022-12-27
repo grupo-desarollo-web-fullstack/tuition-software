@@ -1,9 +1,5 @@
 const Courses = () => {
-  return (
-
-    <h1>Cursos</h1>
-  );
-
+  return <h1>Cursos</h1>;
 };
 
 export default Courses;

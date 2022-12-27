@@ -18,10 +18,13 @@
     color: #2c3333;
   }
   &--sidebar {
+    top: 0;
+    position: relative;
+    transform: rotate(180deg);
+    right: 0;
     background-color: transparent;
     justify-content: flex-start;
     padding: 0;
-    color: #f5f2e7;
     @include flex-fd-jc-ai-g(
       row,
       center,
@@ -31,6 +34,22 @@
         y: 0rem,
       )
     );
+    transition: transform 0.25s;
+    @include sm {
+      position: absolute;
+      top: 0.5rem;
+      transform: rotate(0deg);
+    }
+    &-minimized {
+      top: 0;
+      position: relative;
+      transform: rotate(180deg);
+    }
+    &-expand {
+      position: absolute;
+      top: 0.5rem;
+      transform: rotate(0deg);
+    }
   }
   &--form {
     margin: 0 auto;
