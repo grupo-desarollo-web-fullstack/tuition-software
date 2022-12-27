@@ -11,8 +11,14 @@
 
 .main {
   flex: 1;
+  margin-top: 4rem;
+  &--auth {
+    margin-top: 0;
+    @include laptop {
+      margin-top: 4rem;
+    }
+  }
   &--dashboard {
-    margin-top: 4rem;
     @include flex-fd-jc-ai-g;
     position: relative;
   }
