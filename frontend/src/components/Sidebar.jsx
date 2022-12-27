@@ -20,7 +20,7 @@ const Sidebar = ({ user }) => {
         <section className="sidebar__user">
           <div className="sidebar__user-container">
             <img
-              className="avatar"
+              className="sidebar__avatar"
               width={80}
               height={80}
               src={gravatar}
@@ -40,10 +40,10 @@ const Sidebar = ({ user }) => {
               <IoMdDocument />
             </NavLink>
           </li>
-          <li className="menu__item menu__item--sidebar menu__item--sidebar-logout">
+          <li className="menu__item menu__item--sidebar">
             <Link
               to="/services/logout"
-              className="menu__link menu__link--sidebar menu__link--sidebar-logout"
+              className="menu__link menu__link--sidebar"
             >
               <BiLogOut />
             </Link>

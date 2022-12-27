@@ -22,7 +22,7 @@ const Auth = () => {
     if (token) navigate("/dashboard");
   }, [token]);
   return (
-    <main className="main">
+    <main className="main main--auth">
       <section className="auth">
         <div className="auth-container">
           <aside className="auth__aside">
