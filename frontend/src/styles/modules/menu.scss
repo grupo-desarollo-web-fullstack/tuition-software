@@ -211,6 +211,7 @@
       flex-direction: column;
     }
     &-minimized {
+      align-items: center;
       & .menu__item--sidebar .menu__link--sidebar::after {
         content: none;
       }
