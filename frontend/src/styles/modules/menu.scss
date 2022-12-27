@@ -210,5 +210,24 @@
     @include laptop {
       flex-direction: column;
     }
+    &-minimized {
+      & .menu__item--sidebar .menu__link--sidebar::after {
+        content: none;
+      }
+    }
+    &-expand {
+      align-items: flex-start;
+      & .menu__item--sidebar {
+        &:nth-child(1) .menu__link--sidebar::after {
+          content: "Cursos";
+        }
+        &:nth-child(2) .menu__link--sidebar::after {
+          content: "Matrículas";
+        }
+        &:nth-child(3) .menu__link--sidebar::after {
+          content: "Cerrar Sesión";
+        }
+      }
+    }
   }
 }
