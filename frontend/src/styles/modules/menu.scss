@@ -204,8 +204,10 @@
     align-items: center;
     height: 100%;
     justify-content: flex-start;
-    @include laptop {
+    @include sm {
       align-items: flex-start;
+    }
+    @include laptop {
       flex-direction: column;
     }
   }
