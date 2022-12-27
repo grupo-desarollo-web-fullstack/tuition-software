@@ -18,6 +18,11 @@
       margin-top: 4rem;
     }
   }
+
+  &--about {
+    background-color: #395B64;
+  }
+  
   &--dashboard {
     @include flex-fd-jc-ai-g;
     position: relative;
