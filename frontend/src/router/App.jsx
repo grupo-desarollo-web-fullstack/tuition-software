@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Dashboard, { loaderDashboard } from "@pages/Dashboard";
-import Courses from "@pages/Dashboard/Courses";
+import Courses, { loaderCourses } from "@pages/Dashboard/Courses";
 import Tuition from "@pages/Dashboard/Tuition";
 import Login, { actionLogin } from "@pages/Auth/Login";
 import Register, { actionRegister } from "@pages/Auth/Register";
@@ -33,7 +33,7 @@ const App = () => {
           path="dashboard"
           element={<Dashboard />}
         >
-          <Route path="courses" element={<Courses />} />
+          <Route path="courses" element={<Courses />} loader={loaderCourses} />
           <Route path="tuition" element={<Tuition />} />
         </Route>
         <Route path="about" element={<About />} />

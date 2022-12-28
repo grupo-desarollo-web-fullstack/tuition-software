@@ -6,8 +6,8 @@ import {
 } from "../libs/db.js";
 
 const matriculaServices = {
-  async getAll() {
-    const data = await getDataListFromModel("matricula");
+  async getAll(options) {
+    const data = await getDataListFromModel("matricula",options);
     return data;
   },
 

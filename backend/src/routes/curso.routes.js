@@ -2,6 +2,7 @@ import express from "express";
 import validatorHandler from "../middlewares/validator.handler.js";
 import schemaCurso from "../schemas/curso.schema.js";
 import cursoServices from "../services/curso.services.js";
+import passport from "passport";
 
 const curso = express.Router();
 
@@ -15,14 +16,16 @@ curso.get("/", async function (req, res) {
 });
 
 //Obtiene datos por ID
-curso.get("/:id", async function (req, res) {
-  const { id } = req.params;
-  const data = await cursoServices.getUnique(id);
-  res.json({
-    data,
-    status: 200,
-  });
-});
+
+curso.get("/:id",async function (req, res) {
+    const { id } = req.params;
+    const data = await cursoServices.getUnique(id);
+    res.json({
+      data,
+      status: 200,
+    });
+  }
+);
 
 //Actualiza datos por ID
 curso.put("/:id", async function (req, res) {

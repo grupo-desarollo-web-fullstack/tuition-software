@@ -15,7 +15,12 @@ matricula.use(
 
 //Obtiene datos
 matricula.get("/", async function (req, res) {
-  const data = await matriculaServices.getAll();
+  const { userId } = req.query;
+  const data = await matriculaServices.getAll(userId &&{
+    where: {
+      tbl_estudiante_estudiante_id: +userId,
+    }
+  });
   res.json({
     data,
     status: 200,
@@ -23,14 +28,21 @@ matricula.get("/", async function (req, res) {
 });
 
 //Obtiene datos por ID
-matricula.get("/:id", async function (req, res) {
-  const { id } = req.params;
-  const data = await matriculaServices.getUnique(id);
-  res.json({
-    data,
-    status: 200,
-  });
-});
+matricula.get(
+  "/:id",
+  passport.authorize("jwt", {
+    session: false,
+    failWithError: true,
+  }),
+  async function (req, res) {
+    const { id } = req.params;
+    const data = await matriculaServices.getUnique(id);
+    res.json({
+      data,
+      status: 200,
+    });
+  }
+);
 
 //Actualiza datos por ID
 matricula.put("/:id", async function (req, res) {
