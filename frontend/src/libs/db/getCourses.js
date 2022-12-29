@@ -17,7 +17,7 @@ const getCourseFromMatricula = async ({ tbl_curso_curso_id: cursoId }) => {
   return course;
 };
 
-const getCourses = async (token, options) => {
+const getCourses = async (token, options = {}) => {
   if (cache.token === token) return cache.courses;
   const { baseUrlBackend } = config;
   let courses = [];
