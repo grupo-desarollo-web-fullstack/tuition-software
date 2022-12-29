@@ -8,8 +8,7 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"preview": "vite preview",
-		"styles:dev": "sass --watch --poll src/styles/scss:src/styles/css"
+		"preview": "vite preview"
 	},
 	"repository": {
 		"type": "git",
