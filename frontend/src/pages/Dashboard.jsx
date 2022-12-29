@@ -4,7 +4,6 @@ import config from "@config/index";
 import getUser from "@libs/auth/getUser";
 import Sidebar from "@components/Sidebar";
 import useUser from "@hooks/auth/useUser";
-import { motion } from "framer-motion";
 
 export const loaderDashboard = async ({ request }) => {
   const tokenTuitionSoftware = localStorage.getItem(

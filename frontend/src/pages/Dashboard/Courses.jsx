@@ -1,19 +1,17 @@
 import config from "@config/index";
 import getCourses from "@libs/db/getCourses";
 import getMatriculas from "@libs/db/getMatricula";
-import { useLoaderData, useOutletContext } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 
-
-export const loaderCourses = async () => { 
+export const loaderCourses = async () => {
   const token = localStorage.getItem(config.tokenTuitionSoftware);
   const matriculas = await getMatriculas(token);
-  const courses = await getCourses(token,{matriculas});
+  const courses = await getCourses(token, { matriculas });
   return courses;
-}
-
+};
 
 const Courses = () => {
-  const courses = useLoaderData(); 
+  const courses = useLoaderData();
   console.log(courses);
   return (
     <></>
