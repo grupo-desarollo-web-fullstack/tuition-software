@@ -6,7 +6,7 @@ import { useLoaderData } from "react-router-dom";
 export const loaderCourses = async () => {
   const token = localStorage.getItem(config.tokenTuitionSoftware);
   const matriculas = await getMatriculas(token);
-  const courses = await getCourses(token, { matriculas });
+  const courses = await getCourses({ matriculas });
   return courses;
 };
 
