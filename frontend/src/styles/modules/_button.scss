@@ -44,6 +44,7 @@
       top: 0;
       position: relative;
       transform: rotate(180deg);
+      order: -1;
     }
     &-expand {
       position: absolute;

@@ -33,20 +33,26 @@
     margin: 0;
     color: #f5f2e7;
     font-size: 0;
+    opacity: 0;
     transition: opacity 0.25s, font-size 0.25s;
+    display: none;
     @include sm {
       display: inline-block;
       font-size: 1.35rem;
       opacity: 1;
     }
-    &--minimized {
+    &--hidden {
+      display: none;
       font-size: 0;
       opacity: 0;
     }
-    &--hidden {
+    &--minimized {
       display: none;
+      font-size: 0;
+      opacity: 0;
     }
     &--expand {
+      display: inline-block;
       font-size: 1.35rem;
       opacity: 1;
     }
