@@ -1,10 +1,5 @@
 import config from "@config/index";
 
-const cache = {
-  token: "",
-  courses: null,
-};
-
 const getCourseFromMatricula = async ({ tbl_curso_curso_id: cursoId }) => {
   const { baseUrlBackend } = config;
   const headers = new Headers();
@@ -17,8 +12,7 @@ const getCourseFromMatricula = async ({ tbl_curso_curso_id: cursoId }) => {
   return course;
 };
 
-const getCourses = async (token, options = {}) => {
-  if (cache.token === token) return cache.courses;
+const getCourses = async (options = {}) => {
   const { baseUrlBackend } = config;
   let courses = [];
   if (options.matriculas) {
@@ -34,8 +28,6 @@ const getCourses = async (token, options = {}) => {
     const { data } = await response.json();
     courses = data;
   }
-  cache.token = token;
-  cache.courses = courses;
   return courses;
 };
 

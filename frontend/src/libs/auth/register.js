@@ -1,5 +1,5 @@
 import config from "@config";
-import serializeUser from "@utils/serializeUser";
+import serialize from "@utils/serialize";
 
 const actionRegister = async (payload) => {
   const { baseUrlBackend } = config;
@@ -37,7 +37,7 @@ export default async function register(formData) {
     email,
   });
   return {
-    user: serializeUser(user),
+    user: serialize(user, "estudiante"),
     status,
     error,
   };

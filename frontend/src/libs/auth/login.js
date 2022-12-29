@@ -1,5 +1,5 @@
 import config from "@config";
-import serializeUser from "@utils/serializeUser";
+import serialize from "@utils/serialize";
 
 const actionLogin = async (payload) => {
   const { baseUrlBackend } = config;
@@ -31,7 +31,7 @@ export default async function login(formData) {
     password,
   });
   return {
-    user: serializeUser(user),
+    user: serialize(user, "estudiante"),
     status,
     error,
   };

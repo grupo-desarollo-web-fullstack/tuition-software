@@ -1,13 +1,7 @@
 import config from "@config/index";
 import parseToken from "@utils/parseToken";
 
-const cache = {
-  token: "",
-  matriculas: null,
-};
-
 const getMatriculas = async (token) => {
-  if (cache.token === token) return cache.matriculas;
   const tokenParsed = parseToken(token);
   const { baseUrlBackend } = config;
   if (tokenParsed.exp < new Date() / 1000) return null;
@@ -22,8 +16,6 @@ const getMatriculas = async (token) => {
     }
   );
   const { data: matriculas } = await response.json();
-  cache.token = token;
-  cache.matriculas = matriculas;
   return matriculas;
 };
 
