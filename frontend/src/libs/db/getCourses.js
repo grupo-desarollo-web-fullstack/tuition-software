@@ -29,7 +29,7 @@ const getCourses = async (options = {}) => {
     const { data } = await response.json();
     courses = data;
   }
-  return courses;
+  return courses.map((course) => serialize(course, "curso"));
 };
 
 export default getCourses;
