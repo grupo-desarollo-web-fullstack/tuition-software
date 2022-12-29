@@ -1,4 +1,5 @@
 import config from "@config/index";
+import serialize from "@utils/serialize";
 
 const getCourseFromMatricula = async ({ tbl_curso_curso_id: cursoId }) => {
   const { baseUrlBackend } = config;
@@ -9,7 +10,7 @@ const getCourseFromMatricula = async ({ tbl_curso_curso_id: cursoId }) => {
     headers,
   });
   const { data: course } = await response.json();
-  return course;
+  return serialize(course, "curso");
 };
 
 const getCourses = async (options = {}) => {
