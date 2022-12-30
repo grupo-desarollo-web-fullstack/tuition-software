@@ -10,7 +10,8 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"eslint:check": "npx eslint --ext .jsx,.js src",
-		"eslint:fix": "npx eslint --ext .jsx,.js src --fix"
+		"eslint:fix": "npx eslint --ext .jsx,.js src --fix",
+		"prepare": "cd .. && husky install frontend/.husky"
 	},
 	"repository": {
 		"type": "git",
@@ -40,6 +41,7 @@
 		"eslint-plugin-jsx-a11y": "^6.6.1",
 		"eslint-plugin-react": "^7.31.11",
 		"eslint-plugin-react-hooks": "^4.6.0",
+		"husky": "^8.0.2",
 		"sass": "^1.56.2",
 		"vite": "^3.2.5"
 	},
