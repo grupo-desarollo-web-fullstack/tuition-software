@@ -1,6 +1,3 @@
-const Course = ({ course }) => {
-  console.log(course);
-  return <div>Course</div>;
-};
+const Course = ({ course }) => <div>{course.id}</div>;
 
 export default Course;
