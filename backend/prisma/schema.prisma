@@ -29,6 +29,7 @@ model Curso {
   curso_nombre   String      @db.VarChar(100)
   curso_creditos Int
   curso_tipo     String      @default("obligatorio") @db.VarChar(45)
+  curso_ciclo    Int      
   Matricula      Matricula[]
 
   @@map("tbl_curso")

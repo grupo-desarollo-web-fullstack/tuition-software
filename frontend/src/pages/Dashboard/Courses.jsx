@@ -22,6 +22,7 @@ const Courses = () => {
             <th>ASIGNATURA</th>
             <th>CREDITOS</th>
             <th>TIPO</th>
+            <th>CICLO</th>
           </tr>
         </thead>
         <tbody>
@@ -31,10 +32,10 @@ const Courses = () => {
               <td>{course.nombre}</td>
               <td>{course.creditos}</td>
               <td>{course.tipo}</td>
+              <td>{course.ciclo}</td>
             </tr>
           )) }
         </tbody>
-
       </table>
 
       <div className="tabla-mobile">
@@ -58,6 +59,10 @@ const Courses = () => {
             <div className="columna">
               <div className="header-table">TIPO</div>
               <div className="contenido">{course.tipo}</div>
+            </div>
+            <div className="columna">
+              <div className="header-table">CICLO</div>
+              <div className="contenido">{course.ciclo}</div>
             </div>
           </div>
         )) }

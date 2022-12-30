@@ -20,7 +20,7 @@ const cursoServices = {
     return data;
   },
 
-  async updateUnique(id, nombre, creditos, tipo) {
+  async updateUnique(id, nombre, creditos, tipo, ciclo) {
     const data = await updateDataUniqueFromModel("curso", {
       where: {
         curso_id: +id,
@@ -29,17 +29,19 @@ const cursoServices = {
         curso_nombre: nombre,
         curso_creditos: +creditos,
         curso_tipo: tipo,
+        curso_ciclo: +ciclo,
       },
     });
     return data;
   },
 
-  async create(nombre, creditos, tipo) {
+  async create(nombre, creditos, tipo, ciclo) {
     const data = await postDataListFromModel("curso", {
       data: {
         curso_nombre: nombre,
         curso_creditos: +creditos,
         curso_tipo: tipo,
+        curso_ciclo: +ciclo,
       },
     });
     return data;

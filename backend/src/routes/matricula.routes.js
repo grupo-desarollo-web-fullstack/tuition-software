@@ -33,12 +33,7 @@ matricula.get("/", async function (req, res) {
 
 //Obtiene datos por ID
 matricula.get(
-  "/:id",
-  passport.authorize("jwt", {
-    session: false,
-    failWithError: true,
-  }),
-  async function (req, res) {
+  "/:id",async function (req, res) {
     const { id } = req.params;
     const data = await matriculaServices.getUnique(id);
     res.json({
