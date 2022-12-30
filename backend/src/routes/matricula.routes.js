@@ -15,11 +15,15 @@ matricula.use(
 
 //Obtiene datos
 matricula.get("/", async function (req, res) {
-  const { userId } = req.query;
-  const data = await matriculaServices.getAll(userId &&{
-    where: {
+  const { userId, orderBy } = req.query;
+  const fields = Array.isArray(orderBy) ? orderBy : (orderBy && [orderBy])
+  const data = await matriculaServices.getAll({
+    where: userId &&{
       tbl_estudiante_estudiante_id: +userId,
-    }
+    },
+    orderBy:  fields?.map(function (field) { 
+      return { [field]: "asc" }
+    })
   });
   res.json({
     data,

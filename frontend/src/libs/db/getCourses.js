@@ -10,7 +10,7 @@ const getCourseFromMatricula = async ({ tbl_curso_curso_id: cursoId }) => {
     headers,
   });
   const { data: course } = await response.json();
-  return serialize(course, "curso");
+  return course;
 };
 
 const getCourses = async (options = {}) => {
