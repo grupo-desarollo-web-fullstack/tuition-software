@@ -1,9 +1,12 @@
 import config from "@config/index";
 import parseToken from "@utils/parseToken";
 
-const getMatriculas = async (token, options = {
-  orderBy:"matricula_id"
-}) => {
+const getMatriculas = async (
+  token,
+  options = {
+    orderBy: "matricula_id",
+  },
+) => {
   const tokenParsed = parseToken(token);
   const { baseUrlBackend } = config;
   if (tokenParsed.exp < new Date() / 1000) return null;
@@ -15,7 +18,7 @@ const getMatriculas = async (token, options = {
     {
       method: "GET",
       headers,
-    }
+    },
   );
   const { data: matriculas } = await response.json();
   return matriculas;

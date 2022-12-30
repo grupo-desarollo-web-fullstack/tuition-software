@@ -1,7 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, forwardRef } from "react";
 import useSound from "use-sound";
 import soundButton from "@assets/sounds/button.mp3";
-import { forwardRef } from "react";
 
 const Button = forwardRef(
   (
@@ -9,12 +8,12 @@ const Button = forwardRef(
       fetcher,
       children,
       modifiers = [],
-      type,
+      type = "submit",
       className,
       onClick,
       isSound = true,
     },
-    ref
+    ref,
   ) => {
     const buttonSubmit = useRef();
     useEffect(() => {
@@ -46,11 +45,11 @@ const Button = forwardRef(
         {fetcher?.state === "loading"
           ? "Cargando..."
           : fetcher?.state === "submitting"
-          ? "Enviando datos..."
-          : children}
+            ? "Enviando datos..."
+            : children}
       </button>
     );
-  }
+  },
 );
 
 export default Button;

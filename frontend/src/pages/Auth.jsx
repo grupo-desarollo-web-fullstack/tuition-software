@@ -1,5 +1,7 @@
 import { useEffect } from "react";
-import { Outlet, redirect, useMatch, useNavigate } from "react-router-dom";
+import {
+  Outlet, redirect, useMatch, useNavigate,
+} from "react-router-dom";
 import LoginSvg from "@components/LoginSvg";
 import RegisterSvg from "@components/RegisterSvg";
 import useToken from "@hooks/auth/useToken";

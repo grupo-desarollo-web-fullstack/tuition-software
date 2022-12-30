@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { json, Link, useFetcher, useOutletContext } from "react-router-dom";
+import {
+  json, Link, useFetcher, useOutletContext,
+} from "react-router-dom";
 import Button from "@components/Button";
 import login from "@libs/auth/login";
 import "@styles/modules/form.scss";
@@ -12,12 +14,12 @@ export const actionLogin = async ({ request }) => {
   const { user, status, error } = await login(formData);
   return json(
     {
-      user: user,
-      error: error,
+      user,
+      error,
     },
     {
       status,
-    }
+    },
   );
 };
 
@@ -55,7 +57,7 @@ const Login = () => {
             />
           </label>
           <InputPassword />
-          {error ? <ErrorForm error={error} /> : <></>}
+          {error && <ErrorForm error={error} />}
           <Button fetcher={fetcher} modifiers="dark">
             ¡Entrar!
           </Button>

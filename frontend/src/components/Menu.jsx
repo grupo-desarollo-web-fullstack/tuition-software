@@ -12,20 +12,18 @@ const Menu = forwardRef(({ className, children, suscribe = true }, menuRef) => {
   );
 });
 
-export const MenuLink = ({ modifier, onClick, to, children }) => {
-  return (
-    <NavLink
-      onClick={onClick}
-      className={({ isActive }) =>
-        isActive
-          ? `menu__link menu__link--${modifier} menu__link--active`
-          : `menu__link menu__link--${modifier}`
-      }
-      to={to}
-    >
-      {children}
-    </NavLink>
-  );
-};
+export const MenuLink = ({
+  modifier, onClick, to, children,
+}) => (
+  <NavLink
+    onClick={onClick}
+    className={({ isActive }) => (isActive
+      ? `menu__link menu__link--${modifier} menu__link--active`
+      : `menu__link menu__link--${modifier}`)}
+    to={to}
+  >
+    {children}
+  </NavLink>
+);
 
 export default Menu;

@@ -4,9 +4,9 @@ import { FaSwatchbook } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { IoMdDocument } from "react-icons/io";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import getGravatar from "@utils/getGravatar";
 import Menu from "./Menu";
 import Button from "./Button";
-import getGravatar from "@utils/getGravatar";
 import "@styles/modules/sidebar.scss";
 
 const clearClasses = ([refAvatar, refTitle, refMenu, refButton], modifier) => {
@@ -26,7 +26,7 @@ const Sidebar = ({ user }) => {
   const refMenu = useRef();
   const refTitle = useRef();
   const refButton = useRef();
-  const modifier = useRef(innerWidth > 640 ? "minimized" : "expand");
+  const modifier = useRef(window.innerWidth > 640 ? "minimized" : "expand");
   const gravatar = getGravatar(user.email);
   const handleClickButton = () => {
     refAvatar.current.classList.toggle(`sidebar__avatar--${modifier.current}`);
@@ -36,17 +36,17 @@ const Sidebar = ({ user }) => {
   };
   useEffect(() => {
     const handleResizeWindow = () => {
-      const isSm = innerWidth < 640;
+      const isSm = window.innerWidth < 640;
       if (isSm && modifier.current === "minimized") {
         clearClasses([refAvatar, refTitle, refMenu, refButton], "minimized");
         return (modifier.current = "expand");
       }
-      if (isSm) return;
+      if (isSm) return null;
       clearClasses([refAvatar, refTitle, refMenu, refButton], "expand");
-      modifier.current = "minimized";
+      return modifier.current = "minimized";
     };
-    addEventListener("resize", handleResizeWindow);
-    return () => removeEventListener("resize", handleResizeWindow);
+    window.addEventListener("resize", handleResizeWindow);
+    return () => window.removeEventListener("resize", handleResizeWindow);
   }, []);
   return (
     <aside className="sidebar">

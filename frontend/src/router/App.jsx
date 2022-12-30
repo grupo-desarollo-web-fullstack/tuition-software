@@ -40,8 +40,8 @@ const App = () => {
         <Route path="services">
           <Route path="logout" loader={loaderLogout} />
         </Route>
-      </Route>
-    )
+      </Route>,
+    ),
   );
   return <RouterProvider router={routerBrowser} />;
 };

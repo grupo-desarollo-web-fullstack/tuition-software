@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { json, Link, useFetcher, useOutletContext } from "react-router-dom";
+import {
+  json, Link, useFetcher, useOutletContext,
+} from "react-router-dom";
 import Button from "@components/Button";
 import register from "@libs/auth/register";
 import ErrorForm from "@components/errors/ErrorForm";
@@ -12,12 +14,12 @@ export const actionRegister = async ({ request }) => {
   const { user, status, error } = await register(formData);
   return json(
     {
-      user: user,
-      error: error,
+      user,
+      error,
     },
     {
       status,
-    }
+    },
   );
 };
 
@@ -101,11 +103,7 @@ const Register = () => {
             />
           </label>
 
-          {error ? (
-            <ErrorForm className="error--register" error={error} />
-          ) : (
-            <></>
-          )}
+          {error && <ErrorForm className="error--register" error={error} />}
           <Button fetcher={fetcher} modifiers={["dark", "form"]}>
             ¡Registrarme!
           </Button>

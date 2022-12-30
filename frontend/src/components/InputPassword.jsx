@@ -8,8 +8,7 @@ const InputPassword = ({ className }) => {
   const eyeIcon = useRef();
   const handleClickShow = () => {
     eyeIcon.current.classList.toggle("button--icon-eye--close");
-    if (inputPassword.current.type === "text")
-      return (inputPassword.current.type = "password");
+    if (inputPassword.current.type === "text") return (inputPassword.current.type = "password");
     inputPassword.current.type = "text";
   };
   return (

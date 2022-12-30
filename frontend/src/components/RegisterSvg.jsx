@@ -4,6 +4,7 @@ const RegisterSvg = (props) => (
   <motion.svg
     viewBox="724.467 117.861 201.577 235.387"
     xmlns="http://www.w3.org/2000/svg"
+  // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     <path

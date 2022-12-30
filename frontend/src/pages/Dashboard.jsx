@@ -1,4 +1,6 @@
-import { matchPath, Navigate, Outlet, redirect } from "react-router-dom";
+import {
+  matchPath, Navigate, Outlet, redirect,
+} from "react-router-dom";
 import stateUser from "@libs/states/user";
 import config from "@config/index";
 import getUser from "@libs/auth/getUser";
@@ -7,7 +9,7 @@ import useUser from "@hooks/auth/useUser";
 
 export const loaderDashboard = async ({ request }) => {
   const tokenTuitionSoftware = localStorage.getItem(
-    config.tokenTuitionSoftware
+    config.tokenTuitionSoftware,
   );
   if (tokenTuitionSoftware) {
     const user = await getUser(tokenTuitionSoftware);
