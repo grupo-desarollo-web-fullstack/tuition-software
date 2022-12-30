@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import Logo from "../Logo";
 import Menu, { MenuLink } from "@components/Menu";
 import Button from "@components/Button";
+import Logo from "../Logo";
 
 const Header = () => {
   const menuRef = useRef();
@@ -30,9 +30,9 @@ const Header = () => {
             modifiers="menu-icon"
             className="menu__icon"
           >
-            <div className="menu__icon__bar"></div>
-            <div className="menu__icon__bar"></div>
-            <div className="menu__icon__bar"></div>
+            <div className="menu__icon__bar" />
+            <div className="menu__icon__bar" />
+            <div className="menu__icon__bar" />
           </Button>
           <Menu ref={menuRef}>
             {(user) => (

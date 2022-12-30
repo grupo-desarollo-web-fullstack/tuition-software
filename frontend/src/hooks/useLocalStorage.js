@@ -33,8 +33,8 @@ export default function useLocalStorage(key, initialValue, isSuscribe = true) {
         setInitial(false);
         if (!newValue) setStoredValue(undefined);
       };
-      addEventListener("storage", handleStorage);
-      return () => removeEventListener("storage", handleStorage);
+      window.addEventListener("storage", handleStorage);
+      return () => window.removeEventListener("storage", handleStorage);
     }
   }, []);
   return [

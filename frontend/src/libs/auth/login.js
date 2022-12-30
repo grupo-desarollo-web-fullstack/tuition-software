@@ -15,11 +15,12 @@ const actionLogin = async (payload) => {
     user,
     status: response.status,
   };
-  if (error)
+  if (error) {
     dataGetted.error = {
       error,
       message,
     };
+  }
   return dataGetted;
 };
 

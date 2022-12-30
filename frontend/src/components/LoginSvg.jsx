@@ -4,6 +4,7 @@ const LoginImage = (props) => (
   <motion.svg
     viewBox="147.554 125.916 202.591 120.643"
     xmlns="http://www.w3.org/2000/svg"
+      // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     <path

@@ -19,7 +19,7 @@ export default async function getUser(token) {
     {
       method: "GET",
       headers,
-    }
+    },
   );
   const { data: user } = await response.json();
   const userSerialized = serialize(user, "estudiante");

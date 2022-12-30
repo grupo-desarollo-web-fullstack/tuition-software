@@ -6,6 +6,7 @@ const Logo = (props) => (
       enableBackground: "new 0 0 489.8 489.8",
     }}
     xmlSpace="preserve"
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     <ellipse cx={337.5} cy={319.388} rx={24.4} ry={36.6} />
