@@ -1,10 +1,6 @@
 @import "mixins";
 
 .sidebar {
-  left: 0;
-  top: 0;
-  bottom: 0;
-  transition: bottom 0.25s;
   background-color: #2666cf;
   &-container {
     height: 100%;
