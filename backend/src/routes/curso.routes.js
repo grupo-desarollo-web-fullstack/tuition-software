@@ -2,7 +2,6 @@ import express from "express";
 import validatorHandler from "../middlewares/validator.handler.js";
 import schemaCurso from "../schemas/curso.schema.js";
 import cursoServices from "../services/curso.services.js";
-import passport from "passport";
 
 const curso = express.Router();
 
@@ -16,22 +15,27 @@ curso.get("/", async function (req, res) {
 });
 
 //Obtiene datos por ID
-
-curso.get("/:id",async function (req, res) {
-    const { id } = req.params;
-    const data = await cursoServices.getUnique(id);
-    res.json({
-      data,
-      status: 200,
-    });
-  }
-);
+curso.get("/:id", async function (req, res) {
+  const { id } = req.params;
+  const data = await cursoServices.getUnique(id);
+  res.json({
+    data,
+    status: 200,
+  });
+});
 
 //Actualiza datos por ID
 curso.put("/:id", async function (req, res) {
   const { id } = req.params;
-  const { nombre, creditos, tipo, ciclo } = req.body;
-  const data = await cursoServices.updateUnique(id, nombre, creditos, tipo, ciclo);
+  const { nombre, creditos, tipo, ciclo, id_clase } = req.body;
+  const data = await cursoServices.updateUnique(
+    id,
+    nombre,
+    creditos,
+    tipo,
+    ciclo,
+    id_clase
+  );
   res.status(201).json({
     data,
     status: 201,
@@ -40,8 +44,14 @@ curso.put("/:id", async function (req, res) {
 
 //Envia nuevos datos
 curso.post("/", validatorHandler(schemaCurso), async function (req, res) {
-  const { nombre, creditos, tipo, ciclo } = req.body;
-  const data = await cursoServices.create(nombre, creditos, tipo, ciclo);
+  const { nombre, creditos, tipo, ciclo, id_clase } = req.body;
+  const data = await cursoServices.create(
+    nombre,
+    creditos,
+    tipo,
+    ciclo,
+    id_clase
+  );
   res.status(201).json({
     data,
     status: 201,
