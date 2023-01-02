@@ -28,7 +28,6 @@ const matriculaServices = {
       data: {
         tbl_estudiante_estudiante_id: +estudiante_id,
         tbl_curso_curso_id: +curso_id,
-        tbl_clase_clase_id: +clase_id,
       },
     });
     return data;
@@ -39,7 +38,6 @@ const matriculaServices = {
       data: {
         tbl_estudiante_estudiante_id: +estudiante_id,
         tbl_curso_curso_id: +curso_id,
-        tbl_clase_clase_id: +clase_id,
       },
     });
     return data;

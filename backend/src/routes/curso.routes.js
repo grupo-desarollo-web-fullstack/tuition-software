@@ -27,13 +27,8 @@ curso.get("/:id", async function (req, res) {
 //Actualiza datos por ID
 curso.put("/:id", async function (req, res) {
   const { id } = req.params;
-<<<<<<< Updated upstream
-  const { nombre, creditos, tipo } = req.body;
-  const data = await cursoServices.updateUnique(id, nombre, creditos, tipo);
-=======
   const { nombre, creditos, tipo, ciclo, id_clase } = req.body;
   const data = await cursoServices.updateUnique(id, nombre, creditos, tipo, ciclo, id_clase);
->>>>>>> Stashed changes
   res.status(201).json({
     data,
     status: 201,
@@ -42,13 +37,8 @@ curso.put("/:id", async function (req, res) {
 
 //Envia nuevos datos
 curso.post("/", validatorHandler(schemaCurso), async function (req, res) {
-<<<<<<< Updated upstream
-  const { nombre, creditos, tipo } = req.body;
-  const data = await cursoServices.create(nombre, creditos, tipo);
-=======
   const { nombre, creditos, tipo, ciclo, id_clase } = req.body;
   const data = await cursoServices.create(nombre, creditos, tipo, ciclo, id_clase);
->>>>>>> Stashed changes
   res.status(201).json({
     data,
     status: 201,
