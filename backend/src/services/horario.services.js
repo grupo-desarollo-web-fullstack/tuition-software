@@ -20,7 +20,7 @@ const horarioServices = {
     return data;
   },
 
-  async updateUnique(id, horario_fecha, disponibilidad, aforo, docente_id) {
+  async updateUnique(id, horario_fecha, disponibilidad, dias, horario, docente_id) {
     const data = await updateDataUniqueFromModel("horario", {
       where: {
         horario_id: +id,
@@ -28,19 +28,21 @@ const horarioServices = {
       data: {
         horario_fecha: new Date(horario_fecha),
         horario_disponibilidad: !!disponibilidad,
-        horario_aforo: +aforo,
+        horario_dias: dias,
+        horario_hora: horario,
         tbl_docente_docente_id: +docente_id,
       },
     });
     return data;
   },
 
-  async create(horario_fecha, disponibilidad, aforo, docente_id) {
+  async create(horario_fecha, disponibilidad, dias, horario, docente_id) {
     const data = await postDataListFromModel("horario", {
       data: {
         horario_fecha: new Date(horario_fecha),
         horario_disponibilidad: !!disponibilidad,
-        horario_aforo: +aforo,
+        horario_dias: dias,
+        horario_hora: new Date(horario),
         tbl_docente_docente_id: +docente_id,
       },
     });

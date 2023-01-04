@@ -25,13 +25,13 @@ model Estudiante {
 }
 
 model Curso {
-  curso_id       Int         @id @default(autoincrement())
-  curso_nombre   String      @db.VarChar(100)
+  curso_id       Int    @id @default(autoincrement())
+  curso_nombre   String @db.VarChar(100)
   curso_creditos Int
-  curso_tipo     String      @default("obligatorio") @db.VarChar(45)
-  curso_ciclo    Int      
-  Clase          Clase[]
-  Matricula      Matricula[]
+  curso_tipo     String @default("obligatorio") @db.VarChar(45)
+  curso_ciclo    Int
+
+  Clase Clase[]
 
   @@map("tbl_curso")
 }
@@ -40,8 +40,8 @@ model Matricula {
   matricula_id                 Int        @id @default(autoincrement())
   tbl_estudiante_estudiante    Estudiante @relation(fields: [tbl_estudiante_estudiante_id], references: [estudiante_id])
   tbl_estudiante_estudiante_id Int
-  tbl_curso_curso              Curso      @relation(fields: [tbl_curso_curso_id], references: [curso_id])
-  tbl_curso_curso_id           Int
+  tbl_clase_clase              Clase      @relation(fields: [tbl_clase_clase_id], references: [clase_id])
+  tbl_clase_clase_id           Int
 
   @@map("tbl_matricula")
 }
@@ -57,9 +57,9 @@ model Docente {
 
 model Horario {
   horario_id             Int      @id @default(autoincrement())
-  horario_fecha          DateTime
-  horario_disponibilidad Boolean  @default(true)
-  horario_aforo          Int
+  horario_dias           String   @db.VarChar(100)
+  horario_hora           DateTime @db.Time(6)
+  horario_disponibilidad Boolean  @default(false)
   tbl_docente_docente    Docente  @relation(fields: [tbl_docente_docente_id], references: [docente_id])
   tbl_docente_docente_id Int
   Clase                  Clase[]
@@ -70,9 +70,12 @@ model Horario {
 model Clase {
   clase_id               Int         @id @default(autoincrement())
   clase_nsalon           String      @db.VarChar(10)
-  tbl_curso_curso        Curso     @relation(fields: [tbl_curso_curso_id], references: [curso_id])
-  tbl_curso_curso_id      Int
-  Horario Horario[]
+  tbl_horario_horario    Horario     @relation(fields: [tbl_horario_horario_id], references: [horario_id])
+  tbl_horario_horario_id Int
+  clase_aforo            Int
+  tbl_curso_curso        Curso       @relation(fields: [tbl_curso_curso_id], references: [curso_id])
+  tbl_curso_curso_id     Int
+  Matricula              Matricula[]
 
   @@map("tbl_clase")
 }

@@ -35,11 +35,11 @@ matricula.get("/:id", async function (req, res) {
 //Actualiza datos por ID
 matricula.put("/:id", async function (req, res) {
   const { id } = req.params;
-  const { curso_id, estudiante_id } = req.body;
+  const { clase_id, estudiante_id } = req.body;
   const data = await matriculaServices.updateUnique(
     id,
     estudiante_id,
-    curso_id,
+    clase_id
   );
   res.status(201).json({
     data,
@@ -52,10 +52,10 @@ matricula.post(
   "/",
   validatorHandler(schemaMatricula),
   async function (req, res) {
-    const { curso_id, estudiante_id } = req.body;
+    const { clase_id, estudiante_id } = req.body;
     const data = await matriculaServices.create(
       estudiante_id,
-      curso_id,
+      clase_id
     );
     res.status(201).json({
       data,
