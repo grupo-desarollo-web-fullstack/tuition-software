@@ -7,7 +7,16 @@ const clase = express.Router();
 
 //Obtiene datos
 clase.get("/", async function (req, res) {
-  const data = await claseServices.getAll();
+  const { cursoId, orderBy } = req.query;
+  const fields = Array.isArray(orderBy) ? orderBy : orderBy && [orderBy];
+  const data = await claseServices.getAll({
+    where: cursoId && {
+      tbl_curso_curso_id: +cursoId,
+    },
+    orderBy: fields?.map(function (field) {
+      return { [field]: "asc" };
+    }),
+  });
   res.json({
     data,
     status: 200,
@@ -27,8 +36,15 @@ clase.get("/:id", async function (req, res) {
 //Actualiza datos por ID
 clase.put("/:id", async function (req, res) {
   const { id } = req.params;
-  const { nsalon, horario_id, curso_id, aforo } = req.body;
-  const data = await claseServices.updateUnique(id, nsalon, horario_id, curso_id, aforo);
+  const { nsalon, horario_id, curso_id, aforo, disponibilidad } = req.body;
+  const data = await claseServices.updateUnique(
+    id,
+    nsalon,
+    horario_id,
+    curso_id,
+    aforo,
+    disponibilidad
+  );
   res.status(201).json({
     data,
     status: 201,

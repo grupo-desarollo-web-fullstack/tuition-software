@@ -6,8 +6,8 @@ import {
 } from "../libs/db.js";
 
 const cursoServices = {
-  async getAll() {
-    const data = await getDataListFromModel("curso");
+  async getAll(options) {
+    const data = await getDataListFromModel("curso", options);
     return data;
   },
 

@@ -5,8 +5,8 @@ import {
   updateDataUniqueFromModel,
 } from "../libs/db.js";
 const claseServices = {
-  async getAll() {
-    const data = await getDataListFromModel("clase");
+  async getAll(options) {
+    const data = await getDataListFromModel("clase", options);
     return data;
   },
 
@@ -19,7 +19,14 @@ const claseServices = {
     return data;
   },
 
-  async updateUnique(id, nsalon, horario_id, curso_id, clase_aforo) {
+  async updateUnique(
+    id,
+    nsalon,
+    horario_id,
+    curso_id,
+    clase_aforo,
+    disponibilidad
+  ) {
     const data = await updateDataUniqueFromModel("clase", {
       where: {
         clase_id: +id,
@@ -28,7 +35,8 @@ const claseServices = {
         clase_nsalon: nsalon,
         tbl_horario_horario_id: +horario_id,
         tbl_curso_curso_id: +curso_id,
-        clase_aforo : +clase_aforo,
+        clase_aforo: +clase_aforo,
+        clase_disponibilidad: !!disponibilidad,
       },
     });
     return data;
@@ -40,7 +48,7 @@ const claseServices = {
         clase_nsalon: nsalon,
         tbl_horario_horario_id: +horario_id,
         tbl_curso_curso_id: +curso_id,
-        clase_aforo : +aforo,
+        clase_aforo: +aforo,
       },
     });
     return data;

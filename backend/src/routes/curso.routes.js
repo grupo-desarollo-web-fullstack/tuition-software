@@ -1,4 +1,5 @@
 import express from "express";
+import passport from "passport";
 import validatorHandler from "../middlewares/validator.handler.js";
 import schemaCurso from "../schemas/curso.schema.js";
 import cursoServices from "../services/curso.services.js";
@@ -19,9 +20,13 @@ curso.get(
     const data = await cursoServices.getAll({
       where: userId &&
         action && {
-          Matricula: {
+          Clase: {
             [action]: {
-              tbl_estudiante_estudiante_id: +userId,
+              Matricula: {
+                some: {
+                  tbl_estudiante_estudiante_id: +userId,
+                },
+              },
             },
           },
         },

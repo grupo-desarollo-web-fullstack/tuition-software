@@ -59,7 +59,6 @@ model Horario {
   horario_id             Int      @id @default(autoincrement())
   horario_dias           String   @db.VarChar(100)
   horario_hora           DateTime @db.Time(6)
-  horario_disponibilidad Boolean  @default(false)
   tbl_docente_docente    Docente  @relation(fields: [tbl_docente_docente_id], references: [docente_id])
   tbl_docente_docente_id Int
   Clase                  Clase[]
@@ -73,6 +72,7 @@ model Clase {
   tbl_horario_horario    Horario     @relation(fields: [tbl_horario_horario_id], references: [horario_id])
   tbl_horario_horario_id Int
   clase_aforo            Int
+  clase_disponibilidad   Boolean     @default(true)
   tbl_curso_curso        Curso       @relation(fields: [tbl_curso_curso_id], references: [curso_id])
   tbl_curso_curso_id     Int
   Matricula              Matricula[]

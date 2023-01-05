@@ -2,7 +2,7 @@ import { badData, badImplementation, unauthorized } from "@hapi/boom";
 
 function handlerError(err, req, res, next) {
   let error = err;
-
+  console.log(error.stack);
   if (!error.isBoom) {
     if (error.name === "AuthenticationError") {
       error = unauthorized(error.message);
