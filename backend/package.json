@@ -31,7 +31,7 @@
   "homepage": "https://github.com/grupo-desarollo-web-fullstack/toution-software#readme",
   "devDependencies": {
     "nodemon": "^2.0.20",
-    "prisma": "^4.7.1"
+    "prisma": "^4.8.0"
   },
   "author": "",
   "dependencies": {

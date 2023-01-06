@@ -5,8 +5,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Dashboard, { loaderDashboard } from "@pages/Dashboard";
-import Courses from "@pages/Dashboard/Courses";
-import Tuition from "@pages/Dashboard/Tuition";
+import Courses, { loaderCourses } from "@pages/Dashboard/Courses";
+import Tuition, { loaderTuition } from "@pages/Dashboard/Tuition";
 import Login, { actionLogin } from "@pages/Auth/Login";
 import Register, { actionRegister } from "@pages/Auth/Register";
 import Auth, { loaderAuth } from "@pages/Auth";
@@ -14,12 +14,20 @@ import Layout, { loaderLayout } from "@layouts/Layout";
 import Home from "@pages/Home";
 import About from "@pages/About";
 import { loaderLogout } from "@pages/Logout";
+import Lessons from "@pages/Dashboard/Tuition/Lessons";
+import LessonsId, {
+  actionLessonsId,
+  loaderLessonsId,
+} from "@pages/Dashboard/Tuition/Lessons/LessonsId";
+import ErrorLessons from "@components/errors/ErrorLessons";
+import SuccessLesson from "@pages/Dashboard/Tuition/Lessons/LessonsId/SuccessLesson";
+import LessonsIdIndex from "@pages/Dashboard/Tuition/Lessons/LessonsId/LessonsIdIndex";
 
 const App = () => {
   const routerBrowser = createBrowserRouter(
     createRoutesFromElements(
       <Route loader={loaderLayout} path="/" element={<Layout />}>
-        <Route index path="/" element={<Home />} />
+        <Route index element={<Home />} />
         <Route loader={loaderAuth} path="auth" element={<Auth />}>
           <Route
             action={actionRegister}
@@ -33,8 +41,21 @@ const App = () => {
           path="dashboard"
           element={<Dashboard />}
         >
-          <Route path="courses" element={<Courses />} />
-          <Route path="tuition" element={<Tuition />} />
+          <Route path="courses" element={<Courses />} loader={loaderCourses} />
+          <Route path="tuition" element={<Tuition />} loader={loaderTuition}>
+            <Route path="lessons" element={<Lessons />}>
+              <Route
+                path=":id"
+                element={<LessonsId />}
+                loader={loaderLessonsId}
+                action={actionLessonsId}
+                errorElement={<ErrorLessons />}
+              >
+                <Route index element={<LessonsIdIndex />} />
+                <Route path="success" element={<SuccessLesson />} />
+              </Route>
+            </Route>
+          </Route>
         </Route>
         <Route path="about" element={<About />} />
         <Route path="services">

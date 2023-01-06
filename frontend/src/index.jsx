@@ -11,5 +11,5 @@ const root = createRoot(rootRef);
 root.render(
   <StrictMode>
     <App />
-  </StrictMode>
+  </StrictMode>,
 );

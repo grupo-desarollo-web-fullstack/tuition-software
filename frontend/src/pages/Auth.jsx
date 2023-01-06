@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, redirect, useMatch, useNavigate } from "react-router-dom";
-import LoginSvg from "@components/LoginSvg";
-import RegisterSvg from "@components/RegisterSvg";
+import LoginSvg from "@components/svgr/LoginSvg";
+import RegisterSvg from "@components/svgr/RegisterSvg";
 import useToken from "@hooks/auth/useToken";
 import stateUser from "@libs/states/user";
 import "@styles/modules/auth.scss";
@@ -22,7 +22,7 @@ const Auth = () => {
     if (token) navigate("/dashboard");
   }, [token]);
   return (
-    <main className="main">
+    <main className="main main--auth">
       <section className="auth">
         <div className="auth-container">
           <aside className="auth__aside">

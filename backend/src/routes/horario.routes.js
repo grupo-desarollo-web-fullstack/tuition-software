@@ -7,7 +7,16 @@ const horario = express.Router();
 
 //Obtiene datos
 horario.get("/", async function (req, res) {
-  const data = await horarioServices.getAll();
+  const { cursoId, orderBy } = req.query;
+  const fields = Array.isArray(orderBy) ? orderBy : orderBy && [orderBy];
+  const data = await horarioServices.getAll({
+    where: cursoId && {
+      tbl_curso_curso_id: +cursoId,
+    },
+    orderBy: fields?.map(function (field) {
+      return { [field]: "asc" };
+    }),
+  });
   res.json({
     data,
     status: 200,
@@ -27,12 +36,11 @@ horario.get("/:id", async function (req, res) {
 //Actualiza datos por ID -----------
 horario.put("/:id", async function (req, res) {
   const { id } = req.params;
-  const { horario_fecha, disponibilidad, aforo, docente_id } = req.body;
+  const { horario_fecha, aforo, docente_id } = req.body;
 
   const data = await horarioServices.updateUnique(
     id,
     horario_fecha,
-    disponibilidad,
     aforo,
     docente_id
   );
@@ -44,13 +52,8 @@ horario.put("/:id", async function (req, res) {
 
 //Envia nuevos datos
 horario.post("/", validatorHandler(schemaHorario), async function (req, res) {
-  const { horario_fecha, disponibilidad, aforo, docente_id } = req.body;
-  const data = await horarioServices.create(
-    horario_fecha,
-    disponibilidad,
-    aforo,
-    docente_id
-  );
+  const { horario_fecha, aforo, docente_id } = req.body;
+  const data = await horarioServices.create(horario_fecha, aforo, docente_id);
   res.status(201).json({
     data,
     status: 201,

@@ -1,0 +1,222 @@
+@import "mixins";
+
+.tuition {
+  flex: 1;
+  overflow: hidden;
+  &-container {
+    padding: 1rem 0;
+    box-sizing: border-box;
+    height: 100%;
+    @include flex-fd-jc-ai-g(column, flex-start, center, 1rem);
+    @include laptop {
+      flex-direction: row;
+    }
+  }
+  &__courses {
+    flex: 2;
+    &-container {
+      padding: 1rem;
+      box-sizing: border-box;
+      @include flex-fd-jc-ai-g(column, $gap: (x: 0.4rem, y: 0.8rem));
+      height: 100%;
+    }
+    &__filter {
+      &-form {
+        width: 100%;
+        @include flex-fd-jc-ai-g(row, $gap: 0.4rem);
+        flex-wrap: wrap;
+      }
+      &-label {
+        margin: 0;
+        padding: 0;
+        border: none;
+        box-shadow: 0 0 0.1rem 0.05rem #2c3333;
+        padding: 0 0.5rem;
+        box-sizing: border-box;
+        border-radius: 0.2rem;
+        @include flex-fd-jc-ai-g(row, flex-start, center, 0.4rem);
+        flex: auto;
+        &--focus {
+          outline: auto;
+        }
+      }
+      &-input {
+        width: 100%;
+        border: none;
+        background-color: transparent;
+        line-height: 1.5rem;
+        outline: none;
+      }
+    }
+    &__link {
+      -webkit-user-drag: none;
+      text-decoration: none;
+      color: #2c3333;
+    }
+    &__title {
+      margin: 0;
+    }
+    &__list {
+      margin: 0;
+      box-sizing: border-box;
+      padding: 0;
+      list-style: none;
+      width: 100%;
+    }
+    &__item {
+      @include sm {
+        width: 50%;
+        margin: 0 auto;
+      }
+    }
+    &__course {
+      margin: 1rem 0;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      border-radius: 0.1rem;
+      box-shadow: 0 0 0.1rem 0.05rem #395b64;
+      background-color: #f5f2e7;
+      cursor: grab;
+      &:active {
+        cursor: grabbing;
+      }
+      &-container {
+        @include flex-fd-jc-ai-g(
+          row,
+          center,
+          center,
+          (
+            x: 0.5rem,
+            y: 0.3rem,
+          )
+        );
+        flex-wrap: wrap;
+      }
+      &__id {
+        flex: 1;
+        font-weight: 900;
+        text-align: center;
+      }
+      &__title {
+        flex: 20;
+        font-size: 1rem;
+        margin: 0;
+      }
+    }
+    @include laptop {
+      height: 100%;
+    }
+  }
+  &__lessons {
+    flex: 1;
+    width: 80%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    opacity: 0;
+    background-color: #2666cf;
+    box-shadow: 0 0 1rem 0.3rem #2c33334a;
+    transition: box-shadow 0.25s;
+    border-radius: 1rem;
+    &__background {
+      position: fixed;
+      inset: 0;
+      &::before {
+        content: "";
+        background-color: var(--value-bg);
+        position: absolute;
+        inset: 0;
+      }
+    }
+    &-container {
+      border-radius: 1rem;
+      padding: 1rem;
+      box-sizing: border-box;
+      color: #f5f2e7;
+      height: 100%;
+      @include flex-fd-jc-ai-g(column, $gap: 1rem);
+      @include laptop {
+        color: #2c3333;
+      }
+    }
+    &__list {
+      @include flex-fd-jc-ai-g(column, $gap: 1rem);
+      max-height: calc(3.5rem * 2 + 3rem);
+      overflow-y: auto;
+      @include laptop {
+        max-height: fit-content;
+      }
+    }
+    &__title {
+      margin: 0;
+      text-align: center;
+      font-size: 1.4rem;
+      @include laptop {
+        text-align: start;
+      }
+    }
+    &__info {
+      @include flex-fd-jc-ai-g(row, flex-start, center, 0.25rem);
+      flex-wrap: wrap;
+      &__amount {
+        margin: 0;
+        flex: auto;
+        @include desktop {
+          flex: 100%;
+        }
+      }
+    }
+    &__paragraph {
+      text-align: center;
+      margin: 0;
+      @include laptop {
+        text-align: start;
+      }
+    }
+    @include laptop {
+      position: static;
+      height: 100%;
+      box-shadow: none;
+    }
+  }
+}
+
+.lesson {
+  background-color: #f5f2e7;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  color: #2c3333;
+  position: relative;
+  cursor: pointer;
+  &-container {
+    @include flex-fd-jc-ai-g(row, center, center, 0.5rem);
+    flex-wrap: wrap;
+  }
+  &__selected {
+    position: absolute;
+    top: 0rem;
+    right: 0.15rem;
+  }
+  &__section {
+    @include flex-fd-jc-ai-g(row, center, center, 0.5rem);
+    &__title {
+      margin: 0;
+      font-size: 0.8rem;
+    }
+  }
+  &__spinner {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    margin: auto 0;
+    right: 2rem;
+    @include laptop {
+      right: 0.8rem;
+    }
+  }
+  @include laptop {
+    padding: 0.8rem;
+  }
+}

@@ -7,6 +7,7 @@ import schemaEstudiante, {
 import validatorHandler from "../middlewares/validator.handler.js";
 import estudianteServices from "../services/estudiante.services.js";
 import config from "../config/index.js";
+import { notFound } from "@hapi/boom";
 
 const estudiante = express.Router();
 const options = {
@@ -52,10 +53,7 @@ estudiante.get(
       { session: false },
       (error, user) => {
         if (error) return next(error);
-        if (user) {
-          req.user = user;
-          return next();
-        }
+        if (user) return (req.user = user);
         res.json({
           data: null,
           status: 200,

@@ -1,15 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, forwardRef } from "react";
 import useSound from "use-sound";
 import soundButton from "@assets/sounds/button.mp3";
-import { forwardRef } from "react";
 
 const Button = forwardRef(
   (
     {
       fetcher,
+      name,
       children,
       modifiers = [],
-      type,
+      type = "submit",
       className,
       onClick,
       isSound = true,
@@ -27,12 +27,13 @@ const Button = forwardRef(
       }
     }, [fetcher?.state]);
     const [play] = useSound(soundButton);
-    const handleClick = () => {
-      if (onClick) onClick();
+    const handleClick = (e) => {
+      if (onClick) onClick(e);
       if (isSound) play();
     };
     return (
       <button
+        name={name}
         type={type}
         className={`button ${(Array.isArray(modifiers)
           ? modifiers

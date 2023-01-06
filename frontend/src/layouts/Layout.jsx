@@ -9,7 +9,7 @@ import "@styles/modules/menu.scss";
 
 export const loaderLayout = async () => {
   const tokenTuitionSoftware = localStorage.getItem(
-    config.tokenTuitionSoftware
+    config.tokenTuitionSoftware,
   );
   if (tokenTuitionSoftware) {
     const user = await getUser(tokenTuitionSoftware);
@@ -22,15 +22,13 @@ export const loaderLayout = async () => {
   return null;
 };
 
-const Layout = () => {
-  return (
-    <>
-      <Header />
-      <Outlet />
-      <Footer />
-      <ScrollRestoration />
-    </>
-  );
-};
+const Layout = () => (
+  <>
+    <Header />
+    <Outlet />
+    <Footer />
+    <ScrollRestoration />
+  </>
+);
 
 export default Layout;

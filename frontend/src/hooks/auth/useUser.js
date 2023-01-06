@@ -21,12 +21,12 @@ import { useEffect, useSyncExternalStore } from "react";
 export default function useUser(isSuscribe = true) {
   const user = useSyncExternalStore(
     stateUser.suscribe.bind(stateUser, isSuscribe),
-    stateUser.getSnapshot.bind(stateUser)
+    stateUser.getSnapshot.bind(stateUser),
   );
   const [token, , { initial }] = useLocalStorage(
     config.tokenTuitionSoftware,
     undefined,
-    isSuscribe
+    isSuscribe,
   );
   const updateUser = async (userPreGetted) => {
     if (typeof userPreGetted !== "undefined") {

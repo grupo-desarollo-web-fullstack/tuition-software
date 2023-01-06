@@ -1,6 +1,6 @@
 import config from "@config";
 import parseToken from "@utils/parseToken";
-import serializeUser from "@utils/serializeUser";
+import serialize from "@utils/serialize";
 
 const cache = {
   token: "",
@@ -19,10 +19,10 @@ export default async function getUser(token) {
     {
       method: "GET",
       headers,
-    }
+    },
   );
   const { data: user } = await response.json();
-  const userSerialized = serializeUser(user);
+  const userSerialized = serialize(user, "estudiante");
   cache.token = token;
   cache.user = userSerialized;
   return userSerialized;
