@@ -1,4 +1,4 @@
-import "@styles/modules/members.scss";
+import "@styles/modules/about.scss";
 import Image1 from "@assets/img/img1.png";
 import Image2 from "@assets/img/img2.jpeg";
 import Image3 from "@assets/img/img3.jpg";
