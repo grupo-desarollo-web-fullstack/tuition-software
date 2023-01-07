@@ -10,9 +10,9 @@ const LessonsSelectUser = ({ lessons }) => {
   const outlet = useOutlet({
     lessonSelected,
     setLessonSelected,
-    lessons,
     setIsVisited,
     isVisited,
+    lessons,
     setCourses,
   });
   return <AnimatePresence>{outlet}</AnimatePresence>;

@@ -26,7 +26,7 @@ import serialize from "@utils/serialize";
  *  action: String
  * }} options
  */
-const getCourses = async (token, options = {}) => {
+const getCourse = async (token, idCourse, options = {}) => {
   const { baseUrlBackend } = config;
   const headers = new Headers();
   headers.set("Content-Type", "application/json; charset=utf-8");
@@ -39,7 +39,7 @@ const getCourses = async (token, options = {}) => {
     if (options.action) urlSearchParams.append("action", options.action);
   }
   const response = await fetch(
-    `${baseUrlBackend}/curso${
+    `${baseUrlBackend}/curso/${idCourse}${
       urlSearchParams.toString() ? `?${urlSearchParams.toString()}` : ""
     }`.trimEnd(),
     {
@@ -47,8 +47,8 @@ const getCourses = async (token, options = {}) => {
       headers,
     }
   );
-  const { data: courses } = await response.json();
-  return courses?.map((course) => serialize(course, "curso"));
+  const { data: course } = await response.json();
+  return serialize(course, "curso");
 };
 
-export default getCourses;
+export default getCourse;

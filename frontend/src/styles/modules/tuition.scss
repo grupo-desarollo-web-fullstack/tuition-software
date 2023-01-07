@@ -129,6 +129,9 @@
         inset: 0;
       }
     }
+    &__not-found {
+      @include flex-fd-jc-ai-g(column, $gap: 1rem);
+    }
     &-container {
       border-radius: 1rem;
       padding: 1rem;
@@ -211,7 +214,7 @@
     width: 2rem;
     height: 2rem;
     margin: auto 0;
-    right: 2rem;
+    right: 1rem;
     @include laptop {
       right: 0.8rem;
     }
