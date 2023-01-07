@@ -39,14 +39,23 @@ curso.get(
 );
 
 //Obtiene datos por ID
-curso.get("/:id", async function (req, res) {
-  const { id } = req.params;
-  const data = await cursoServices.getUnique(id);
-  res.json({
-    data,
-    status: 200,
-  });
-});
+curso.get(
+  "/:id",
+  function (req, res, next) {
+    const { userId } = req.query;
+    if (userId)
+      return passport.authorize("jwt", { session: false })(req, res, next);
+    next();
+  },
+  async function (req, res) {
+    const { id } = req.params;
+    const data = await cursoServices.getUnique(id, req.query);
+    res.json({
+      data,
+      status: 200,
+    });
+  }
+);
 
 //Actualiza datos por ID
 curso.put("/:id", async function (req, res) {

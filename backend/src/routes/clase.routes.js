@@ -7,15 +7,22 @@ const clase = express.Router();
 
 //Obtiene datos
 clase.get("/", async function (req, res) {
-  const { cursoId, orderBy } = req.query;
+  const { cursoId, orderBy, orderByRelation } = req.query;
   const fields = Array.isArray(orderBy) ? orderBy : orderBy && [orderBy];
+  const [relation, field] = orderByRelation;
   const data = await claseServices.getAll({
     where: cursoId && {
       tbl_curso_curso_id: +cursoId,
     },
-    orderBy: fields?.map(function (field) {
-      return { [field]: "asc" };
-    }),
+    orderBy:
+      fields?.map(function (field) {
+        return { [field]: "asc" };
+      }) ||
+      (orderByRelation && {
+        [relation]: {
+          [field]: "asc",
+        },
+      }),
   });
   res.json({
     data,
