@@ -38,9 +38,9 @@ model Curso {
 
 model Matricula {
   matricula_id                 Int        @id @default(autoincrement())
-  tbl_estudiante_estudiante    Estudiante @relation(fields: [tbl_estudiante_estudiante_id], references: [estudiante_id])
+  tbl_estudiante_estudiante    Estudiante @relation(fields: [tbl_estudiante_estudiante_id], references: [estudiante_id], onDelete: Cascade)
   tbl_estudiante_estudiante_id Int
-  tbl_clase_clase              Clase      @relation(fields: [tbl_clase_clase_id], references: [clase_id])
+  tbl_clase_clase              Clase      @relation(fields: [tbl_clase_clase_id], references: [clase_id], onDelete: Cascade)
   tbl_clase_clase_id           Int
 
   @@map("tbl_matricula")
@@ -59,7 +59,7 @@ model Horario {
   horario_id             Int      @id @default(autoincrement())
   horario_dias           String   @db.VarChar(100)
   horario_hora           DateTime @db.Time(6)
-  tbl_docente_docente    Docente  @relation(fields: [tbl_docente_docente_id], references: [docente_id])
+  tbl_docente_docente    Docente  @relation(fields: [tbl_docente_docente_id], references: [docente_id], onDelete: Cascade)
   tbl_docente_docente_id Int
   Clase                  Clase[]
 
@@ -69,11 +69,11 @@ model Horario {
 model Clase {
   clase_id               Int         @id @default(autoincrement())
   clase_nsalon           String      @db.VarChar(10)
-  tbl_horario_horario    Horario     @relation(fields: [tbl_horario_horario_id], references: [horario_id])
+  tbl_horario_horario    Horario     @relation(fields: [tbl_horario_horario_id], references: [horario_id], onDelete: Cascade)
   tbl_horario_horario_id Int
   clase_aforo            Int
   clase_disponibilidad   Boolean     @default(true)
-  tbl_curso_curso        Curso       @relation(fields: [tbl_curso_curso_id], references: [curso_id])
+  tbl_curso_curso        Curso       @relation(fields: [tbl_curso_curso_id], references: [curso_id], onDelete: Cascade)
   tbl_curso_curso_id     Int
   Matricula              Matricula[]
 

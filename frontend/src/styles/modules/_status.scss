@@ -10,9 +10,8 @@
   &-container {
     @include flex-fd-jc-ai-g(row, center, center, 0.5rem);
     height: 100%;
-    padding: 0 1rem;
+    padding: 1rem;
     &--lessons {
-      padding: 1rem 0;
       flex-direction: column;
     }
   }

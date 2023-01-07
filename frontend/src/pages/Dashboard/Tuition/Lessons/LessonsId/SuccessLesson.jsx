@@ -34,7 +34,6 @@ const SuccessLesson = () => {
       <div className="success-container">
         <div className="success__img-container">
           <CheckSvg
-            layout
             initial={{
               scale: 0.5,
               filter: "drop-shadow(rgb(44, 51, 51, 0) 2px 3px 1px)",
@@ -55,7 +54,7 @@ const SuccessLesson = () => {
         </div>
         <h2 className="success__title">Matricula completada</h2>
         <Button onClick={handleClickButton} modifiers={["dark", "success"]}>
-          Ver el curso <BsFillJournalBookmarkFill size={18} />
+          Ir al curso <BsFillJournalBookmarkFill size={18} />
         </Button>
       </div>
     </motion.article>

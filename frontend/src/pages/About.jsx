@@ -1,4 +1,4 @@
-import "@styles/modules/members.scss";
+import "@styles/modules/about.scss";
 import Image1 from "@assets/img/img1.png";
 import Image2 from "@assets/img/img2.jpeg";
 import Image3 from "@assets/img/img3.jpg";
@@ -31,44 +31,44 @@ const About = () => (
       <div className="container">
         <div className="card-section">
           <div className="card">
-            <div className="card-header">Alejandro Oroncoy Almeyda</div>
+            <header className="card-header">Alejandro Oroncoy Almeyda</header>
             <div className="card-body">
               <div className="img img--alejo">
                 <img src={Image1} alt="" />
               </div>
               <a href="https://github.com/alejooroncoy">Saber mas!</a>
             </div>
-            <div className="card-footer">7 de Enero 2023</div>
+            <footer className="card-footer">7 de Enero 2023</footer>
           </div>
           <div className="card">
-            <div className="card-header">Mario Grande Contreras</div>
+            <header className="card-header">Mario Grande Contreras</header>
             <div className="card-body">
               <div className="img">
                 <img src={Image2} alt="" />
               </div>
               <a href="https://github.com/Mario2701">Saber mas!</a>
             </div>
-            <div className="card-footer">7 de Enero 2023</div>
+            <footer className="card-footer">7 de Enero 2023</footer>
           </div>
           <div className="card">
-            <div className="card-header">York Antayhua Cortez</div>
+            <header className="card-header">York Antayhua Cortez</header>
             <div className="card-body">
               <div className="img">
                 <img src={Image4} alt="" />
               </div>
               <a href="https://github.com/york30">Saber mas!</a>
             </div>
-            <div className="card-footer">7 de Enero 2023</div>
+            <footer className="card-footer">7 de Enero 2023</footer>
           </div>
           <div className="card">
-            <div className="card-header">Yhancarlos Gonzales Javier</div>
+            <header className="card-header">Yhancarlos Gonzales Javier</header>
             <div className="card-body">
               <div className="img">
                 <img src={Image3} alt="" />
               </div>
               <a href="https://github.com/YHAGON">Saber mas!</a>
             </div>
-            <div className="card-footer">7 de Enero 2023</div>
+            <footer className="card-footer">7 de Enero 2023</footer>
           </div>
         </div>
       </div>

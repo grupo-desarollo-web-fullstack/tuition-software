@@ -2,16 +2,28 @@ import config from "@config/index";
 import serialize from "@utils/serialize";
 import getSchedule from "./getSchedule";
 
-export default async function getLessons(cursoId, options) {
+export default async function getLessons(cursoId, options = {}) {
   const { baseUrlBackend } = config;
   const headers = new Headers();
+  const searchParams = new URLSearchParams();
   headers.set("Content-Type", "application/json; charset=utf-8");
-  const response = await fetch(`${baseUrlBackend}/clase?cursoId=${cursoId}`, {
-    method: "GET",
-    headers,
-  });
+  if (cursoId) searchParams.append("cursoId", cursoId);
+  options.orderByRelation?.forEach((value, i) =>
+    searchParams.append(`orderByRelation[${i}]`, value)
+  );
+  if (options.filter?.userId) {
+    const { userId } = options.filter;
+    searchParams.append("userId", userId);
+  }
+  const response = await fetch(
+    `${baseUrlBackend}/clase?${searchParams.toString()}`,
+    {
+      method: "GET",
+      headers,
+    }
+  );
   const { data } = await response.json();
-  let lessons = await Promise.all(
+  const lessons = await Promise.all(
     data
       .map((lesson) => serialize(lesson, "clase"))
       .map(async (lesson) => {
@@ -22,14 +34,5 @@ export default async function getLessons(cursoId, options) {
         };
       })
   );
-  if (options.sort && options.sort === "schedule") {
-    lessons = lessons?.sort(
-      ({ schedule: scheduleA }, { schedule: scheduleB }) => {
-        const { date: dateA } = scheduleA;
-        const { date: dateB } = scheduleB;
-        return dateA.hour - dateB.hour;
-      }
-    );
-  }
   return lessons;
 }
