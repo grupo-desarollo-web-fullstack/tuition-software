@@ -1,0 +1,93 @@
+@import "mixins";
+
+.modal {
+  flex: 1;
+  width: 80%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  opacity: 0;
+  background-color: #2666cf;
+  box-shadow: 0 0 1rem 0.3rem #2c33334a;
+  transition: box-shadow 0.25s;
+  border-radius: 1rem;
+  z-index: 3;
+  color: #f5f2e7;
+  @include laptop {
+    width: 30%;
+  }
+  &__background {
+    z-index: 3;
+    position: fixed;
+    inset: 0;
+    &::before {
+      content: "";
+      background-color: var(--value-bg);
+      position: absolute;
+      inset: 0;
+    }
+    @include laptop {
+      z-index: 3;
+      position: static;
+      inset: 0;
+      &::before {
+        content: none;
+      }
+    }
+  }
+  &-container {
+    @include flex-fd-jc-ai-g(column, center, center, 1rem);
+    padding: 1rem;
+    &--tuition {
+      height: 100%;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: 0;
+      @include laptop {
+        color: #2c3333;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+  &__title {
+    text-align: center;
+    font-size: 1.25rem;
+    margin: 0;
+  }
+  &__paragraph {
+    text-align: center;
+    margin: 0;
+    line-height: 1.85rem;
+    &--confirm {
+      background-color: #2c3333;
+      padding: 0.25rem;
+      border-radius: 0.2rem;
+      font-weight: 700;
+    }
+    @include laptop {
+      line-height: 1.6rem;
+    }
+  }
+  &__label {
+    padding: 0.25rem 1rem;
+    box-sizing: border-box;
+    @include flex-fd-jc-ai-g(row, center, center, 0.25rem);
+    background-color: #f5f2e7;
+    border-radius: 0.25rem;
+  }
+  &__input {
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    outline: none;
+  }
+  &--tuition {
+    @include laptop {
+      position: static;
+      height: 100%;
+      box-shadow: none;
+    }
+  }
+}
