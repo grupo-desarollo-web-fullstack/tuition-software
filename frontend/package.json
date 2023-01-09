@@ -11,9 +11,7 @@
 		"preview": "vite preview",
 		"eslint:check": "npx eslint --ext .jsx,.js src",
 		"eslint:fix": "npx eslint --ext .jsx,.js src --fix",
-		"prepare": "cd .. && husky install frontend/.husky",
-		"migrate:deploy": "prisma migrate deploy",
-		"migrate:dev": "prisma migrate dev"
+		"prepare": "cd .. && husky install frontend/.husky"
 	},
 	"repository": {
 		"type": "git",

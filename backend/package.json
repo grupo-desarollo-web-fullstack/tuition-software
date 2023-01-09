@@ -9,7 +9,9 @@
     "dev": "nodemon ./src/index.js",
     "prisma:studio": "prisma studio",
     "prisma:format": "prisma format",
-    "start": "node ./src/index.js"
+    "start": "node ./src/index.js",
+    "migrate:deploy": "prisma migrate deploy",
+		"migrate:dev": "prisma migrate dev"
   },
   "repository": {
     "type": "git",
