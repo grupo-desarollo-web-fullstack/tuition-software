@@ -16,10 +16,12 @@ export default async function getSchedule(scheduleId) {
   if (data) {
     const teacher = await getTeacher(data.tbl_docente_docente_id);
     data.teacher = teacher;
-    const date = DateTime.fromISO(data.horario_hora);
-    data.date = date;
+    const start = DateTime.fromISO(data.horario_hora_inicio);
+    const end = DateTime.fromISO(data.horario_hora_final);
+    data.date = {
+      start,
+      end,
+    };
   }
-  // console.log(data);
-
   return serialize(data, "horario");
 }

@@ -1,6 +1,7 @@
 import config from "@config/index";
 import parseToken from "@utils/parseToken";
 import serialize from "@utils/serialize";
+import getSchedule from "./getSchedule";
 
 /**
  * @typedef {"obligatorio"} OBLIGATORIO_TYPE
@@ -48,6 +49,17 @@ const getCourse = async (token, idCourse, options = {}) => {
     }
   );
   const { data: course } = await response.json();
+  course.Clase = await Promise.all(
+    course.Clase.map((lesson) => serialize(lesson, "clase")).map(
+      async (lesson) => {
+        const schedule = await getSchedule(lesson.tbl_horario_horario_id);
+        return {
+          ...lesson,
+          schedule,
+        };
+      }
+    )
+  );
   return serialize(course, "curso");
 };
 
