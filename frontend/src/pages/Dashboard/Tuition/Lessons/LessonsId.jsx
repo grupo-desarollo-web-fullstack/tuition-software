@@ -19,7 +19,7 @@ export const loaderLessonsId = async ({ params, request }) => {
     action: "none",
   });
   const lessons = await getLessons(params.id, {
-    orderByRelation: ["tbl_horario_horario", "horario_hora"],
+    orderByRelation: ["tbl_horario_horario", "horario_hora_inicio"],
   });
   if (course.Clase.length < lessons.length)
     return redirect("/dashboard/tuition/");
@@ -47,7 +47,7 @@ const LessonsId = () => {
   const lessons = useLoaderData();
   return (
     <AnimatePresence>
-      {lessons?.length || lessons.success ? (
+      {lessons?.length || lessons?.success ? (
         <LessonsSelectUser lessons={lessons} />
       ) : (
         <motion.article
