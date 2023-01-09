@@ -104,8 +104,9 @@ const Register = () => {
           <AnimatePresence>
             {error && (
               <ErrorForm
-                className="error--register error--form"
+                className="error--register"
                 error={error}
+                containerClassName="error-container--form"
               />
             )}
           </AnimatePresence>

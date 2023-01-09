@@ -57,7 +57,7 @@ const Login = () => {
           </label>
           <InputPassword />
           <AnimatePresence>
-            {error && <ErrorForm className="error--form" error={error} />}
+            {error && <ErrorForm containerClassName="error-container--form" error={error} />}
           </AnimatePresence>
           <Button fetcher={fetcher} modifiers="dark">
             ¡Entrar!
