@@ -89,6 +89,7 @@ const Lesson = ({ lesson, setLessonSelected, lessonSelected }) => {
         <div className="lesson__section lesson__section--teacher">
           <MdDateRange size={15} />
           <h3 className="lesson__section__title">
+          {dias} |{" "}
           {dates.start.hour}:
               {schedule.date.start.minute || "0".repeat(2)}{" "}
               {dates.start.locution} - {dates.end.hour}:
