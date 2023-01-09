@@ -6,20 +6,20 @@ const Menu = forwardRef(({ className, children, suscribe = true }, menuRef) => {
   const [user] = useUser(suscribe);
   const isFunctionChildren = children instanceof Function;
   return (
-    <ul ref={menuRef} className={`menu ${className || ""}`}>
+    <ul ref={menuRef} className={`menu ${className || ""}`.trimEnd()}>
       {isFunctionChildren ? children(user) : children}
     </ul>
   );
 });
 
-export const MenuLink = ({
-  modifier, onClick, to, children,
-}) => (
+export const MenuLink = ({ modifier, onClick, to, children }) => (
   <NavLink
     onClick={onClick}
-    className={({ isActive }) => (isActive
-      ? `menu__link menu__link--${modifier} menu__link--active`
-      : `menu__link menu__link--${modifier}`)}
+    className={({ isActive }) =>
+      isActive
+        ? `menu__link menu__link--${modifier} menu__link--active`
+        : `menu__link menu__link--${modifier}`
+    }
     to={to}
   >
     {children}

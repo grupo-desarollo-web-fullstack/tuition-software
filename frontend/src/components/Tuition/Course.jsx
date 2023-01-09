@@ -7,11 +7,13 @@ import useUser from "@hooks/auth/useUser";
  * }} params
  * @returns
  */
-const Course = ({ course }) => {
+const Course = ({ course, className }) => {
   const [user] = useUser();
   const type = user.ciclo === course.ciclo ? course.tipo : "opcional";
   return (
-    <article className="tuition__courses__course">
+    <article
+      className={`tuition__courses__course ${className || ""}`.trimEnd()}
+    >
       <div className="tuition__courses__course-container">
         <span className="tuition__courses__course__id">{course.id}</span>
         <h2 className="tuition__courses__course__title">{course.nombre}</h2>
