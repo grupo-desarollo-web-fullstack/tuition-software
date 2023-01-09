@@ -1,4 +1,5 @@
 import {
+  deleteUniqueFromModel,
   getDataListFromModel,
   getDataUniqueFromModel,
   postDataListFromModel,
@@ -38,6 +39,14 @@ const matriculaServices = {
       data: {
         tbl_estudiante_estudiante_id: +estudiante_id,
         tbl_clase_clase_id: +clase_id,
+      },
+    });
+    return data;
+  },
+  async delete(id) {
+    const data = await deleteUniqueFromModel("matricula", {
+      where: {
+        matricula_id: +id,
       },
     });
     return data;

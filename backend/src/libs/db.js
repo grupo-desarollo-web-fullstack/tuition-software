@@ -28,3 +28,10 @@ export async function postDataListFromModel(modelName, options) {
 
   return data;
 }
+
+export async function deleteUniqueFromModel(modelName, options) {
+  const model = prisma[modelName];
+  const data = await model.delete(options);
+
+  return data;
+}
