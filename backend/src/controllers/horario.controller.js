@@ -28,11 +28,13 @@ export const getHorariosId = async function (req, res) {
 
 export const putHorarios = async function (req, res) {
   const { id } = req.params;
-  const { horario_fecha, disponibilidad, aforo, docente_id } = req.body;
+  const { hora_inicio, hora_final, disponibilidad, aforo, docente_id } =
+    req.body;
 
   const data = await horarioServices.updateUnique(
     id,
-    horario_fecha,
+    hora_inicio,
+    hora_final,
     disponibilidad,
     aforo,
     docente_id
@@ -44,14 +46,25 @@ export const putHorarios = async function (req, res) {
 };
 
 export const postHorarios = async function (req, res) {
-  const { horario_fecha, disponibilidad, aforo, docente_id } = req.body;
+  const { hora_inicio, hora_final, disponibilidad, aforo, docente_id } =
+    req.body;
   const data = await horarioServices.create(
-    horario_fecha,
+    hora_inicio,
+    hora_final,
     disponibilidad,
     aforo,
     docente_id
   );
   res.status(201).json({
+    data,
+    status: 201,
+  });
+};
+
+export const deleteHorarioID = async function (req, res) {
+  const { id } = req.params;
+  const data = await horarioServices.delete(id);
+  res.status(200).json({
     data,
     status: 201,
   });

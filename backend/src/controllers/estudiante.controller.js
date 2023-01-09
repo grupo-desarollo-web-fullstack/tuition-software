@@ -2,8 +2,8 @@ import estudianteServices from "../services/estudiante.services.js";
 
 import config from "../config/index.js";
 const options = {
-    secretOrKey: config.secretOrKey,
-  };
+  secretOrKey: config.secretOrKey,
+};
 
 export const loginEstudiante = function (req, res, next) {
   try {
@@ -61,4 +61,13 @@ export const postEstudiante = async function (req, res, next) {
     res.locals.fieldError = "email";
     next(err);
   }
+};
+
+export const deleteEstudianteID = async function (req, res) {
+  const { id } = req.params;
+  const data = await estudianteServices.delete(id);
+  res.status(200).json({
+    data,
+    status: 201,
+  });
 };

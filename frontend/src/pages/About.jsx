@@ -5,7 +5,7 @@ import Image3 from "@assets/img/img3.jpg";
 import Image4 from "@assets/img/img4.jpg";
 
 import Logo from "@components/svgr/GivenSvg";
-
+import { BsGithub } from "react-icons/bs";
 
 const About = () => (
   <main className="main main--about">
@@ -13,7 +13,7 @@ const About = () => (
       <div className="content">
         <Logo />
         <div className="text">
-          <h1>Sobre Nosotros</h1>
+          <h2>Sobre Nosotros</h2>
           <h5>Desarrolladores y diseñadores</h5>
           <p>
             Somos una organizacion de desarrolladores y diseñadores enfocados en
@@ -34,9 +34,15 @@ const About = () => (
             <header className="card-header">Alejandro Oroncoy Almeyda</header>
             <div className="card-body">
               <div className="img img--alejo">
-                <img src={Image1} alt="" />
+                <img src={Image1} alt="Foto de Alejandro Oroncoy Almeyda" />
               </div>
-              <a href="https://github.com/alejooroncoy">Saber mas!</a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/alejooroncoy"
+              >
+                Github <BsGithub size={18} />
+              </a>
             </div>
             <footer className="card-footer">7 de Enero 2023</footer>
           </div>
@@ -44,9 +50,15 @@ const About = () => (
             <header className="card-header">Mario Grande Contreras</header>
             <div className="card-body">
               <div className="img">
-                <img src={Image2} alt="" />
+                <img src={Image2} alt="Foto de Mario Grande Contreras" />
               </div>
-              <a href="https://github.com/Mario2701">Saber mas!</a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/Mario2701"
+              >
+                Github <BsGithub size={18} />
+              </a>
             </div>
             <footer className="card-footer">7 de Enero 2023</footer>
           </div>
@@ -54,9 +66,15 @@ const About = () => (
             <header className="card-header">York Antayhua Cortez</header>
             <div className="card-body">
               <div className="img">
-                <img src={Image4} alt="" />
+                <img src={Image4} alt="Foto de York Antayhua Cortez" />
               </div>
-              <a href="https://github.com/york30">Saber mas!</a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/york30"
+              >
+                Github <BsGithub size={18} />
+              </a>
             </div>
             <footer className="card-footer">7 de Enero 2023</footer>
           </div>
@@ -64,9 +82,15 @@ const About = () => (
             <header className="card-header">Yhancarlos Gonzales Javier</header>
             <div className="card-body">
               <div className="img">
-                <img src={Image3} alt="" />
+                <img src={Image3} alt="Foto de Yhancarlos Gonzales Javier" />
               </div>
-              <a href="https://github.com/YHAGON">Saber mas!</a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/YHAGON"
+              >
+                Github <BsGithub size={18} />
+              </a>
             </div>
             <footer className="card-footer">7 de Enero 2023</footer>
           </div>

@@ -1,7 +1,11 @@
 import config from "@config/index";
 import getCourses from "@libs/db/get/getCourses";
-import { useLoaderData } from "react-router-dom";
-import "@styles/modules/table.scss";
+import { Link, NavLink, useLoaderData, useOutlet } from "react-router-dom";
+import "@styles/modules/courses.scss";
+import Menu from "@components/Menu";
+import Course from "@components/Tuition/Course";
+import { AnimatePresence, motion } from "framer-motion";
+import WarningCourses from "@components/warnings/WarningCourses";
 
 export const loaderCourses = async () => {
   const token = localStorage.getItem(config.tokenTuitionSoftware);
@@ -12,61 +16,64 @@ export const loaderCourses = async () => {
   return courses;
 };
 
+const NavLinkMotion = motion(NavLink);
+
 const Courses = () => {
   const courses = useLoaderData();
+  const outlet = useOutlet();
   return (
-    <section className="section-table">
-      <h2 className="section__title">Tus cursos:</h2>
-      <table className="tabla-desktop">
-        <thead>
-          <tr>
-            <th>CODIGO</th>
-            <th>ASIGNATURA</th>
-            <th>CREDITOS</th>
-            <th>TIPO</th>
-            <th>CICLO</th>
-          </tr>
-        </thead>
-        <tbody>
-          {courses?.map((course) => (
-            <tr key={course.id}>
-              <td>{course.id}</td>
-              <td>{course.nombre}</td>
-              <td>{course.creditos}</td>
-              <td>{course.tipo}</td>
-              <td>{course.ciclo}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="tabla-mobile">
-        {courses?.map((course) => (
-          <div className="fila" key={course.id}>
-            <div className="columna">
-              <div className="header-table">CODIGO</div>
-              <div className="contenido">{course.id}</div>
-            </div>
-
-            <div className="columna">
-              <div className="header-table">ASIGNATURA</div>
-              <div className="contenido">{course.nombre}</div>
-            </div>
-
-            <div className="columna">
-              <div className="header-table">CREDITOS</div>
-              <div className="contenido">{course.creditos}</div>
-            </div>
-
-            <div className="columna">
-              <div className="header-table">TIPO</div>
-              <div className="contenido">{course.tipo}</div>
-            </div>
-            <div className="columna">
-              <div className="header-table">CICLO</div>
-              <div className="contenido">{course.ciclo}</div>
-            </div>
-          </div>
-        ))}
+    <section className="courses">
+      <div className="courses-container">
+        <h2 className="courses__title">Tus cursos:</h2>
+        {courses.length > 0 && (
+          <Menu suscribe={false} className="menu--courses">
+            {courses?.map((course) => (
+              <NavLinkMotion
+                key={course.id}
+                className="tuition__courses__link tuition__courses__link--course"
+                to={`./${course.id}`}
+                state={course}
+                relative
+              >
+                <Course
+                  course={course}
+                  className="tuition__courses__course--without-drag tuition__courses__course--course"
+                />
+              </NavLinkMotion>
+            ))}
+          </Menu>
+        )}
+        <div className="courses__content">
+          <AnimatePresence>
+            {courses.length <= 0 ? (
+              <WarningCourses
+                className="warning--courses"
+                error="No tienes cursos agregados"
+              >
+                <Link className="courses__link" to="/dashboard/tuition">
+                  Agrega cursos en /dashboard/tuition
+                </Link>
+              </WarningCourses>
+            ) : (
+              outlet || (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="courses__content-container courses__content-container--empty"
+                >
+                  <h2 className="courses__content__title">
+                    Da click a una de tus clases para ver sus detalles 😉
+                  </h2>
+                  <p className="courses__content__paragraph">
+                    Podrás ver los días de clase, el horario, etc de tu clase
+                    seleccionada. 📘
+                  </p>
+                </motion.div>
+              )
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );

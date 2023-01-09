@@ -4,6 +4,7 @@ import {
   getDocentesId,
   postDocentes,
   putDocentes,
+  deleteDocenteID,
 } from "../controllers/docente.controller.js";
 import validatorHandler from "../middlewares/validator.handler.js";
 import schemaDocente from "../schemas/docente.schema.js";
@@ -15,6 +16,7 @@ docente
   .get("/", getDocentes)
   .get("/:id", getDocentesId)
   .put("/:id", putDocentes)
-  .post("/", validatorHandler(schemaDocente), postDocentes);
+  .post("/", validatorHandler(schemaDocente), postDocentes)
+  .delete("/:id", deleteDocenteID);
 
 export default docente;

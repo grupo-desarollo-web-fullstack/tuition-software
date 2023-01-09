@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import {
-  json, Link, useFetcher, useOutletContext,
-} from "react-router-dom";
+import { json, Link, useFetcher, useOutletContext } from "react-router-dom";
 import Button from "@components/Button";
 import register from "@libs/auth/register";
 import ErrorForm from "@components/errors/ErrorForm";
 import { MdEmail, MdLibraryBooks, MdPerson } from "react-icons/md";
 import { FaUniversity } from "react-icons/fa";
 import InputPassword from "@components/InputPassword";
+import { AnimatePresence } from "framer-motion";
 
 export const actionRegister = async ({ request }) => {
   const formData = await request.formData();
@@ -19,7 +18,7 @@ export const actionRegister = async ({ request }) => {
     },
     {
       status,
-    },
+    }
   );
 };
 
@@ -102,8 +101,14 @@ const Register = () => {
               type="number"
             />
           </label>
-
-          {error && <ErrorForm className="error--register" error={error} />}
+          <AnimatePresence>
+            {error && (
+              <ErrorForm
+                className="error--register error--form"
+                error={error}
+              />
+            )}
+          </AnimatePresence>
           <Button fetcher={fetcher} modifiers={["dark", "form"]}>
             ¡Registrarme!
           </Button>

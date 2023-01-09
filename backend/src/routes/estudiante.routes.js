@@ -6,8 +6,8 @@ import schemaEstudiante, {
 } from "../schemas/estudiante.schema.js";
 import validatorHandler from "../middlewares/validator.handler.js";
 
-
 import {
+  deleteEstudianteID,
   getEstudiantes,
   getEstudiantesId,
   loginEstudiante,
@@ -16,7 +16,6 @@ import {
 } from "../controllers/estudiante.controller.js";
 
 const estudiante = express.Router();
-
 
 //Passport Estrategias
 passport.use(localStrategy);
@@ -57,6 +56,7 @@ estudiante
   )
   .get("/:id", getEstudiantesId)
   .put("/:id", putEstudiante)
-  .post("/", validatorHandler(schemaEstudiante), postEstudiante);
+  .post("/", validatorHandler(schemaEstudiante), postEstudiante)
+  .delete("/:id", deleteEstudianteID);
 
 export default estudiante;

@@ -13,8 +13,11 @@ const getTuitions = async (
   const headers = new Headers();
   headers.set("Authorization", `Bearer ${token}`);
   headers.set("Content-Type", "application/json; charset=utf-8");
+  const searchParams = new URLSearchParams();
+  searchParams.append("userId", tokenParsed.id);
+  if (options.orderBy) searchParams.append("orderBy", options.orderBy);
   const response = await fetch(
-    `${baseUrlBackend}/matricula?userId=${tokenParsed.id}&orderBy=${options.orderBy}`,
+    `${baseUrlBackend}/matricula?${searchParams.toString()}`,
     {
       method: "GET",
       headers,

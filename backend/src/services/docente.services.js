@@ -1,4 +1,5 @@
 import {
+  deleteUniqueFromModel,
   getDataListFromModel,
   getDataUniqueFromModel,
   postDataListFromModel,
@@ -38,6 +39,14 @@ const docenteServices = {
       data: {
         docente_nombre: nombre,
         docente_edad: +edad,
+      },
+    });
+    return data;
+  },
+  async delete(id) {
+    const data = await deleteUniqueFromModel("docente", {
+      where: {
+        docente_id: +id,
       },
     });
     return data;

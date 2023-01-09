@@ -1,6 +1,7 @@
 import express from "express";
 import passport from "passport";
 import {
+  deleteMatriculaID,
   getMatriculas,
   getMatriculasId,
   postMatriculas,
@@ -23,6 +24,7 @@ matricula
   .get("/", getMatriculas)
   .get("/:id", getMatriculasId)
   .put("/:id", putMatriculas)
-  .post("/", validatorHandler(schemaMatricula), postMatriculas);
+  .post("/", validatorHandler(schemaMatricula), postMatriculas)
+  .delete("/:id", deleteMatriculaID);
 
 export default matricula;

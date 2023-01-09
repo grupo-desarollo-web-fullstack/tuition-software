@@ -1,4 +1,5 @@
 import {
+  deleteUniqueFromModel,
   getDataListFromModel,
   getDataUniqueFromModel,
   postDataListFromModel,
@@ -49,6 +50,14 @@ const claseServices = {
         tbl_horario_horario_id: +horario_id,
         tbl_curso_curso_id: +curso_id,
         clase_aforo: +aforo,
+      },
+    });
+    return data;
+  },
+  async delete(id) {
+    const data = await deleteUniqueFromModel("clase", {
+      where: {
+        clase_id: +id,
       },
     });
     return data;

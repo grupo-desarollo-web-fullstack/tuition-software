@@ -22,6 +22,11 @@ import LessonsId, {
 import ErrorLessons from "@components/errors/ErrorLessons";
 import SuccessLesson from "@pages/Dashboard/Tuition/Lessons/LessonsId/SuccessLesson";
 import LessonsIdIndex from "@pages/Dashboard/Tuition/Lessons/LessonsId/LessonsIdIndex";
+import LessonsIndex from "@pages/Dashboard/Tuition/Lessons/LessonsIndex";
+import CourseId, {
+  actionCourseId,
+  loaderCourseId,
+} from "@pages/Dashboard/Courses/Course/CourseId";
 
 const App = () => {
   const routerBrowser = createBrowserRouter(
@@ -41,9 +46,17 @@ const App = () => {
           path="dashboard"
           element={<Dashboard />}
         >
-          <Route path="courses" element={<Courses />} loader={loaderCourses} />
+          <Route path="courses" element={<Courses />} loader={loaderCourses}>
+            <Route
+              loader={loaderCourseId}
+              action={actionCourseId}
+              path=":id"
+              element={<CourseId />}
+            />
+          </Route>
           <Route path="tuition" element={<Tuition />} loader={loaderTuition}>
             <Route path="lessons" element={<Lessons />}>
+              <Route index element={<LessonsIndex />} />
               <Route
                 path=":id"
                 element={<LessonsId />}

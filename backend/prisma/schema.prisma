@@ -58,7 +58,8 @@ model Docente {
 model Horario {
   horario_id             Int      @id @default(autoincrement())
   horario_dias           String   @db.VarChar(100)
-  horario_hora           DateTime @db.Time(6)
+  horario_hora_inicio    DateTime @db.Time(6)
+  horario_hora_final     DateTime @db.Time(6)
   tbl_docente_docente    Docente  @relation(fields: [tbl_docente_docente_id], references: [docente_id], onDelete: Cascade)
   tbl_docente_docente_id Int
   Clase                  Clase[]

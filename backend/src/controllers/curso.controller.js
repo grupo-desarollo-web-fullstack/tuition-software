@@ -5,9 +5,13 @@ export const getCourses = async function (req, res) {
   const data = await cursoServices.getAll({
     where: userId &&
       action && {
-        Matricula: {
+        Clase: {
           [action]: {
-            tbl_estudiante_estudiante_id: +userId,
+            Matricula: {
+              some: {
+                tbl_estudiante_estudiante_id: +userId,
+              },
+            },
           },
         },
       },
@@ -20,7 +24,7 @@ export const getCourses = async function (req, res) {
 
 export const getCoursesID = async function (req, res) {
   const { id } = req.params;
-  const data = await cursoServices.getUnique(id);
+  const data = await cursoServices.getUnique(id, req.query);
   res.json({
     data,
     status: 200,
@@ -54,6 +58,15 @@ export const postCourses = async function (req, res) {
     id_clase
   );
   res.status(201).json({
+    data,
+    status: 201,
+  });
+};
+
+export const deleteCursoID = async function (req, res) {
+  const { id } = req.params;
+  const data = await cursoServices.delete(id);
+  res.status(200).json({
     data,
     status: 201,
   });

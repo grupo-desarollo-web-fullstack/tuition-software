@@ -35,3 +35,12 @@ export const postDocentes = async function (req, res) {
     status: 201,
   });
 };
+
+export const deleteDocenteID = async function (req, res) {
+  const { id } = req.params;
+  const data = await docenteServices.delete(id);
+  res.status(200).json({
+    data,
+    status: 201,
+  });
+};

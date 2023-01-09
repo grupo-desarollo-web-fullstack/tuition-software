@@ -4,12 +4,19 @@ import { FaSwatchbook } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { IoMdDocument } from "react-icons/io";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
-import getGravatar from "@utils/getGravatar";
+import getAvatar from "@utils/getAvatar";
 import useMatchMeasure from "@hooks/useMatchMeasure";
 import Menu from "./Menu";
 import Button from "./Button";
 import "@styles/modules/sidebar.scss";
 
+const formatName = (name) => {
+  const nameParts = name.split(" ");
+  const namePartsMapped = nameParts.map(
+    (namePart, i) => `${namePart}${i === 2 ? "\n" : ""}`
+  );
+  return namePartsMapped.join(" ");
+};
 const clearClasses = ([refAvatar, refTitle, refMenu, refButton], modifier) => {
   refAvatar.current.classList.remove(`sidebar__avatar--${modifier}`);
   refTitle.current.classList.remove(`sidebar__title--${modifier}`);
@@ -28,7 +35,7 @@ const Sidebar = ({ user }) => {
   const refTitle = useRef();
   const refButton = useRef();
   const modifier = useRef(window.innerWidth > 640 ? "minimized" : "expand");
-  const gravatar = getGravatar(user.email);
+  const avatar = getAvatar(user.nombre);
   const isSm = useMatchMeasure(640, "max");
   const handleClickButton = () => {
     refAvatar.current.classList.toggle(`sidebar__avatar--${modifier.current}`);
@@ -62,11 +69,11 @@ const Sidebar = ({ user }) => {
             <img
               ref={refAvatar}
               className="sidebar__avatar"
-              src={gravatar}
+              src={avatar}
               alt={`Foto de perfil de ${user.nombre}`}
             />
             <h2 ref={refTitle} className="sidebar__title">
-              {user.nombre}
+              {formatName(user.nombre)}
             </h2>
           </div>
         </section>

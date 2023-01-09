@@ -52,6 +52,14 @@
       -webkit-user-drag: none;
       text-decoration: none;
       color: #2c3333;
+      &--course {
+        -webkit-user-drag: none;
+        cursor: pointer;
+        width: 100%;
+        @include laptop {
+          width: initial;
+        }
+      }
     }
     &__title {
       margin: 0;
@@ -100,6 +108,15 @@
       &__title {
         flex: 20;
         font-size: 1rem;
+        margin: 0;
+      }
+      &--without-drag {
+        cursor: pointer;
+        &:active {
+          cursor: pointer;
+        }
+      }
+      &--course {
         margin: 0;
       }
     }
@@ -173,6 +190,14 @@
     &__paragraph {
       text-align: center;
       margin: 0;
+      &--link {
+        font-weight: 800;
+        color: #f5f2e7;
+        background-color: #2c3333;
+        padding: 0.2rem;
+        border-radius: 0.4rem;
+        text-decoration: none;
+      }
       @include laptop {
         text-align: start;
       }

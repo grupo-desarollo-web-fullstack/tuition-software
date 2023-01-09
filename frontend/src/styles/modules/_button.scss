@@ -9,6 +9,7 @@
   border-radius: 0.5rem;
   transition: transform 0.25s, opacity 0.25s;
   cursor: pointer;
+  text-decoration: none;
   &--dark {
     background-color: #2c3333;
     color: #f5f2e7;
@@ -160,6 +161,42 @@
   }
   &--success {
     @include flex-fd-jc-ai-g(row, center, center, 0.5rem);
+  }
+  &--danger {
+    box-shadow: 0 0 0.5rem 0rem #fc1a1a;
+    background-color: #ff4c4c;
+    align-self: center;
+    display: block;
+    margin: 0 auto;
+  }
+
+  &--lg {
+    font-size: 1.125rem;
+    @include laptop {
+      font-size: 1.25rem;
+    }
+  }
+  &--primary {
+    border: 0.0625rem solid var(--primary-button-color);
+    color: var(--primary-text-color);
+    background-color: #2666cf;
+  }
+
+  &--secondary {
+    background-color: var(--secondary-button-color);
+    border: 0.0625rem solid var(--secondary-button-color);
+    color: var(--reverse-primary-text-color);
+    &:hover {
+      box-shadow: 0 0 0.5rem 0 var(--secondary-button-color);
+    }
+  }
+  &--contact {
+    background-color: #395b64;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+  &--outline {
+    background-color: transparent;
+    color: var(--primary-text-color);
   }
   &:active {
     transform: scale(0.95);

@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  deleteHorarioID,
   getHorarios,
   getHorariosId,
   postHorarios,
@@ -14,5 +15,6 @@ horario
   .get("/", getHorarios)
   .get("/:id", getHorariosId)
   .put("/:id", putHorarios)
-  .post("/", validatorHandler(schemaHorario), postHorarios);
+  .post("/", validatorHandler(schemaHorario), postHorarios)
+  .delete("/:id", deleteHorarioID);
 export default horario;

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import {
-  json, Link, useFetcher, useOutletContext,
-} from "react-router-dom";
+import { json, Link, useFetcher, useOutletContext } from "react-router-dom";
 import Button from "@components/Button";
 import login from "@libs/auth/login";
 import "@styles/modules/form.scss";
 import ErrorForm from "@components/errors/ErrorForm";
 import { MdEmail } from "react-icons/md";
 import InputPassword from "@components/InputPassword";
+import { AnimatePresence } from "framer-motion";
 
 export const actionLogin = async ({ request }) => {
   const formData = await request.formData();
@@ -19,7 +18,7 @@ export const actionLogin = async ({ request }) => {
     },
     {
       status,
-    },
+    }
   );
 };
 
@@ -57,7 +56,9 @@ const Login = () => {
             />
           </label>
           <InputPassword />
-          {error && <ErrorForm error={error} />}
+          <AnimatePresence>
+            {error && <ErrorForm className="error--form" error={error} />}
+          </AnimatePresence>
           <Button fetcher={fetcher} modifiers="dark">
             ¡Entrar!
           </Button>

@@ -1,4 +1,5 @@
 import {
+  deleteUniqueFromModel,
   getDataListFromModel,
   getDataUniqueFromModel,
   postDataListFromModel,
@@ -20,13 +21,14 @@ const horarioServices = {
     return data;
   },
 
-  async updateUnique(id, horario_fecha, dias, horario, docente_id) {
+  async updateUnique(id, hora_inicio, hora_final, dias, horario, docente_id) {
     const data = await updateDataUniqueFromModel("horario", {
       where: {
         horario_id: +id,
       },
       data: {
-        horario_fecha: new Date(horario_fecha),
+        hora_inicio: new Date(hora_inicio),
+        hora_final: new Date(hora_final),
         horario_dias: dias,
         horario_hora: horario,
         tbl_docente_docente_id: +docente_id,
@@ -35,13 +37,22 @@ const horarioServices = {
     return data;
   },
 
-  async create(horario_fecha, dias, horario, docente_id) {
+  async create(hora_inicio, hora_final, dias, horario, docente_id) {
     const data = await postDataListFromModel("horario", {
       data: {
-        horario_fecha: new Date(horario_fecha),
+        horario_hora_inicio: new Date(hora_inicio),
+        horario_hora_final: new Date(hora_final),
         horario_dias: dias,
         horario_hora: new Date(horario),
         tbl_docente_docente_id: +docente_id,
+      },
+    });
+    return data;
+  },
+  async delete(id) {
+    const data = await deleteUniqueFromModel("horario", {
+      where: {
+        horario_id: +id,
       },
     });
     return data;

@@ -250,4 +250,25 @@
     gap: 0.25rem;
     flex-wrap: wrap;
   }
+  &--courses {
+    position: static;
+    --translate-x: translateX(0);
+    background-color: transparent;
+    flex-direction: row;
+    gap: 1rem;
+    overflow-y: auto;
+    padding: 0.6rem;
+    height: 100%;
+    flex-direction: column;
+    @include sm {
+      width: 100%;
+      height: initial;
+      justify-content: flex-start;
+    }
+    @include laptop {
+      overflow-x: auto;
+      flex-direction: row;
+      padding: 1rem;
+    }
+  }
 }

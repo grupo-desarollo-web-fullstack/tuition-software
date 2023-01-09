@@ -1,9 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { FaChalkboardTeacher, FaSchool } from "react-icons/fa";
-import { MdDateRange, MdReduceCapacity } from "react-icons/md";
+import { MdDateRange } from "react-icons/md";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { BsBookmarkCheckFill } from "react-icons/bs";
 import LoaderLesson from "@components/loaders/LoaderLesson";
+import { IoIosPeople } from "react-icons/io";
 
 const Lesson = ({ lesson, setLessonSelected, lessonSelected }) => {
   const [loading, startTransition] = useTransition();
@@ -66,8 +67,8 @@ const Lesson = ({ lesson, setLessonSelected, lessonSelected }) => {
           <h3 className="lesson__section__title">{lesson.nsalon}</h3>
         </div>
         <div className="lesson__section lesson__section--capacity">
-          <MdReduceCapacity size={15} />
-          <h3 className="lesson__section__title">{schedule.aforo}</h3>
+          <IoIosPeople size={15} />
+          <h3 className="lesson__section__title">{lesson.aforo}</h3>
         </div>
         <div className="lesson__section lesson__section--teacher">
           <FaChalkboardTeacher size={15} />

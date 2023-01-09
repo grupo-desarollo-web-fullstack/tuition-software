@@ -1,5 +1,7 @@
 import express from "express";
+import passport from "passport";
 import {
+  deleteCursoID,
   getCourses,
   getCoursesID,
   postCourses,
@@ -24,6 +26,7 @@ curso
   )
   .get("/:id", getCoursesID)
   .put("/:id", putCourses)
-  .post("/", validatorHandler(schemaCurso), postCourses);
+  .post("/", validatorHandler(schemaCurso), postCourses)
+  .delete("/:id", deleteCursoID);
 
 export default curso;

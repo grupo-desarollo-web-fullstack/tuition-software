@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  deleteClaseID,
   getClases,
   getClasesID,
   postClase,
@@ -15,6 +16,7 @@ clase
   .get("/", getClases)
   .get("/:id", getClasesID)
   .put("/:id", putClasesID)
-  .post("/", validatorHandler(schemaClase), postClase);
+  .post("/", validatorHandler(schemaClase), postClase)
+  .delete("/:id", deleteClaseID);
 
 export default clase;

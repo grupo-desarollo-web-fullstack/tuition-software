@@ -39,3 +39,11 @@ export const postMatriculas = async function (req, res) {
     status: 201,
   });
 };
+export const deleteMatriculaID = async function (req, res) {
+  const { id } = req.params;
+  const data = await matriculaServices.delete(id);
+  res.status(200).json({
+    data,
+    status: 201,
+  });
+};
