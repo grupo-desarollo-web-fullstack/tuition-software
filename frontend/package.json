@@ -46,10 +46,11 @@
 		"vite": "^3.2.5"
 	},
 	"dependencies": {
+		"@hassanmojab/react-modern-calendar-datepicker": "^3.1.7",
 		"framer-motion": "^8.0.2",
 		"luxon": "^3.1.1",
-		"md5": "^2.3.0",
 		"react": "^18.2.0",
+		"react-calendar": "^4.0.0",
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.7.1",
 		"react-router-dom": "^6.4.5",
