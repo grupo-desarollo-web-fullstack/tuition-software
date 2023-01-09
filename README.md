@@ -14,12 +14,18 @@ Stack utilizado: MERN(Mysql, Express, React, Node)
 	- Prisma (ORM)
 	- Passport.js (Authentication)
 	- JWT (Authentication)
+	- Boom (Errores)
+	- Joi (Esquemas)
+	- Playwright (Tests)
 	- ...
 
 - Frontend
 	- React.js
 	- react-router-dom
 	- luxon
+	- Eslint (Linter)
+	- framer-motion (Animación)
+	- Sass (Preprocesador)
 	- ...
 
 ## 📦 Estructura del proyecto 📦
@@ -35,6 +41,10 @@ Stack utilizado: MERN(Mysql, Express, React, Node)
 			-> Horarios Disponibles
 			-> Lista de cursos escogidos
 			-> Modal: Confirmación de matrícula
+
+## 📸 Foto de proyecto 📸
+
+![Imagen](./assets/photo.jpg)
 
 ##  🌌 Pasos a seguir 🌌
 ```bash
