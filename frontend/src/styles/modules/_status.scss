@@ -1,0 +1,95 @@
+@import "mixins";
+
+.error {
+  background-color: #395b64;
+  border-radius: 0 0 0.5rem 0.5rem;
+  width: 80%;
+  box-sizing: border-box;
+  overflow: hidden;
+  flex: 1;
+  &-container {
+    @include flex-fd-jc-ai-g(row, center, center, 0.5rem);
+    height: 100%;
+    padding: 1rem;
+    &--lessons {
+      flex-direction: column;
+    }
+  }
+  &__title {
+    margin: 0;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    color: #f5f2e7;
+    text-align: center;
+    &::first-letter {
+      text-transform: uppercase;
+    }
+    &--lessons {
+      color: #f5f2e7;
+      @include laptop {
+        color: #2c3333;
+      }
+    }
+  }
+  &__icon-button {
+    & path {
+      stroke: #f5f2e7;
+    }
+  }
+  &--register {
+    flex: 100%;
+  }
+  @include laptop {
+    width: 60%;
+  }
+  &--lessons {
+    width: 100%;
+    background-color: transparent;
+  }
+  &__img {
+    width: 11rem;
+  }
+}
+
+.warning {
+  flex: 1;
+  &-container {
+    box-sizing: border-box;
+    padding: 1rem 0;
+    @include flex-fd-jc-ai-g(column, center, center, 0.5rem);
+    height: 100%;
+  }
+  &__title {
+    font-size: 1rem;
+    text-align: center;
+    margin: 0;
+  }
+  &__img {
+    width: 11rem;
+    height: auto;
+  }
+}
+
+.success {
+  flex: 1;
+  &-container {
+    box-sizing: border-box;
+    padding: 1rem 0;
+    @include flex-fd-jc-ai-g(column, center, center, 1rem);
+    height: 100%;
+  }
+  &__title {
+    font-size: 1.4rem;
+    text-align: center;
+    margin: 0;
+  }
+  &__img {
+    width: 5rem;
+    height: auto;
+    display: inherit;
+    &-container {
+      width: 5rem;
+      border-radius: 50%;
+      background-color: #f5f2e7;
+    }
+  }
+}

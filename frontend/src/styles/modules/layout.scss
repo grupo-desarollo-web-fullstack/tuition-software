@@ -1,0 +1,30 @@
+@import "./mixins";
+@import "./nav";
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.main {
+  flex: 1;
+  margin-top: 4rem;
+  &--auth {
+    margin-top: 0;
+    @include laptop {
+      margin-top: 4rem;
+    }
+  }
+
+  &--about {
+    background-color: #2666CF;
+  }
+  
+  &--dashboard {
+    @include flex-fd-jc-ai-g;
+    position: relative;
+  }
+}

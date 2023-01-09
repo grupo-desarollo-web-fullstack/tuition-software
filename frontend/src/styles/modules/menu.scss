@@ -1,0 +1,253 @@
+@import "mixins";
+
+.menu {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  top: 4rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2c3333;
+  list-style: none;
+  --translate-x: translateX(100%);
+  transition: transform 0.25s;
+  transform: var(--translate-x);
+  @include flex-fd-jc-ai-g(column, center, center, 1rem);
+  @include laptop {
+    position: static;
+    --translate-x: translateX(0);
+    flex-direction: row;
+    background-color: transparent;
+  }
+
+  &__item {
+    &--sidebar {
+      &:nth-child(1) .menu__link--sidebar::after {
+        content: none;
+        @include sm {
+          content: "Cursos";
+        }
+      }
+      &:nth-child(2) .menu__link--sidebar::after {
+        content: none;
+        @include sm {
+          content: "Matrículas";
+        }
+      }
+      &:nth-child(3) .menu__link--sidebar::after {
+        content: none;
+        @include sm {
+          content: "Cerrar Sesión";
+        }
+      }
+      &-logout {
+        justify-self: flex-end;
+      }
+    }
+    &--course-extra-info {
+      font-size: 0.85rem;
+      background-color: #395b64;
+      color: #f5f2e7;
+      padding: 0.5rem;
+      font-weight: 700;
+      text-align: center;
+      border-radius: 0.3rem;
+      flex: auto;
+    }
+  }
+  &__icon {
+    @include flex-fd-jc-ai-g(column, $justify-content: center, $gap: 0.4rem);
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.25s;
+    padding-left: revert;
+    padding-right: revert;
+    &__bar {
+      background-color: #2c3333;
+      height: calc(0.0625rem * 3);
+      width: 100%;
+      border-radius: calc(0.0625rem * 5);
+      transition: transform 0.5s, opacity 0.5s;
+      transform-origin: left;
+    }
+    &--close {
+      .menu__icon__bar {
+        &:nth-child(1) {
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+    @include laptop {
+      display: none;
+    }
+  }
+  &__link {
+    position: relative;
+    text-decoration: none;
+    color: #f5f2e7;
+    font-weight: 800;
+    &__icon {
+      transition: transform 0.25s;
+      &--instagram {
+        width: 1.875rem;
+        height: 1.875rem;
+        background: radial-gradient(
+          circle at 33% 100%,
+          #fed373 4%,
+          #f15245 30%,
+          #d92e7f 62%,
+          #9b36b7 85%,
+          #515ecf
+        );
+        border-radius: 30%;
+        position: relative;
+        &::before {
+          content: "";
+          border: 0.1rem solid #fff;
+          border-radius: 30%;
+          width: 1.1rem;
+          height: 1.1rem;
+          inset: 0;
+          position: absolute;
+          margin: auto;
+        }
+        &::after {
+          content: "";
+          border: 0.1rem solid #fff;
+          width: 0.4rem;
+          height: 0.4rem;
+          border-radius: 100%;
+          inset: 0;
+          position: absolute;
+          margin: auto;
+        }
+      }
+      &-circle {
+        content: "";
+        border: 0.1rem solid #fff;
+        width: 0;
+        height: 0;
+        border-radius: 100%;
+        top: 0.52rem;
+        right: 0.52rem;
+        position: absolute;
+        margin: auto;
+      }
+      &:hover {
+        transform: scale(1.1);
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+      &--footer {
+        @include flex-fd-jc-ai-g(row, center, center);
+      }
+    }
+    &--header {
+      &::before {
+        content: "";
+        right: 100%;
+        position: absolute;
+        left: 0;
+        top: 1.2rem;
+        background-color: #2666cf;
+        height: calc(0.0625rem * 2);
+        transition: right 0.25s;
+      }
+      @include laptop {
+        color: #2c3333;
+      }
+    }
+
+    &--sidebar {
+      @include flex-fd-jc-ai-g(
+        $gap: (
+          x: 0.5rem,
+          y: 0rem,
+        )
+      );
+    }
+
+    &--active {
+      &::before {
+        right: 0;
+      }
+    }
+  }
+  &--open {
+    --translate-x: translateX(0);
+  }
+  &--footer {
+    position: relative;
+    top: 0;
+    flex-direction: row;
+    --translate-x: translateX(0);
+    background: transparent;
+    &::after {
+      content: "";
+      position: absolute;
+      background-color: #2666cf;
+      height: 0.125rem;
+      top: 2.2rem;
+      left: 0;
+      right: 0;
+      transition: right 0.25s ease-in-out;
+      @include sm {
+        right: 100%;
+      }
+    }
+  }
+  &--sidebar {
+    position: static;
+    --translate-x: translateX(0);
+    background-color: transparent;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-start;
+    @include sm {
+      align-items: flex-start;
+    }
+    @include laptop {
+      flex-direction: column;
+    }
+    &-minimized {
+      align-items: center;
+      & .menu__item--sidebar .menu__link--sidebar::after {
+        content: none;
+      }
+    }
+    &-expand {
+      align-items: flex-start;
+      & .menu__item--sidebar {
+        &:nth-child(1) .menu__link--sidebar::after {
+          content: "Cursos";
+        }
+        &:nth-child(2) .menu__link--sidebar::after {
+          content: "Matrículas";
+        }
+        &:nth-child(3) .menu__link--sidebar::after {
+          content: "Cerrar Sesión";
+        }
+      }
+    }
+  }
+  &--course-extra-info {
+    position: static;
+    --translate-x: translateX(0);
+    background-color: transparent;
+    flex-direction: row;
+    flex: 100%;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+  }
+}

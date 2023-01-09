@@ -6,16 +6,31 @@ import {
 } from "../libs/db.js";
 
 const cursoServices = {
-  async getAll() {
-    const data = await getDataListFromModel("curso");
+  async getAll(options) {
+    const data = await getDataListFromModel("curso", options);
     return data;
   },
 
-  async getUnique(id) {
+  async getUnique(id, query = {}) {
+    let where = {
+      curso_id: +id,
+    };
+    const { userId, action } = query;
+    const include = userId &&
+      action && {
+        Clase: {
+          where: {
+            Matricula: {
+              [action]: {
+                tbl_estudiante_estudiante_id: +userId,
+              },
+            },
+          },
+        },
+      };
     const data = await getDataUniqueFromModel("curso", {
-      where: {
-        curso_id: +id,
-      },
+      where,
+      include,
     });
     return data;
   },
