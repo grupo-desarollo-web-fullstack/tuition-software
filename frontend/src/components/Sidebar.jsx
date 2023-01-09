@@ -13,7 +13,7 @@ import "@styles/modules/sidebar.scss";
 const formatName = (name) => {
   const nameParts = name.split(" ");
   const namePartsMapped = nameParts.map(
-    (namePart, i) => `${namePart}${i === 2 ? "\n" : ""}`
+    (namePart, i) => `${namePart}${i === 1 ? "\n" : ""}`
   );
   return namePartsMapped.join(" ");
 };
