@@ -16,7 +16,7 @@ const SuccessLesson = () => {
   const navigate = useNavigate();
   if (!isVisited) return <Navigate to=".." relative />;
   const handleClickButton = () => {
-    navigate("/dashboard/courses");
+    navigate(`/dashboard/courses/${id}`);
   };
 
   useEffect(() => {
