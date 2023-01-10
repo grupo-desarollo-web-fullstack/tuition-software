@@ -6,14 +6,26 @@ import { BsBookmarkCheckFill } from "react-icons/bs";
 import LoaderLesson from "@components/loaders/LoaderLesson";
 import { IoIosPeople } from "react-icons/io";
 
+
+const getLocutionHour = (hour) => (hour >= 12 ? "PM" : "AM");
+const getHour = (hour) => hour % 12 || 12;
+
 const Lesson = ({ lesson, setLessonSelected, lessonSelected }) => {
   const [loading, startTransition] = useTransition();
   const [isSelected, setSelected] = useState(false);
   const { schedule } = lesson;
   const { teacher, date, dias } = schedule;
   const refArticle = useRef();
-  const hour = date.hour % 12 || 12;
-  const locutionHour = date.hour >= 12 ? "PM" : "AM";
+  const dates = {
+    start: {
+      hour: getHour(date.start.hour),
+      locution: getLocutionHour(date.start.hour),
+    },
+    end: {
+      hour: getHour(date.end.hour),
+      locution: getLocutionHour(date.end.hour),
+    },
+  };
   const handleClickToogleSelect = () => {
     const newIsSelected = !isSelected;
     startTransition(() => {
@@ -77,7 +89,11 @@ const Lesson = ({ lesson, setLessonSelected, lessonSelected }) => {
         <div className="lesson__section lesson__section--teacher">
           <MdDateRange size={15} />
           <h3 className="lesson__section__title">
-            {dias} - {hour} {locutionHour}
+          {dias} |{" "}
+          {dates.start.hour}:
+              {schedule.date.start.minute || "0".repeat(2)}{" "}
+              {dates.start.locution} - {dates.end.hour}:
+              {schedule.date.end.minute || "0".repeat(2)} {dates.end.locution}{" "}
           </h3>
         </div>
         <AnimatePresence>
