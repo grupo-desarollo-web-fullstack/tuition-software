@@ -1,5 +1,7 @@
 import Boom from "@hapi/boom";
 
+
+//Validador de esquemas
 /**
  *
  * @param {import("joi").Schema} es esto es un schema

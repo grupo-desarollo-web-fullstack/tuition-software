@@ -1,5 +1,7 @@
 import { badData, badImplementation, unauthorized } from "@hapi/boom";
 
+
+//manejo de errores
 function handlerError(err, req, res, next) {
   let error = err;
   if (!error.isBoom) {
