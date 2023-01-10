@@ -11,7 +11,8 @@
     "prisma:format": "prisma format",
     "start": "node ./src/index.js",
     "migrate:deploy": "prisma migrate deploy",
-		"migrate:dev": "prisma migrate dev"
+		"migrate:dev": "prisma migrate dev",
+    "test": "playwright test"
   },
   "repository": {
     "type": "git",
