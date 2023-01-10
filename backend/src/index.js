@@ -16,6 +16,8 @@ import config from "./config/index.js";
 
 const app = express();
 
+
+//Traduccion de los errores del ingles a español
 i18n.configure({
   locales: ["es", "en"],
   directory: path.resolve("./src/locales"),
@@ -38,7 +40,7 @@ app.use("/clase", clase);
 
 //handlers errors
 app.use(handlerError);
-app.use(notFoundHandler);
+app.use(notFoundHandler); //error 404(no ecnuentra la ruta)
 
 app.listen(config.port, function () {
   console.log(`servidor activo en http://localhost:${config.port}`);

@@ -2,6 +2,7 @@ import { unauthorized } from "@hapi/boom";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import { getDataUniqueFromModel } from "../db.js";
 
+//Validacion del token
 const jwtStrategy = (options) =>
   new JwtStrategy(
     {

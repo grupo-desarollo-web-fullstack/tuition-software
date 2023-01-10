@@ -3,6 +3,9 @@ import { getDataUniqueFromModel } from "../db.js";
 import { unauthorized } from "@hapi/boom";
 import bcrypt from "bcrypt";
 
+
+//Validacion del Login
+
 const localStrategy = new LocalStrategy(
   { usernameField: "email" },
   async function (email, password, done) {
